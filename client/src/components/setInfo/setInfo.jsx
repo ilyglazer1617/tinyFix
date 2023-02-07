@@ -7,24 +7,42 @@ const SetInfo = () => {
     setInfo,
     setSetInfo,
     updateUserInfo,
+    // carMake,
+    // getAllCars,
+    // carCompany,
+    // setCarCompany,
+    // getAllCarModels,
+    // carModels,
+    // carYears,
+    // userCarModel,
+    // getCarYear,
+
+    registerReq,
+    registerData,
+    setRegisterData,
     carMake,
     getAllCars,
+    updating,
+    setUpdating,
+    setCarCompany,
     carCompany,
     getAllCarModels,
     carModels,
-    carYears,
+    setUserCarModel,
     userCarModel,
     getCarYear,
+    carYears,
   } = useContext(UserContext);
-
   //! get all makes
   useEffect(() => {
     getAllCars();
   }, []);
+
   //! fet all models
   useEffect(() => {
     getAllCarModels();
   }, [carCompany]);
+
   //! get all years
   useEffect(() => {
     getCarYear();
@@ -67,7 +85,7 @@ const SetInfo = () => {
           />
           :אזור
         </h3>
-        <h3 className="P_SetInfo">
+        {/* <h3 className="P_SetInfo">
           <select
             onChange={(e) => {
               setSetInfo({ ...setInfo, car_make: e.target.value });
@@ -92,6 +110,7 @@ const SetInfo = () => {
           <select
             onChange={(e) => {
               setSetInfo({ ...setInfo, car_model: e.target.value });
+              setCarCompany({ make: e.target.value });
             }}
             name=""
             id=""
@@ -128,7 +147,61 @@ const SetInfo = () => {
             })}
           </select>
           :שנת רכב{" "}
-        </h3>
+        </h3> */}
+        <select
+          onChange={(e) => {
+            setCarCompany({ make: e.target.value });
+
+            setSetInfo({ ...setInfo, car_make: e.target.value });
+          }}
+          name=""
+          id=""
+          className="registerSelect"
+        >
+          <option value="">חברה</option>
+          {carMake.map((car, index) => {
+            return (
+              <option value={car} key={index}>
+                {car}
+              </option>
+            );
+          })}
+        </select>{" "}
+        <select
+          onChange={(e) => {
+            setRegisterData({ ...registerData, car_model: e.target.value });
+            setUserCarModel({ model: e.target.value });
+          }}
+          name=""
+          id=""
+          className="registerSelect"
+        >
+          <option value="">דגם</option>
+          {carModels.map((model) => {
+            return (
+              <option key={model} value={model}>
+                {model}
+              </option>
+            );
+          })}
+        </select>{" "}
+        <select
+          onChange={(e) => {
+            setRegisterData({ ...registerData, car_year: e.target.value });
+          }}
+          name=""
+          id=""
+          className="registerSelect"
+        >
+          <option value="">שנה</option>
+          {carYears.map((year) => {
+            return (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            );
+          })}
+        </select>
         <button onClick={(e) => updateUserInfo(e)}>עדכן מידע </button>
       </div>
     </div>
