@@ -91,7 +91,6 @@ const SetInfo = () => {
           {" "}
           <select
             onChange={(e) => {
-              setSetInfo({ ...setInfo, car_model: e.target.value });
             }}
             name=""
             id=""
