@@ -26,7 +26,8 @@ function CommentsProvider(props) {
 
   const uploudComment = async () => {
     const req = await axios.post(
-      `http://localhost:5555/api/comments/${newComment.garage_id}`,
+      //todo `http://localhost:5555/api/comments/${newComment.garage_id}`,
+      `http://localhost:5555/api/comments/63e13d41a85456fda0636b64`,
       newComment
     );
   };
