@@ -34,31 +34,31 @@ const messages = [
     id: 1,
     primary: "?עשית תאונה",
     secondary: "בשביל זה בידיוק אנחנו פה",
-    person: "/static/images/avatar/5.jpg",
+    person: "/images/intro1.png",
   },
   {
     id: 2,
     primary: "לחץ על כפתור ה + והעלה את התמונה ",
     secondary: `לאחר שמילאת את הטופס`,
-    person: "/static/images/avatar/1.jpg",
+    person: "/images/intro2.png",
   },
   {
     id: 3,
     primary: "אנחנו נפיץ את התקלה שלך",
     secondary: "בין המוסכים הטובים ביותר שנמצאים בקרבתך",
-    person: "/static/images/avatar/2.jpg",
+    person: "/images/intro3.jpg",
   },
   {
     id: 4,
     primary: "המוסכים יבחנו את התקלה שלך",
     secondary: "ויתחרו על מי יתן לך את ההצעה והמחיר הטוב ביותר",
-    person: "/static/images/avatar/3.jpg",
+    person: "/images/intro4.png",
   },
   {
     id: 5,
     primary: "שלב הבחירה",
     secondary: "אתה תבחר מי יטפל לך ברכב מבין כל ההצעות",
-    person: "/static/images/avatar/4.jpg",
+    person: "/images/intro5.png",
   },
 ];
 
@@ -99,7 +99,10 @@ export default function Home() {
             <div className="cardWrap">
               {messages.map(({ id, primary, secondary, person }) => (
                 <div class="card">
-                  <div class="card-img"></div>
+                  <div class="card-img">
+                    {" "}
+                    <img className="introPic" src={person} alt="" />
+                  </div>
                   <div class="card-info">
                     <p class="text-title">{primary}</p>
                     <p class="text-body">{secondary}</p>
@@ -109,7 +112,9 @@ export default function Home() {
             </div>
           </List>
         </Paper>
-        <Bottom />
+        <div className="buttomHome">
+          <Bottom className="bottomHomeC" />
+        </div>
       </React.Fragment>
     </div>
   );

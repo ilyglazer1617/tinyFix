@@ -17,25 +17,29 @@ const UserContextProvider = () => {
   const [loginData, setLoginData] = useState({});
   const [userInfo, setUserInfo] = useState([]);
   const [setInfo, setSetInfo] = useState({});
-
+  let token = localStorage.getItem("token");
+  let id;
+  if (token) {
+    const { _id } = jwtdecode(token);
+    id = _id;
+  }
   //! update user info
-
-  const updateUserInfo = async () => {
+  const updateUserInfo = async (e) => {
+    e.preventDefault();
     const data = setInfo;
     try {
-      //todo===========================================
+      console.log(data);
+      const res = await axios.put(
+        "http://localhost:5555/user/updateUser/" + id,
+        data
+      );
+      setUserInfo(res.data);
     } catch (error) {
       console.log(error.message);
     }
   };
   //! get User info
   const getUserInfo = async () => {
-    let token = localStorage.getItem("token");
-    let id;
-    if (token) {
-      const { _id } = jwtdecode(token);
-      id = _id;
-    }
     try {
       console.log(id);
       const res = await axios.get("http://localhost:5555/user/" + id);
@@ -150,6 +154,7 @@ const UserContextProvider = () => {
           userInfo,
           setInfo,
           setSetInfo,
+          updateUserInfo,
         }}
       >
         <App />

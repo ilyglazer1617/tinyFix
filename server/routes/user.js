@@ -35,6 +35,7 @@ userRouter.post("/register", async (req, res) => {
 //! get user info
 userRouter.get("/:id", async (req, res) => {
   try {
+    console.log(req.params.id);
     const userData = await User.findById(req.params.id);
     res.status(200).send(userData);
   } catch (error) {
@@ -46,8 +47,8 @@ userRouter.get("/:id", async (req, res) => {
 userRouter.put("/updateUser/:id", async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
-    await user.updateOne({ $set: req.body });
-    res.status(200).send("user has been updated");
+    await user.updateOne({ $set: req.body }, { new: true });
+    res.status(200).send(user);
   } catch (error) {
     res.status(400).send(error.message);
   }

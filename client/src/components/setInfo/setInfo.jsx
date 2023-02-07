@@ -1,9 +1,34 @@
 import "./setInfo.css";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "./../../context/user";
 
 const SetInfo = () => {
-  const { setInfo, setSetInfo } = useContext(UserContext);
+  const {
+    setInfo,
+    setSetInfo,
+    updateUserInfo,
+    carMake,
+    getAllCars,
+    carCompany,
+    getAllCarModels,
+    carModels,
+    carYears,
+    userCarModel,
+    getCarYear,
+  } = useContext(UserContext);
+
+  //! get all makes
+  useEffect(() => {
+    getAllCars();
+  }, []);
+  //! fet all models
+  useEffect(() => {
+    getAllCarModels();
+  }, [carCompany]);
+  //! get all years
+  useEffect(() => {
+    getCarYear();
+  }, [userCarModel]);
   return (
     <div>
       <div className="SetInfoForm">
@@ -43,33 +68,68 @@ const SetInfo = () => {
           :אזור
         </h3>
         <h3 className="P_SetInfo">
-          <input
-            type="text"
-            onChange={(e) =>
-              setSetInfo({ ...setInfo, car_make: e.target.value })
-            }
-          />
+          <select
+            onChange={(e) => {
+              setSetInfo({ ...setInfo, car_make: e.target.value });
+            }}
+            name=""
+            id=""
+            className="registerSelect"
+          >
+            <option value="">חברה</option>
+            {carMake.map((car, index) => {
+              return (
+                <option value={car} key={index}>
+                  {car}
+                </option>
+              );
+            })}
+          </select>
           :חברת רכב
         </h3>
         <h3 className="P_SetInfo">
           {" "}
-          <input
-            type="text"
-            onChange={(e) =>
-              setSetInfo({ ...setInfo, car_model: e.target.value })
-            }
-          />
+          <select
+            onChange={(e) => {
+              setSetInfo({ ...setInfo, car_model: e.target.value });
+            }}
+            name=""
+            id=""
+            className="registerSelect"
+          >
+            <option value="">דגם</option>
+            {carModels.map((model) => {
+              return (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              );
+            })}
+          </select>{" "}
           :דגם
         </h3>
         <h3 className="P_SetInfo">
-          <input
-            type="text"
-            onChange={(e) =>
-              setSetInfo({ ...setInfo, car_year: e.target.value })
-            }
-          />
-          :שנת רכב
+          {" "}
+          <select
+            onChange={(e) => {
+              setSetInfo({ ...setInfo, car_year: e.target.value });
+            }}
+            name=""
+            id=""
+            className="registerSelect"
+          >
+            <option value="">שנה</option>
+            {carYears.map((year) => {
+              return (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              );
+            })}
+          </select>
+          :שנת רכב{" "}
         </h3>
+        <button onClick={(e) => updateUserInfo(e)}>עדכן מידע </button>
       </div>
     </div>
   );

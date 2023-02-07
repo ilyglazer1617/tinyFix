@@ -4,13 +4,17 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import { UserContext } from "./../../context/user";
 import CreateIcon from "@mui/icons-material/Create";
+import { useNavigate } from "react-router-dom";
+
 const PrsonalInfo = () => {
+  const navigate = useNavigate();
+
   const { getUserInfo, userInfo } = useContext(UserContext);
   useEffect(() => {
     getUserInfo();
   }, []);
   return (
-    <div className="personalInfo">
+    <div className="personalInfo1">
       <div className="card-client">
         <div className="user-picture">
           <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +33,10 @@ const PrsonalInfo = () => {
           <h3 className="P_Info">{userInfo.car_make} :חברת רכב</h3>
           <h3 className="P_Info">{userInfo.car_model} :דגם</h3>
           <h3 className="P_Info">{userInfo.car_year} :שנת רכב</h3>
-          <span className="setPersonalInfo">
+          <span
+            onClick={() => navigate("/SetInfo")}
+            className="setPersonalInfo"
+          >
             <CreateIcon />
             לחץ כאן לעריכת מידע
           </span>

@@ -37,7 +37,11 @@ const Bottom = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <AppBar position="fixed" color="primary" sx={{ top: "auto", bottom: 0 }}>
+      <AppBar
+        position="fixed"
+        color=""
+        sx={{ top: "auto", bottom: 0, background: "rgb(255, 136, 0)" }}
+      >
         <Toolbar className="homeHead">
           <IconButton color="inherit" aria-label="open drawer">
             <MailIcon />

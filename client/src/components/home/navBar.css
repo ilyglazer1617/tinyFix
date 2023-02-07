@@ -1,5 +1,7 @@
 .homeHead {
     background-color: rgb(255, 136, 0);
+    width: 100vw;
+
 }
 
 .homeImgWrap {
@@ -89,4 +91,19 @@ svg {
 .card-button:hover {
     border: 1px solid #ffcaa6;
     background-color: #ffcaa6;
+}
+
+.buttomHome {
+    width: 100vw;
+
+}
+
+.bottomHomeC {
+    width: 100%;
+
+}
+
+.introPic {
+    width: 100%;
+    height: 131%;
 }
