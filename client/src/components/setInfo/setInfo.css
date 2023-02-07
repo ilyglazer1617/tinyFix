@@ -1,0 +1,12 @@
+.SetInfoForm {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+
+}
+
+.P_SetInfo {
+    display: flex;
+    justify-content: right;
+}
