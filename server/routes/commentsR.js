@@ -67,55 +67,55 @@ router.post("/sortComments/display/:post_id", async (req, res) => {
       .sort({ bid: 1 })
       .populate({ path: "garage_id" });
 
-    // comments = comments.map((comment) => {
-    //   function averageProf(ARRprfessionalism) {
-    //     let sum = 0;
-    //     for (let i = 0; i < ARRprfessionalism.length; i++) {
-    //       sum += ARRprfessionalism[i];
-    //     }
-    //     return sum / ARRprfessionalism.length;
-    //   }
+    comments = comments.map((comment) => {
+      function averageProf(ARRprfessionalism) {
+        let sum = 0;
+        for (let i = 0; i < ARRprfessionalism.length; i++) {
+          sum += ARRprfessionalism[i];
+        }
+        return sum / ARRprfessionalism.length;
+      }
 
-    //   const avgPrfessionalism = parseFloat(
-    //     averageProf(comment.garage_id.reviews.prfessionalism).toFixed(1)
-    //   );
+      const avgPrfessionalism = parseFloat(
+        averageProf(comment.garage_id.reviews.prfessionalism).toFixed(1)
+      );
 
-    //   comment.garage_id.reviews.prfessionalism = avgPrfessionalism;
+      comment.garage_id.reviews.prfessionalism = avgPrfessionalism;
 
-    //   function averageRel(ARRreliability) {
-    //     let sum = 0;
-    //     for (let i = 0; i < ARRreliability.length; i++) {
-    //       sum += ARRreliability[i];
-    //     }
-    //     return sum / ARRreliability.length;
-    //   }
+      function averageRel(ARRreliability) {
+        let sum = 0;
+        for (let i = 0; i < ARRreliability.length; i++) {
+          sum += ARRreliability[i];
+        }
+        return sum / ARRreliability.length;
+      }
 
-    //   const avgReliability = parseFloat(
-    //     averageRel(comment.garage_id.reviews.reliability).toFixed(1)
-    //   );
-    //   console.log(avgReliability);
+      const avgReliability = parseFloat(
+        averageRel(comment.garage_id.reviews.reliability).toFixed(1)
+      );
+      console.log(avgReliability);
 
-    //   comment.garage_id.reviews.reliability = avgReliability;
+      comment.garage_id.reviews.reliability = avgReliability;
 
-    //   return comment;
-    // });
+      return comment;
+    });
 
-    // if (prof) {
-    //   comments = comments.sort((a, b) => {
-    //     return (
-    //       b.garage_id.reviews.prfessionalism[0] -
-    //       a.garage_id.reviews.prfessionalism[0]
-    //     );
-    //   });
-    // }
-    // if (reli) {
-    //   comments = comments.sort((a, b) => {
-    //     return (
-    //       b.garage_id.reviews.reliability[0] -
-    //       a.garage_id.reviews.reliability[0]
-    //     );
-    //   });
-    // }
+    if (prof) {
+      comments = comments.sort((a, b) => {
+        return (
+          b.garage_id.reviews.prfessionalism[0] -
+          a.garage_id.reviews.prfessionalism[0]
+        );
+      });
+    }
+    if (reli) {
+      comments = comments.sort((a, b) => {
+        return (
+          b.garage_id.reviews.reliability[0] -
+          a.garage_id.reviews.reliability[0]
+        );
+      });
+    }
 
     res.send(comments);
   } catch (error) {
