@@ -54,20 +54,20 @@ const Garage = new mongoose.model(
             },
             url: {
                 type: String,
-                // required: true
+                required: true
             },
         },
         reviews: {
             prfessionalism: {
-                type: Array,
+                type: [Number],
                 default: [],
             },
             reliability: {
-                type: Array,
+                type: [Number],
                 default: [],
             },
-            pricing: {
-                type: Array,
+            text: {
+                type: [String],
                 default: [],
             },
         },

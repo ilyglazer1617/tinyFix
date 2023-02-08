@@ -14,7 +14,7 @@ const CommentSchema = new Schema(
       required: true
     },
     bid: {
-      type: String, 
+      type: Number, 
       required: true
 
     },
