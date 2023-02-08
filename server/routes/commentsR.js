@@ -55,10 +55,10 @@ router.delete("/:comment_id", async (req, res) => {
   }
 });
 
-//!get all comments of a specific posts by sorting bids to disply to the garage
+//!get all comments of a specific posts by sorting bids to disply the garage or user
 
 router.get("/byBids/:post_id", async (req, res) => {
-  console.log("first");
+  // console.log("first");
   try {
     const comments = await Comment.find({ post_id: req.params.post_id }).sort({ bid: 1 }).populate({ path: "garage_id" });
 
@@ -68,5 +68,27 @@ router.get("/byBids/:post_id", async (req, res) => {
     res.status(500).send({ message: error.message });
   }
 });
+
+
+
+//!filtering coments to the user
+
+router.get("/byPrfessionalism/:post_id", async (req, res) => {
+  // console.log("first");
+  try {
+    const comments = await Comment.find({ post_id: req.params.post_id }).populate({ path: "garage_id" });
+
+    comments
+      
+
+    res.send(comments);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
+
+
+
 
 module.exports = router;
