@@ -58,7 +58,8 @@ router.delete("/:comment_id", async (req, res) => {
 
 //!get all comments of a specific posts by sorting bids,pro,rel to disply the garage or user
 
-router.post("/sortComments/:post_id", async (req, res) => {
+router.post("/sortComments/display/:post_id", async (req, res) => {
+  console.log("first");
   const prof = req.body.prof;
   const reli = req.body.reli;
   try {
@@ -119,27 +120,10 @@ router.post("/sortComments/:post_id", async (req, res) => {
     res.send(comments);
   } catch (error) {
     console.log(error.message);
-    res.status(500).send({ message: error.message });
+    res.status(500).send({ message: error.message, tyu: "sdfsd" });
   }
 });
 
-//!filtering coments to the user
-
-router.get("/byPrfessionalism/:post_id", async (req, res) => {
-  // console.log("first");
-  try {
-    const comments = await Comment.find({
-      post_id: req.params.post_id,
-    }).populate({ path: "garage_id" });
-
-    comments;
-
-    res.send(comments);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
-  }
-});
 // router.get("/byPrfessionalism/:post_id", async (req, res) => {
 //   // console.log("first");
 //   try {
@@ -155,3 +139,5 @@ router.get("/byPrfessionalism/:post_id", async (req, res) => {
 // });
 
 module.exports = router;
+
+//ze ani ily

@@ -46,7 +46,8 @@ export default function Home() {
               <img className="homeLogoImg" src="/images/logo.png" alt="" />
             </div>
           </Typography>
-          {userPosts ? <MyPosts /> : <Explanation />}
+          {console.log(userPosts)}
+          {userPosts.length ? <MyPosts /> : <Explanation />}
         </Paper>
         <div className="buttomHome">
           <Bottom className="bottomHomeC" />
