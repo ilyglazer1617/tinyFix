@@ -30,12 +30,16 @@ app.post("/register", async function (req, res) {
         const image = req.body.image;
         console.log("image");
         try {
+            const emailValid = await Garage.find({ email: req.body.email });
             //upload img to cloudinary
-            const imgUploud = await cloudinary.uploader.upload(image, {
-                folder: "garages",
-                // width: 300,
-                // crop: "scale",
-            });
+            if (emailValid) {
+                console.log(emailValid)
+                const imgUploud = await cloudinary.uploader.upload(image, {
+                    folder: "garages",
+                    // width: 300,
+                    // crop: "scale",
+                });
+            }
 
             const garage = new Garage({
                 garage_name: req.body.garage_name,
