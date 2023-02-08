@@ -6,65 +6,74 @@ import jwtDecode from "jwt-decode";
 export const CommentsContext = createContext();
 
 function CommentsProvider(props) {
-    const { children } = props;
+  const { children } = props;
 
-    const [newComment, setNewComment] = useState({});
-    const [comments, setComments] = useState([]);
-    const [commentsOpen, setCommentsOpen] = useState("false");
+  const [newComment, setNewComment] = useState({});
+  const [comments, setComments] = useState([]);
+  const [commentsOpen, setCommentsOpen] = useState("false");
+  const [editComment, setEditComment] = useState({});
 
-    useEffect(() => {
-        const sendWhenComment = async () => {
-            let token = localStorage.getItem("token");
-            let id;
-            if (token) {
-                const { _id } = await jwtdecode(token);
-                id = _id;
-            }
-            setNewComment({ ...newComment, garage_id: id });
-            return;
-        };
-        sendWhenComment();
-    }, []);
-
-    //!new posts comments====================
-
-    const uploudComment = async () => {
-        const token = localStorage.getItem("token");
-        const garage_id = jwtDecode(token);
-        console.log(garage_id);
-        const req = await axios.post(
-            `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`,
-            newComment
-        );
+  useEffect(() => {
+    const sendWhenComment = async () => {
+      let token = localStorage.getItem("token");
+      let id;
+      if (token) {
+        const { _id } = await jwtdecode(token);
+        id = _id;
+      }
+      setNewComment({ ...newComment, garage_id: id });
+      return;
     };
+    sendWhenComment();
+  }, []);
 
-    //! get all comments ============================
+  //!new posts comments====================
 
-    async function getAllComments(postId) {
-        console.log(postId);
-        const comments = await axios.post(
-            "http://localhost:5555/api/comments/sortComments/display/" + postId
-        );
-        console.log(comments.data);
-        setComments(comments.data);
-        setCommentsOpen("true");
-    }
+  const uploudComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = jwtDecode(token);
+    console.log(garage_id);
+    const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`, newComment);
+  };
 
-    return (
-        <CommentsContext.Provider
-            value={{
-                newComment,
-                comments,
-                setComments,
-                setNewComment,
-                uploudComment,
-                getAllComments,
-                commentsOpen,
-            }}
-        >
-            {children}
-        </CommentsContext.Provider>
+  const editingComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = jwtDecode(token);
+    console.log(garage_id);
+    const req = await axios.put(
+      `http://localhost:5555/api/comments/${editComment.comment_id}`,
+      editComment
     );
+  };
+
+  //! get all comments ============================
+
+  async function getAllComments(postId) {
+    console.log(postId);
+    const comments = await axios.post("http://localhost:5555/api/comments/sortComments/display/" + postId);
+    console.log(comments.data);
+    setComments(comments.data);
+    setCommentsOpen("true");
+  }
+
+  return (
+    <CommentsContext.Provider
+      value={{
+        newComment,
+        comments,
+        setComments,
+        setNewComment,
+        uploudComment,
+        getAllComments,
+        commentsOpen,
+        editComment,
+        editingComment,
+        setEditComment,
+      }}
+    >
+      {children}
+    </CommentsContext.Provider>
+  );
 }
 
 export default CommentsProvider;
