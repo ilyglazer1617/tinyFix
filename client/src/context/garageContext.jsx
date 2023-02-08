@@ -28,7 +28,7 @@ const GarageProvider = (props) => {
         ev.preventDefault();
         const garage = await axios.post("http://localhost:5555/api/garage/login", info);
         localStorage.setItem("token", garage.data);
-        console.log(garage.data);
+        console.log(garage);
     }
 
     // function that set the newArticle obj with imgUrl
