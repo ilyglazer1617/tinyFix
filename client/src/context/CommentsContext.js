@@ -33,7 +33,6 @@ function CommentsProvider(props) {
         const garage_id = jwtDecode(token);
         console.log(garage_id);
         const req = await axios.post(
-            //todo `http://localhost:5555/api/comments/${newComment.garage_id}`,
             `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`,
             newComment
         );
@@ -41,8 +40,11 @@ function CommentsProvider(props) {
 
     //! get all comments ============================
 
-    async function getAllComments(post_id) {
-        const comments = await axios.get(`http://localhost:5555/api/comments/byBids/${post_id}`);
+    async function getAllComments(postId) {
+        console.log(postId);
+        const comments = await axios.post(
+            "http://localhost:5555/api/comments/sortComments/display/" + postId
+        );
         console.log(comments.data);
         setComments(comments.data);
         setCommentsOpen("true");

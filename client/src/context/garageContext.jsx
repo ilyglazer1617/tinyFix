@@ -8,15 +8,19 @@ const GarageProvider = (props) => {
     const { children } = props;
     const [registerInformation, setRegisterInformation] = useState([]);
     const [image, setImg] = useState();
-    
+
     async function registerSubmit(ev, info) {
         ev.preventDefault();
-        const req = await axios.post("http://localhost:5555/api/garage/register", {
-            ...info,
-            image: image,
-        });
-        localStorage.setItem("token", req.data.token);
-        console.log(req);
+        try {
+            const req = await axios.post("http://localhost:5555/api/garage/register", {
+                ...info,
+                image: image,
+            });
+            localStorage.setItem("token", req.data.token);
+            console.log(req);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     // function that set the newArticle obj with imgUrl
