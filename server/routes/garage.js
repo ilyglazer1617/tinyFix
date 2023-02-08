@@ -30,12 +30,16 @@ app.post("/register", async function (req, res) {
         const image = req.body.image;
         console.log("image");
         try {
+            const emailValid = await Garage.find({ email: req.body.email });
             //upload img to cloudinary
-            const imgUploud = await cloudinary.uploader.upload(image, {
-                folder: "garages",
-                // width: 300,
-                // crop: "scale",
-            });
+            if (emailValid) {
+                console.log(emailValid);
+                const imgUploud = await cloudinary.uploader.upload(image, {
+                    folder: "garages",
+                    // width: 300,
+                    // crop: "scale",
+                });
+            }
 
             const garage = new Garage({
                 garage_name: req.body.garage_name,
@@ -114,14 +118,14 @@ app.post("/login", async function (req, res) {
     } else {
         try {
             const garage = await Garage.find({ email: req.body.email });
+            const id = garage._id;
+            const token = jwt.sign({ id }, process.env.JWT_SECRET);
             console.log(garage);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {
                 const password = await bcrypt.compare(req.body.password, garage[0].password);
-                password === true
-                    ? res.send("access granted")
-                    : res.status(869).send("There is no way you are here");
+                password === true ? res.send(token) : res.status(869).send("There is no way you are here");
             }
         } catch (error) {
             res.status(400).send(error.message);
@@ -133,8 +137,8 @@ app.post("/login", async function (req, res) {
 
 function loginValidate(garage) {
     const garageSchema = {
-        email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        email: Joi.string().email(),
+        password: Joi.string(),
     };
     return Joi.validate(garage, garageSchema);
 }
@@ -239,57 +243,25 @@ app.delete("/:garage_id", async function (req, res) {
     }
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //!=================reviews on garage======================
-
 
 app.post("/addReviews/:garage_id", async function (req, res) {
     const { prfessionalism, reliability, text } = req.body;
     const { garage_id } = req.params;
     try {
         const garage = await Garage.findById(garage_id);
-        if (!garage) return res.status(400).send({ error: 'Garage not found' });
-        
+        if (!garage) return res.status(400).send({ error: "Garage not found" });
+
         garage.reviews.prfessionalism.push(prfessionalism);
         garage.reviews.reliability.push(reliability);
         garage.reviews.text.push(text);
-        
+
         await garage.save();
-        
-        return res.send({ message: 'Review added successfully' });
+
+        return res.send({ message: "Review added successfully" });
     } catch (error) {
-        return res.status(500).send({ error: 'Failed to add review' });
+        return res.status(500).send({ error: "Failed to add review" });
     }
 });
-
-
 
 module.exports = app;

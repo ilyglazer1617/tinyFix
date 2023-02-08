@@ -60,16 +60,34 @@ const GarageMainPage = () => {
             <main>
                 <div className="postsList">
                     {posts.map((post, index) => {
+                        console.log(post);
                         return (
                             <div key={index} className="postCard">
                                 <div className="nameAndTime">
                                     <h3>12:31 20/4/2022</h3>
-                                    <h1>עילי גלזר</h1>
+                                    <h1>{post.user[0].full_name}</h1>
                                 </div>
-                                <h2 className="problemClasification">
-                                    סיווג הבעיה: {post.problem_classification}
-                                </h2>
-                                <h3>תיאור מפורט של הבעיה: {post.description}</h3>
+                                <div className="topContainer">
+                                    <div className="carInfo">
+                                        <h2>:מידע על הרכב</h2>
+                                        <p>
+                                            {post.user[0].car_make} <span>:סוג הרכב</span>
+                                        </p>
+                                        <p>
+                                            {post.user[0].car_model} <span>:מודל הרכב</span>
+                                        </p>
+                                        <p>
+                                            {post.user[0].car_year}
+                                            <span> :שנתון</span>
+                                        </p>
+                                    </div>
+                                    <div className="problemInfo">
+                                        <h2 className="problemClasification">
+                                            סיווג הבעיה: {post.problem_classification}
+                                        </h2>
+                                        <h3>תיאור מפורט של הבעיה: {post.description}</h3>
+                                    </div>
+                                </div>
                                 <div className="imagesList">
                                     {post.images.map((image, index) => {
                                         return <img key={index} src={image} />;
