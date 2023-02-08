@@ -33,7 +33,7 @@ app.post("/register", async function (req, res) {
             const emailValid = await Garage.find({ email: req.body.email });
             //upload img to cloudinary
             if (emailValid) {
-                console.log(emailValid)
+                console.log(emailValid);
                 const imgUploud = await cloudinary.uploader.upload(image, {
                     folder: "garages",
                     // width: 300,
@@ -118,14 +118,14 @@ app.post("/login", async function (req, res) {
     } else {
         try {
             const garage = await Garage.find({ email: req.body.email });
+            const id = garage._id;
+            const token = jwt.sign({ id }, process.env.JWT_SECRET);
             console.log(garage);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {
                 const password = await bcrypt.compare(req.body.password, garage[0].password);
-                password === true
-                    ? res.send("access granted")
-                    : res.status(869).send("There is no way you are here");
+                password === true ? res.send(token) : res.status(869).send("There is no way you are here");
             }
         } catch (error) {
             res.status(400).send(error.message);
@@ -137,8 +137,8 @@ app.post("/login", async function (req, res) {
 
 function loginValidate(garage) {
     const garageSchema = {
-        email: Joi.string().email().required(),
-        password: Joi.string().required(),
+        email: Joi.string().email(),
+        password: Joi.string(),
     };
     return Joi.validate(garage, garageSchema);
 }

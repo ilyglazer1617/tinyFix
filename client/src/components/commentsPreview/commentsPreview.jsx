@@ -29,7 +29,7 @@ const CommentsPreview = () => {
                       <div className="commentFix">
                         <h1>התיקון: {comment.text}</h1>
                       </div>
-                      {comment.garage_id === jwtDecode(localStorage.getItem("token")).id ? (
+                      {comment.garage_id === (jwtDecode(localStorage.getItem("token"))).id ? (
                           <button onClick={() => setEditComment({ ...editComment, comment_id: comment._id, text: comment.text, bid: comment.bid })}>עריכת הצעה</button>
                       ) : null}
                     </div>

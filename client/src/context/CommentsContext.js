@@ -27,26 +27,35 @@ function CommentsProvider(props) {
     sendWhenComment();
   }, []);
 
-  //!new posts comments====================
+  //!new comments====================
 
-  const uploudComment = async () => {
-    const token = localStorage.getItem("token");
-    const garage_id = jwtDecode(token);
-    console.log(garage_id);
-    const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`, newComment);
-  };
+    const uploudComment = async () => {
+        const token = localStorage.getItem("token");
+        const garage_id = jwtDecode(token);
 
-  const editingComment = async () => {
-    const token = localStorage.getItem("token");
-    const garage_id = jwtDecode(token);
-    console.log(garage_id);
-    const req = await axios.put(
-      `http://localhost:5555/api/comments/${editComment.comment_id}`,
-      editComment
-    );
-  };
+        console.log(garage_id);
+        const req = await axios.post(
+            `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`,
+            newComment
+        );
+    };
+    
 
-  //! get all comments ============================
+  //!edit comments====================
+
+
+    const editingComment = async () => {
+        const token = localStorage.getItem("token");
+        const garage_id = jwtDecode(token);
+        console.log(garage_id);
+        const req = await axios.put(
+          `http://localhost:5555/api/comments/${editComment.comment_id}`,
+          editComment
+        );
+      };
+
+
+    //! get all comments ============================
 
   async function getAllComments(postId) {
     console.log(postId);
