@@ -46,7 +46,7 @@ export default function Home() {
               <img className="homeLogoImg" src="/images/logo.png" alt="" />
             </div>
           </Typography>
-          {console.log(userPosts)}
+          {/* {console.log(userPosts)} */}
           {userPosts.length ? <MyPosts /> : <Explanation />}
         </Paper>
         <div className="buttomHome">

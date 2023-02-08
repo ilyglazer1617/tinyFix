@@ -14,6 +14,7 @@
     transition: .2s linear;
     box-shadow: 1px 1px 10px lightslategray;
     cursor: default;
+    margin-bottom: 12px;
 }
 
 .card-top-part {
@@ -47,7 +48,7 @@
 }
 
 .name {
-    font-size: 50%;
+    font-size: 82%;
     width: 90%;
 }
 
@@ -123,4 +124,91 @@
 
 .bottom-part:first-child {
     border-right: 1px solid rgb(231, 227, 227);
+}
+
+/*! comments ///// */
+.commentsWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+    padding: 4px;
+}
+
+.cardComment {
+    width: 100%;
+    height: 70px;
+    background: #353535;
+    border-radius: 4px;
+    display: flex;
+
+    align-items: center;
+    justify-content: left;
+    backdrop-filter: blur(10px);
+    transition: 0.5s ease-in-out;
+    text-align: right;
+}
+
+.cardComment:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+}
+
+.imgCommentWrap {
+    width: 50px;
+    height: 50px;
+    margin-left: 10px;
+    border-radius: 10px;
+    background: linear-gradient(#d7cfcf, #9198e5);
+}
+
+.imgComment {
+    width: 100%;
+}
+
+.cardComment:hover>.img {
+    transition: 0.5s ease-in-out;
+    background: linear-gradient(#9198e5, #712020);
+}
+
+.textBoxComment {
+    width: calc(100% - 90px);
+    margin-left: 10px;
+    color: white;
+    font-family: 'Poppins' sans-serif;
+}
+
+.textContentComment {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.spanComment {
+    font-size: 10px;
+}
+
+.h1Comment {
+    font-size: 16px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.pComment {
+    font-size: 12px;
+    font-weight: lighter;
+    margin: 0;
+
+}
+
+.bidWrapper {
+    display: flex;
+    justify-content: space-evenly;
+
+}
+
+#bid {
+    width: -webkit-fill-available;
 }

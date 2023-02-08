@@ -3,15 +3,32 @@ import { useContext } from "react";
 import { UserContext } from "./../../context/user";
 import "./myPosts.css";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
-const MyPosts = () => {
-  const { userPosts, commentOfPost, postComment } = useContext(UserContext);
+import { useState } from "react";
+import { format } from "timeago.js";
 
+const MyPosts = () => {
+  const {
+    userPosts,
+    commentOfPost,
+    postComment,
+    setFilterCommentData,
+    filterCommentData,
+  } = useContext(UserContext);
+
+  const [visibility, setVisibility] = useState(null);
+  const [hiddenOrNot, setHiddenOrNot] = useState(false);
+  //! להוריד למטה לכפתורים
+  useEffect(() => {
+    commentOfPost(userPosts._id);
+  }, [filterCommentData]);
+
+  console.log(postComment);
   return (
     <div className="myPosts">
       התקלות שלי
-      {userPosts.map((post) => {
+      {userPosts.map((post, index) => {
         return (
-          <div key={post._id}>
+          <div key={index}>
             <div className="myPostscard">
               <div className="card-top-part">
                 <div className="left-part">
@@ -33,7 +50,13 @@ const MyPosts = () => {
               </div>
               <div className="card-bottom-part">
                 <div className="bottom-part">
-                  <a className="link" onClick={() => commentOfPost(post._id)}>
+                  <a
+                    className="link"
+                    onClick={() => {
+                      commentOfPost(post._id);
+                      setVisibility(index);
+                    }}
+                  >
                     <span className="icon">
                       <svg
                         viewBox="0 0 20 20"
@@ -60,11 +83,64 @@ const MyPosts = () => {
                 </div>
               </div>
             </div>
-            {/* {userPosts[0]._id === postComment.post_id
-              ? postComment.map((comment) => {
-                  return <p>{comment.text}</p>;
-                })
-              : []} */}
+            <div
+              className="commentsWrap"
+              style={{
+                visibility: "",
+              }}
+            >
+              <div className="commentComments">
+                <button onClick={() => setFilterCommentData({})}> מחיר </button>
+                <button
+                  onClick={() => {
+                    setFilterCommentData({ reli: true });
+                  }}
+                >
+                  {" "}
+                  אמינות
+                </button>
+                <button
+                  onClick={() => {
+                    setFilterCommentData({ prof: true });
+                  }}
+                >
+                  {" "}
+                  מקצועיות{" "}
+                </button>
+              </div>
+              {visibility === index &&
+                postComment.map((comment) => {
+                  return (
+                    <div class="cardComment" key={comment._id}>
+                      <div class="textBoxComment">
+                        <div class="textContentComment">
+                          <span class="spanComment">
+                            {format(comment.createdAt)}
+                          </span>
+                          <p class="h1Comment">
+                            {comment.garage_id.garage_name}
+                          </p>
+                        </div>
+                        <div className="bidWrapper">
+                          <p class="pComment" id="bid">
+                            {comment.bid} :הצעה
+                          </p>
+                          <p class="pComment">{comment.text}</p>
+                        </div>
+                        <div></div>
+                      </div>
+                      <div class="imgCommentWrap">
+                        <img
+                          className="imgComment"
+                          src={comment.garage_id.image.url}
+                          alt=""
+                        />
+                        <p></p>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
           </div>
         );
       })}
