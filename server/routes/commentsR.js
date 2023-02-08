@@ -58,10 +58,13 @@ router.delete("/:comment_id", async (req, res) => {
 //!get all comments of a specific posts by sorting bids,pro,rel to disply the garage or user
 
 router.post("/sortComments/:post_id", async (req, res) => {
+  console.log(req.params.post_id);
   const prof = req.body.prof;
   const reli = req.body.reli;
   try {
-    let comments = await Comment.find({ post_id: req.params.post_id }).sort({ bid: 1 }).populate({ path: "garage_id" });
+    let comments = await Comment.find({ post_id: req.params.post_id })
+      .sort({ bid: 1 })
+      .populate({ path: "garage_id" });
 
     comments = comments.map((comment) => {
       function averageProf(ARRprfessionalism) {
@@ -72,7 +75,9 @@ router.post("/sortComments/:post_id", async (req, res) => {
         return sum / ARRprfessionalism.length;
       }
 
-      const avgPrfessionalism = parseFloat(averageProf(comment.garage_id.reviews.prfessionalism).toFixed(1));
+      const avgPrfessionalism = parseFloat(
+        averageProf(comment.garage_id.reviews.prfessionalism).toFixed(1)
+      );
 
       comment.garage_id.reviews.prfessionalism = avgPrfessionalism;
 
@@ -84,8 +89,10 @@ router.post("/sortComments/:post_id", async (req, res) => {
         return sum / ARRreliability.length;
       }
 
-      const avgReliability = parseFloat(averageRel(comment.garage_id.reviews.reliability).toFixed(1));
-      console.log(avgReliability)
+      const avgReliability = parseFloat(
+        averageRel(comment.garage_id.reviews.reliability).toFixed(1)
+      );
+      console.log(avgReliability);
 
       comment.garage_id.reviews.reliability = avgReliability;
 
@@ -94,13 +101,20 @@ router.post("/sortComments/:post_id", async (req, res) => {
 
     if (prof) {
       comments = comments.sort((a, b) => {
-        return b.garage_id.reviews.prfessionalism[0] - a.garage_id.reviews.prfessionalism[0];
-    });
+        return (
+          b.garage_id.reviews.prfessionalism[0] -
+          a.garage_id.reviews.prfessionalism[0]
+        );
+      });
     }
     if (reli) {
       comments = comments.sort((a, b) => {
-        return b.garage_id.reviews.reliability[0] - a.garage_id.reviews.reliability[0];
-      })}
+        return (
+          b.garage_id.reviews.reliability[0] -
+          a.garage_id.reviews.reliability[0]
+        );
+      });
+    }
 
     res.send(comments);
   } catch (error) {

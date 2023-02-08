@@ -18,7 +18,7 @@ const UserContextProvider = () => {
   const [userInfo, setUserInfo] = useState([]);
   const [setInfo, setSetInfo] = useState({});
   const [userPosts, setUserPosts] = useState(null);
-  const [postComment, setPostComment] = useState([]);
+  const [postComment, setPostComment] = useState(null);
   let token = localStorage.getItem("token");
   let id;
   if (token) {
@@ -30,8 +30,9 @@ const UserContextProvider = () => {
 
   const commentOfPost = async (postId) => {
     try {
-      const res = await axios.get(
-        "http://localhost:5555/api/posts/comments/" + postId
+      console.log(postId);
+      const res = await axios.post(
+        "http://localhost:5555/api/comments/sortComments/" + postId
       );
       console.log(res.data);
       setPostComment(res.data);
@@ -182,6 +183,7 @@ const UserContextProvider = () => {
           userPosts,
           getUserPosts,
           commentOfPost,
+          postComment,
         }}
       >
         <App />

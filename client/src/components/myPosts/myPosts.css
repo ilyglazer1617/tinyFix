@@ -8,7 +8,7 @@
 }
 
 .myPostscard {
-    width: 80%;
+    width: 80vw;
     height: 150px;
     background: whitesmoke;
     transition: .2s linear;
