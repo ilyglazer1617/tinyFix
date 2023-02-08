@@ -32,7 +32,7 @@ const UserContextProvider = () => {
     try {
       console.log(postId);
       const res = await axios.post(
-        "http://localhost:5555/api/comments/sortComments/" + postId
+        "http://localhost:5555/api/comments/sortComments/display/" + postId
       );
       console.log(res.data);
       setPostComment(res.data);
