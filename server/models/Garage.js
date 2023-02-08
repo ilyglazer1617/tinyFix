@@ -54,7 +54,7 @@ const Garage = new mongoose.model(
             },
             url: {
                 type: String,
-                required: true
+                required: true,
             },
         },
         reviews: {
@@ -79,5 +79,10 @@ const Garage = new mongoose.model(
         },
     })
 );
+
+// schema.methods.generateJWT = function () {
+//     const token = jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
+//     return token;
+// };
 
 module.exports = Garage;

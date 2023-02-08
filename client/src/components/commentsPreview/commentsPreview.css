@@ -1,0 +1,37 @@
+.commentsPreview {
+    position: fixed;
+    top: 15vh;
+    left: 20vw;
+    height: 70vh;
+    width: 60vw;
+    padding: 1rem;
+    background-color: rgb(245, 235, 235);
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+.backgroundBlocker {
+    position: fixed;
+    top: 0;
+    min-width: 100dvw;
+    min-height: 100dvh;
+    background-color: rgba(45, 29, 48, 0.445);
+}
+
+.exitButton {
+    text-align: right;
+    padding-right: 2rem;
+}
+.exitButton span:hover {
+    cursor: pointer;
+}
+
+.addCommentContainer {
+    position: relative;
+    bottom: 0;
+}
+
+.comment {
+    background-color: rgb(233, 219, 219);
+    margin: 2rem;
+}
