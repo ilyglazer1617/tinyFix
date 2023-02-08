@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CommentsContext } from "../../context/CommentsContext";
 
-function Posts() {
+function EditComments() {
     const { newComment, setNewComment, uploudComment, editComment,editingComment, setEditComment} = useContext(CommentsContext);
 
     return (
@@ -9,6 +9,7 @@ function Posts() {
             <input
                 type="text"
                 placeholder="הצעת מחיר"
+                value={editComment.bid || "helo"}
                 onChange={(e) => setEditComment({ ...editComment, bid: e.target.value })}
             />
             <input
@@ -21,4 +22,4 @@ function Posts() {
     );
 }
 
-export default Posts;
+export default EditComments;
