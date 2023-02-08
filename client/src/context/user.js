@@ -19,6 +19,7 @@ const UserContextProvider = () => {
   const [setInfo, setSetInfo] = useState({});
   const [userPosts, setUserPosts] = useState([]);
   const [postComment, setPostComment] = useState([]);
+  const [filterCommentData, setFilterCommentData] = useState({});
   let token = localStorage.getItem("token");
   let id;
   if (token) {
@@ -29,12 +30,19 @@ const UserContextProvider = () => {
   //!get all comments of a specific posts
 
   const commentOfPost = async (postId) => {
+    const data = filterCommentData;
     try {
-      console.log(postId);
+      if (data) {
+        const res = await axios.post(
+          "http://localhost:5555/api/comments/sortComments/display/" + postId,
+          data
+        );
+        setPostComment(res.data);
+        return;
+      }
       const res = await axios.post(
         "http://localhost:5555/api/comments/sortComments/display/" + postId
       );
-      console.log(res.data);
       setPostComment(res.data);
     } catch (error) {
       console.log(error);
@@ -45,7 +53,7 @@ const UserContextProvider = () => {
     try {
       const res = await axios.get("http://localhost:5555/api/posts/" + id);
       setUserPosts(res.data);
-      console.log(userPosts);
+      // console.log(userPosts);
     } catch (error) {
       console.log(error.message);
     }
@@ -185,6 +193,8 @@ const UserContextProvider = () => {
           getUserPosts,
           commentOfPost,
           postComment,
+          setFilterCommentData,
+          filterCommentData,
         }}
       >
         <App />

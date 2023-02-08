@@ -59,7 +59,7 @@ router.delete("/:comment_id", async (req, res) => {
 //!get all comments of a specific posts by sorting bids,pro,rel to disply the garage or user
 
 router.post("/sortComments/display/:post_id", async (req, res) => {
-  console.log("first");
+  console.log(req.body);
   const prof = req.body.prof;
   const reli = req.body.reli;
   try {
@@ -140,4 +140,3 @@ router.post("/sortComments/display/:post_id", async (req, res) => {
 
 module.exports = router;
 
-//ze ani ily
