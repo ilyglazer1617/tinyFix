@@ -7,8 +7,9 @@ import jwtDecode from "jwt-decode";
 
 const CommentsPreview = () => {
   const { comments, editComment, setEditComment, newComment } = useContext(CommentsContext);
-  const navigate = useNavigate();
-
+    const navigate = useNavigate();
+    
+  
   return (
     <>
       <div className="backgroundBlocker">
