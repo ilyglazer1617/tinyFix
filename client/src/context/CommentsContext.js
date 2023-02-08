@@ -31,13 +31,14 @@ function CommentsProvider(props) {
     const uploudComment = async () => {
         const token = localStorage.getItem("token");
         const garage_id = jwtDecode(token);
+
         console.log(garage_id);
         const req = await axios.post(
             `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id.id}`,
             newComment
         );
     };
-
+    
     //! get all comments ============================
 
     async function getAllComments(postId) {

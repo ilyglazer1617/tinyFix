@@ -60,6 +60,7 @@ const GarageMainPage = () => {
             <main>
                 <div className="postsList">
                     {posts.map((post, index) => {
+                        console.log(post);
                         return (
                             <div key={index} className="postCard">
                                 <div className="nameAndTime">

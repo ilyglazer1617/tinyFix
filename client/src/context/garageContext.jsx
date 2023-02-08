@@ -7,6 +7,7 @@ export const GarageContext = createContext();
 const GarageProvider = (props) => {
     const { children } = props;
     const [registerInformation, setRegisterInformation] = useState([]);
+    const [loginInformation, setLoginInformation] = useState([]);
     const [image, setImg] = useState();
 
     async function registerSubmit(ev, info) {
@@ -21,6 +22,13 @@ const GarageProvider = (props) => {
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async function loginSubmit(ev, info) {
+        ev.preventDefault();
+        const garage = await axios.post("http://localhost:5555/api/garage/login", info);
+        localStorage.setItem("token", garage.data);
+        console.log(garage.data);
     }
 
     // function that set the newArticle obj with imgUrl
@@ -53,6 +61,9 @@ const GarageProvider = (props) => {
                 registerInformation,
                 uploudImg,
                 setImgUrl,
+                loginSubmit,
+                setLoginInformation,
+                loginInformation,
             }}
         >
             {children}
