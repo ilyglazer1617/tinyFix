@@ -56,14 +56,57 @@ router.delete("/:comment_id", async (req, res) => {
     }
 });
 
-//!get all comments of a specific posts by sorting bids to disply the garage or user
+//!get all comments of a specific posts by sorting bids,pro,rel to disply the garage or user
 
-router.get("/byBids/:post_id", async (req, res) => {
-    // console.log("first");
+router.post("/sortComments/:post_id", async (req, res) => {
+    const prof = req.body.prof;
+    const reli = req.body.reli;
     try {
-        const comments = await Comment.find({ post_id: req.params.post_id })
+        let comments = await Comment.find({ post_id: req.params.post_id })
             .sort({ bid: 1 })
             .populate({ path: "garage_id" });
+
+        comments = comments.map((comment) => {
+            function averageProf(ARRprfessionalism) {
+                let sum = 0;
+                for (let i = 0; i < ARRprfessionalism.length; i++) {
+                    sum += ARRprfessionalism[i];
+                }
+                return sum / ARRprfessionalism.length;
+            }
+
+            const avgPrfessionalism = parseFloat(
+                averageProf(comment.garage_id.reviews.prfessionalism).toFixed(1)
+            );
+
+            comment.garage_id.reviews.prfessionalism = avgPrfessionalism;
+
+            function averageRel(ARRreliability) {
+                let sum = 0;
+                for (let i = 0; i < ARRreliability.length; i++) {
+                    sum += ARRreliability[i];
+                }
+                return sum / ARRreliability.length;
+            }
+
+            const avgReliability = parseFloat(averageRel(comment.garage_id.reviews.reliability).toFixed(1));
+            console.log(avgReliability);
+
+            comment.garage_id.reviews.reliability = avgReliability;
+
+            return comment;
+        });
+
+        if (prof) {
+            comments = comments.sort((a, b) => {
+                return b.garage_id.reviews.prfessionalism[0] - a.garage_id.reviews.prfessionalism[0];
+            });
+        }
+        if (reli) {
+            comments = comments.sort((a, b) => {
+                return b.garage_id.reviews.reliability[0] - a.garage_id.reviews.reliability[0];
+            });
+        }
 
         res.send(comments);
     } catch (error) {
@@ -87,5 +130,18 @@ router.get("/byPrfessionalism/:post_id", async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 });
+// router.get("/byPrfessionalism/:post_id", async (req, res) => {
+//   // console.log("first");
+//   try {
+//     const comments = await Comment.find({ post_id: req.params.post_id }).populate({ path: "garage_id" });
+
+//     comments
+
+//     res.send(comments);
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).send({ message: error.message });
+//   }
+// });
 
 module.exports = router;
