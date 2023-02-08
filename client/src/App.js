@@ -12,6 +12,7 @@ import GarageRegister from "./components/garage/garageRegister";
 import GarageLogin from "./components/garage/garageLogin";
 import GarageMainPage from "./components/garage/garageMainPage";
 import LandingPage from "./components/landingPage/landingPage";
+import CommentsPreview from "./components/commentsPreview/commentsPreview";
 function App() {
     return (
         <div className="App">
@@ -24,6 +25,15 @@ function App() {
                 <Route path="/GarageRegister" element={<GarageRegister />} />
                 <Route path="/GarageLogin" element={<GarageLogin />} />
                 <Route path="/GarageMainPage" element={<GarageMainPage />} />
+                <Route
+                    path="/GarageMainPage/Comments"
+                    element={
+                        <>
+                            <GarageMainPage />
+                            <CommentsPreview />
+                        </>
+                    }
+                />
                 <Route path="/Home" element={<Home />} />
                 <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
                 <Route path="/LandingPage" element={<LandingPage />} />

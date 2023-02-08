@@ -4,10 +4,12 @@ import "./garage.css";
 
 import { useState, useContext, useEffect } from "react";
 import { PostsContext } from "../../context/PostsContext";
-
+import { CommentsContext } from "./../../context/CommentsContext";
+import { useNavigate } from "react-router-dom";
 const GarageMainPage = () => {
     const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-
+    const { getAllComments, setNewComment, newComment } = useContext(CommentsContext);
+    const navigate = useNavigate();
     useEffect(() => {
         console.log(filterParams);
         getAllPosts(filterParams);
@@ -73,6 +75,16 @@ const GarageMainPage = () => {
                                         return <img key={index} src={image} />;
                                     })}
                                 </div>
+                                <button
+                                    className="comments"
+                                    onClick={() => {
+                                        navigate("/GarageMainPage/Comments");
+                                        getAllComments(post._id);
+                                        setNewComment({ ...newComment, post_id: post._id });
+                                    }}
+                                >
+                                    הצעות
+                                </button>
                             </div>
                         );
                     })}

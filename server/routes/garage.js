@@ -57,13 +57,16 @@ app.post("/register", async function (req, res) {
                 licanse: req.body.licanse,
             });
             const result = await garage.save();
-            console.log("i got all the way here");
-            res.send(result);
+            const id = result._id;
+            const token = jwt.sign({ id }, process.env.JWT_SECRET);
+            console.log(token);
+            res.send({ result, token });
         } catch (error) {
             res.status(400).send(error.message);
         }
     }
 });
+
 //? Garage register Joi validation:
 
 function registerValidate(garage) {

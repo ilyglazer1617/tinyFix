@@ -1,5 +1,8 @@
 import "./landingPage.css";
+import { to } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+    const navigate = useNavigate();
     return (
         <div>
             <div className="slides">
@@ -22,16 +25,27 @@ const LandingPage = () => {
                     <img src="/images/intro5.png" alt="" />
                 </div>
                 <div className="slide slide4">
-                    <div className="garageSide">
-                        <h3>?יש לך משתמש קיים</h3>
-                        <button className="userLogin submitButton">התחבר</button>
-                        <h3>?עדיין אין לך משתמש</h3>
-                        <button className="userRegister submitButton">הרשמה</button>
-                    </div>
                     <div className="userSide">
+                        <h3>?יש לך משתמש קיים</h3>
+                        <button className="userLogin submitButton" onClick={() => navigate("/")}>
+                            התחבר
+                        </button>
+                        <h3>?עדיין אין לך משתמש</h3>
+                        <button className="userRegister submitButton" onClick={() => navigate("/register")}>
+                            הרשמה
+                        </button>
+                    </div>
+                    <div className="garageSide">
                         <h3>?בעל עסק</h3>
-                        <button className="garageLogin submitButton">התחבר</button>
-                        <button className="garageRegister submitButton">הרשמה</button>
+                        <button className="garageLogin submitButton" onClick={() => navigate("/GarageLogin")}>
+                            התחבר
+                        </button>
+                        <button
+                            className="garageRegister submitButton"
+                            onClick={() => navigate("/GarageRegister")}
+                        >
+                            הרשמה
+                        </button>
                     </div>
                 </div>
             </div>

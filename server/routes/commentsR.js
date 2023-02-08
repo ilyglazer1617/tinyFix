@@ -5,16 +5,17 @@ const Post = require("../models/Posts");
 
 // !add new comment
 
-router.post("/:garage_id", async (req, res) => {
+router.post("/:post_id/:garage_id", async (req, res) => {
   // console.log("first");
+
   try {
     const newComment = new Comment({
       garage_id: req.params.garage_id,
-      //todo post_id: req.body.post_id,
-      post_id: "63e127368f932b42a5996348",
+      post_id: req.params.post_id,
       bid: Number(req.body.bid),
       text: req.body.text,
     });
+
     await newComment.save();
     res.status(201).send({ message: "Comment added successfully." });
   } catch (error) {
@@ -58,7 +59,6 @@ router.delete("/:comment_id", async (req, res) => {
 //!get all comments of a specific posts by sorting bids,pro,rel to disply the garage or user
 
 router.post("/sortComments/:post_id", async (req, res) => {
-  console.log(req.params.post_id);
   const prof = req.body.prof;
   const reli = req.body.reli;
   try {
@@ -125,6 +125,21 @@ router.post("/sortComments/:post_id", async (req, res) => {
 
 //!filtering coments to the user
 
+router.get("/byPrfessionalism/:post_id", async (req, res) => {
+  // console.log("first");
+  try {
+    const comments = await Comment.find({
+      post_id: req.params.post_id,
+    }).populate({ path: "garage_id" });
+
+    comments;
+
+    res.send(comments);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send({ message: error.message });
+  }
+});
 // router.get("/byPrfessionalism/:post_id", async (req, res) => {
 //   // console.log("first");
 //   try {
