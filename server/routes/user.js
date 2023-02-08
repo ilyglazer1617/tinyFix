@@ -35,7 +35,6 @@ userRouter.post("/register", async (req, res) => {
 //! get user info
 userRouter.get("/:id", async (req, res) => {
   try {
-    console.log(req.params.id);
     const userData = await User.findById(req.params.id);
     res.status(200).send(userData);
   } catch (error) {
