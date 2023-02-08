@@ -11,23 +11,25 @@ import Comments from "./components/comments/Comments";
 import GarageRegister from "./components/garage/garageRegister";
 import GarageLogin from "./components/garage/garageLogin";
 import GarageMainPage from "./components/garage/garageMainPage";
+import LandingPage from "./components/landingPage/landingPage";
 function App() {
-  return (
-    <div className="App">
-      <Routes>
-        <Route path="/register" element={<Register />} />
-        <Route path="/" element={<Login />} />
-        <Route path="/SetInfo" element={<SetInfo />} />
-        <Route path="/Posts" element={<Posts />} />
-        <Route path="/Comments" element={<Comments />} />
-        <Route path="/GarageRegister" element={<GarageRegister />} />
-        <Route path="/GarageLogin" element={<GarageLogin />} />
-        <Route path="/GarageMainPage" element={<GarageMainPage />} />
-        <Route path="/Home" element={<Home />} />
-        <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
-      </Routes>
-    </div>
-  );
+    return (
+        <div className="App">
+            <Routes>
+                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Login />} />
+                <Route path="/SetInfo" element={<SetInfo />} />
+                <Route path="/Posts" element={<Posts />} />
+                <Route path="/Comments" element={<Comments />} />
+                <Route path="/GarageRegister" element={<GarageRegister />} />
+                <Route path="/GarageLogin" element={<GarageLogin />} />
+                <Route path="/GarageMainPage" element={<GarageMainPage />} />
+                <Route path="/Home" element={<Home />} />
+                <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
+                <Route path="/LandingPage" element={<LandingPage />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;
