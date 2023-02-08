@@ -17,12 +17,38 @@ const UserContextProvider = () => {
   const [loginData, setLoginData] = useState({});
   const [userInfo, setUserInfo] = useState([]);
   const [setInfo, setSetInfo] = useState({});
+  const [userPosts, setUserPosts] = useState(null);
+  const [postComment, setPostComment] = useState([]);
   let token = localStorage.getItem("token");
   let id;
   if (token) {
     const { _id } = jwtdecode(token);
     id = _id;
   }
+
+  //!get all comments of a specific posts
+
+  const commentOfPost = async (postId) => {
+    try {
+      const res = await axios.get(
+        "http://localhost:5555/api/posts/comments/" + postId
+      );
+      console.log(res.data);
+      setPostComment(res.data);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  //! get user posts
+  const getUserPosts = async () => {
+    try {
+      const res = await axios.get("http://localhost:5555/api/posts/" + id);
+      setUserPosts(res.data);
+      console.log(userPosts);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   //! update user info
   const updateUserInfo = async (e) => {
     e.preventDefault();
@@ -41,10 +67,8 @@ const UserContextProvider = () => {
   //! get User info
   const getUserInfo = async () => {
     try {
-      console.log(id);
       const res = await axios.get("http://localhost:5555/user/" + id);
 
-      console.log(res.data);
       setUserInfo(res.data);
     } catch (error) {
       console.log(error.message);
@@ -155,6 +179,9 @@ const UserContextProvider = () => {
           setInfo,
           setSetInfo,
           updateUserInfo,
+          userPosts,
+          getUserPosts,
+          commentOfPost,
         }}
       >
         <App />

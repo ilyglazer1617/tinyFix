@@ -54,7 +54,7 @@ const Bottom = () => {
             }}
             aria-label="add"
           >
-            <AddIcon />
+            <AddIcon onClick={() => navigate("/Posts")} />
           </StyledFab>
           <Box sx={{ flexGrow: 1 }} />
           <IconButton color="inherit">

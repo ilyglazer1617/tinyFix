@@ -1,7 +1,6 @@
 .homeHead {
     background-color: rgb(255, 136, 0);
     width: 100vw;
-
 }
 
 .homeImgWrap {
@@ -46,10 +45,10 @@
     padding-top: 10%;
 }
 
-svg {
+/* svg {
     width: 20px;
     height: 20px;
-}
+} */
 
 .card-footer {
     width: 100%;

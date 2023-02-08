@@ -1,66 +1,17 @@
 import * as React from "react";
 import { styled } from "@mui/material/styles";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
+
 import CssBaseline from "@mui/material/CssBaseline";
-import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Fab from "@mui/material/Fab";
-import List from "@mui/material/List";
-import PersonIcon from "@mui/icons-material/Person";
-import ContactMailIcon from "@mui/icons-material/ContactMail";
-import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
-import Avatar from "@mui/material/Avatar";
-import MenuIcon from "@mui/icons-material/Menu";
-import AddIcon from "@mui/icons-material/Add";
-import SearchIcon from "@mui/icons-material/Search";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import TableRowsIcon from "@mui/icons-material/TableRows";
-import MailIcon from "@mui/icons-material/Mail";
-import MapIcon from "@mui/icons-material/Map";
 import "./navBar.css";
 import Bottom from "./../bottom/bottom";
 import { UserContext } from "./../../context/user";
 import { useEffect } from "react";
 import { useContext } from "react";
-
-const messages = [
-  {
-    id: 1,
-    primary: "?עשית תאונה",
-    secondary: "בשביל זה בידיוק אנחנו פה",
-    person: "/images/intro1.png",
-  },
-  {
-    id: 2,
-    primary: "לחץ על כפתור ה + והעלה את התמונה ",
-    secondary: `לאחר שמילאת את הטופס`,
-    person: "/images/intro2.png",
-  },
-  {
-    id: 3,
-    primary: "אנחנו נפיץ את התקלה שלך",
-    secondary: "בין המוסכים הטובים ביותר שנמצאים בקרבתך",
-    person: "/images/intro3.jpg",
-  },
-  {
-    id: 4,
-    primary: "המוסכים יבחנו את התקלה שלך",
-    secondary: "ויתחרו על מי יתן לך את ההצעה והמחיר הטוב ביותר",
-    person: "/images/intro4.png",
-  },
-  {
-    id: 5,
-    primary: "שלב הבחירה",
-    secondary: "אתה תבחר מי יטפל לך ברכב מבין כל ההצעות",
-    person: "/images/intro5.png",
-  },
-];
+import Explanation from "../explanation/explanation";
+import MyPosts from "../myPosts/myPosts";
 
 const StyledFab = styled(Fab)({
   position: "absolute",
@@ -72,9 +23,12 @@ const StyledFab = styled(Fab)({
 });
 
 export default function Home() {
-  const { getUserInfo, userInfo } = useContext(UserContext);
+  const { getUserInfo, userPosts, getUserPosts } = useContext(UserContext);
   useEffect(() => {
     getUserInfo();
+  }, []);
+  useEffect(() => {
+    getUserPosts();
   }, []);
   return (
     <div className="home">
@@ -92,25 +46,7 @@ export default function Home() {
               <img className="homeLogoImg" src="/images/logo.png" alt="" />
             </div>
           </Typography>
-          <List sx={{ mb: 2 }}>
-            <h2 style={{ margin: "0px" }} className="howWeStart">
-              ?איך מתחילים
-            </h2>
-            <div className="cardWrap">
-              {messages.map(({ id, primary, secondary, person }) => (
-                <div class="card">
-                  <div class="card-img">
-                    {" "}
-                    <img className="introPic" src={person} alt="" />
-                  </div>
-                  <div class="card-info">
-                    <p class="text-title">{primary}</p>
-                    <p class="text-body">{secondary}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </List>
+          {userPosts ? <MyPosts /> : <Explanation />}
         </Paper>
         <div className="buttomHome">
           <Bottom className="bottomHomeC" />
