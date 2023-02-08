@@ -167,6 +167,12 @@ const GarageRegister = () => {
                                 >
                                     המשך
                                 </button>
+                                <button
+                                    className="submitButton"
+                                    onClick={() => setRegisterPage("personalInfo")}
+                                >
+                                    חזור
+                                </button>
                             </div>
                         ) : (
                             ""
@@ -231,6 +237,12 @@ const GarageRegister = () => {
                                 />
                                 <button className="submitButton" type="submit">
                                     שלח
+                                </button>
+                                <button
+                                    className="submitButton"
+                                    onClick={() => setRegisterPage("locationInfo")}
+                                >
+                                    חזור
                                 </button>
                             </div>
                         ) : (
