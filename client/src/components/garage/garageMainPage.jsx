@@ -13,6 +13,7 @@ const GarageMainPage = () => {
     const navigate = useNavigate();
     useEffect(() => {
         getAllPosts(filterParams);
+        
     }, [filterParams]);
     return (
         <>
