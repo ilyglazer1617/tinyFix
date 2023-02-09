@@ -11,6 +11,7 @@ const GarageProvider = (props) => {
     const [loginInformation, setLoginInformation] = useState([]);
     const [garageInfo, setGarageInfo] = useState([]);
     const [image, setImg] = useState();
+    const [newReview, setNewReview] = useState({});
 
     async function registerSubmit(ev, info) {
         ev.preventDefault();
@@ -58,6 +59,16 @@ const GarageProvider = (props) => {
         setGarageInfo(garage.data);
     }
 
+    async function addReviewToGarage(ev) {
+        ev.preventDefault();
+        try {
+            const comment = await axios.post(`http://localhost:5555/api/garage/addReviews`, newReview);
+            console.log(comment);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
+
     return (
         <GarageContext.Provider
             value={{
@@ -71,6 +82,9 @@ const GarageProvider = (props) => {
                 loginInformation,
                 garageInfo,
                 getGarageById,
+                newReview,
+                setNewReview,
+                addReviewToGarage,
             }}
         >
             {children}

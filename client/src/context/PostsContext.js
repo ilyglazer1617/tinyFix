@@ -29,7 +29,8 @@ function PostsProvider(props) {
   async function getAllPosts(params) {
     const token = localStorage.getItem("token");
     const token_info = jwtdecode(token);
-    const district = token_info.district;
+      const district = token_info.district;
+      
     console.log("function: ");
     const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
     setPosts(posts.data);

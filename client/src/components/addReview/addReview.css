@@ -1,4 +1,4 @@
-.professionalityRating {
+.professionailtyRating {
     display: flex;
     flex-direction: row-reverse;
     justify-content: center;
@@ -34,6 +34,7 @@
 .professionailtyRating:hover > input:checked ~ label:before {
     opacity: 0.4;
 }
+
 
 .reliabilityRating {
     display: flex;

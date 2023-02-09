@@ -1,9 +1,10 @@
 import { useEffect, useState, useContext } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 import { GarageContext } from "./../../context/garageContext";
 import "./garageInfo.css";
 const GarageInfo = () => {
-    const { getGarageById, garageInfo } = useContext(GarageContext);
-
+    const { getGarageById, garageInfo, setNewReview, newReview } = useContext(GarageContext);
+    const Navigate = useNavigate();
     useEffect(() => {
         getGarageById();
     }, []);
@@ -30,7 +31,14 @@ const GarageInfo = () => {
                 </div>
                 <div className="contactButtons">
                     <button>צור קשר</button>
-                    <button>הוסף ביקורת</button>
+                    <button
+                        onClick={() => {
+                            Navigate("/AddReview");
+                            setNewReview({ ...newReview, garage_id: garageInfo._id });
+                        }}
+                    >
+                        הוסף ביקורת
+                    </button>
                 </div>
             </div>
         </>

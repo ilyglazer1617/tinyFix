@@ -245,9 +245,8 @@ app.delete("/:garage_id", async function (req, res) {
 
 //!=================reviews on garage======================
 
-app.post("/addReviews/:garage_id", async function (req, res) {
-    const { prfessionalism, reliability, text } = req.body;
-    const { garage_id } = req.params;
+app.post("/addReviews", async function (req, res) {
+    const { prfessionalism, reliability, text, garage_id } = req.body;
     try {
         const garage = await Garage.findById(garage_id);
         if (!garage) return res.status(400).send({ error: "Garage not found" });
