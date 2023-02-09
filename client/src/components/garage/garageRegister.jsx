@@ -6,7 +6,6 @@ const GarageRegister = () => {
     const { registerSubmit, setRegisterInformation, registerInformation, setImgUrl, uploudImg } =
         useContext(GarageContext);
     const [registerPage, setRegisterPage] = useState("personalInfo");
-    console.log(registerInformation);
     return (
         <>
             <div className="fakeBody">

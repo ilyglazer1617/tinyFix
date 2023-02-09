@@ -17,7 +17,6 @@ cloudinary.config({
 //!add a new post
 
 router.post("/", async (req, res) => {
-    console.log("first");
     // console.log(req.body.images);
     try {
         const images = req.body.images;
@@ -39,7 +38,6 @@ router.post("/", async (req, res) => {
         });
 
         const post = await newPost.save();
-        console.log("yesssssssssssssssss");
         res.send(post);
     } catch (err) {
         console.error(err.message);
@@ -115,7 +113,6 @@ router.get("/:user_id", async (req, res) => {
 //!get all posts
 router.get("/districtFilter/:district", async (req, res) => {
     const district = req.params.district;
-    console.log(district);
     try {
         // let posts = await Post.find({  }).populate({
         //   path: "user_id",
@@ -191,7 +188,6 @@ router.post("/withFilters/:district", async (req, res) => {
         if (problem_classification) {
             posts = posts.filter((post) => post.problem_classification == problem_classification);
         }
-        console.log(posts);
         res.send(posts);
     } catch (err) {
         console.log(err);
@@ -209,7 +205,6 @@ router.get("/myBids/:garage_id", async (req, res) => {
         }
         // console.log(comments)
         const postIds = comments.map((comment) => comment.post_id);
-        console.log(postIds);
         const posts = await Post.find({ _id: { $in: postIds } });
         if (posts.length == 0) {
             res.send("no bids to this garage");

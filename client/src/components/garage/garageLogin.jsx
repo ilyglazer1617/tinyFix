@@ -14,7 +14,6 @@ const GarageLogin = () => {
         loginInformation,
     } = useContext(GarageContext);
     const [registerPage, setRegisterPage] = useState("personalInfo");
-    console.log(loginInformation);
     return (
         <>
             <div className="fakeBody">

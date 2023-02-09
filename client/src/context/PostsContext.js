@@ -33,7 +33,6 @@ function PostsProvider(props) {
   async function getAllPosts(params) {
     //todo change to the garage district from local storage==========================================
     const district = "מחוז תל אביב";
-    console.log("function: ");
     const posts = await axios.post(
       `http://localhost:5555/api/posts/withFilters/${district}`,
       params
@@ -76,7 +75,6 @@ function PostsProvider(props) {
   //generate images and push tu newPost===============
 
   const uploudPost = async () => {
-    // console.log("first");
     const req = await axios.post("http://localhost:5555/api/posts", newPost);
   };
 
