@@ -43,7 +43,7 @@ function CommentsProvider(props) {
           else {
               return comment
           }
-      }));
+      }).sort((a, b) => a.bid - b.bid));
   };
 
   //! get all comments ============================
