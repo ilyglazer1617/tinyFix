@@ -15,7 +15,8 @@ router.post("/:post_id/:garage_id", async (req, res) => {
         });
 
         await newComment.save();
-        res.status(201).send({ message: "Comment added successfully." });
+        
+        res.status(201).send({ newComment });
     } catch (error) {
         res.status(400).send({ error: error.message });
     }
