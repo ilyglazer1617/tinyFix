@@ -24,6 +24,7 @@ import TableRowsIcon from "@mui/icons-material/TableRows";
 import MailIcon from "@mui/icons-material/Mail";
 import MapIcon from "@mui/icons-material/Map";
 import { useNavigate } from "react-router-dom";
+import HomeIcon from "@mui/icons-material/Home";
 const StyledFab = styled(Fab)({
   position: "absolute",
   zIndex: 1,
@@ -60,8 +61,8 @@ const Bottom = () => {
           <IconButton color="inherit">
             <PersonIcon onClick={() => navigate("/PrsonalInfo")} />
           </IconButton>
-          <IconButton color="inherit">
-            <TableRowsIcon />
+          <IconButton color="inherit" onClick={() => navigate("/Home")}>
+            <HomeIcon />
           </IconButton>
         </Toolbar>
       </AppBar>

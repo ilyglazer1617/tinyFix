@@ -43,7 +43,8 @@
     margin: 0;
     margin-top: 20px;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 0.7rem;
+
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -66,4 +67,13 @@
 .setPersonalInfo {
     margin-top: 10%;
     cursor: pointer;
+}
+
+.personalInfoLogoWrapper {
+    position: fixed;
+    width: 26%;
+}
+
+.personalInfoLogo {
+    width: 100%;
 }

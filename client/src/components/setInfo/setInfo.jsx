@@ -1,6 +1,7 @@
 import "./setInfo.css";
 import { useContext, useEffect } from "react";
 import { UserContext } from "./../../context/user";
+import { useNavigate } from "react-router-dom";
 
 const SetInfo = () => {
   const {
@@ -47,6 +48,8 @@ const SetInfo = () => {
   useEffect(() => {
     getCarYear();
   }, [userCarModel]);
+  const navigate = useNavigate();
+
   return (
     <div>
       <div className="SetInfoForm">
@@ -147,7 +150,15 @@ const SetInfo = () => {
           </select>
           :שנת רכב{" "}
         </h3>
-        <button onClick={(e) => updateUserInfo(e)}>עדכן מידע </button>
+        <button
+          onClick={(e) => {
+            updateUserInfo(e);
+            alert("המידע עודכן בהצלחה");
+            navigate("/Home");
+          }}
+        >
+          עדכן מידע{" "}
+        </button>
       </div>
     </div>
   );

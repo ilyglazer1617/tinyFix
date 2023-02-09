@@ -6,6 +6,7 @@ import App from "./../App";
 export const UserContext = createContext();
 
 const UserContextProvider = () => {
+<<<<<<< HEAD
     const navigate = useNavigate();
     const [registerData, setRegisterData] = useState({});
     const [carMake, setcarMake] = useState([]);
@@ -25,6 +26,48 @@ const UserContextProvider = () => {
     if (token) {
         const { _id } = jwtdecode(token);
         id = _id;
+=======
+  const navigate = useNavigate();
+  const [registerData, setRegisterData] = useState({});
+  const [carMake, setcarMake] = useState([]);
+  const [updating, setUpdating] = useState("false");
+  const [carCompany, setCarCompany] = useState({});
+  const [carModels, setCarModels] = useState([]);
+  const [userCarModel, setUserCarModel] = useState({});
+  const [carYears, setCarYears] = useState([]);
+  const [loginData, setLoginData] = useState({});
+  const [userInfo, setUserInfo] = useState([]);
+  const [setInfo, setSetInfo] = useState({});
+  const [userPosts, setUserPosts] = useState([]);
+  const [postComment, setPostComment] = useState([]);
+  const [filterCommentData, setFilterCommentData] = useState({});
+  let token = localStorage.getItem("token");
+  let id;
+  if (token) {
+    const { _id } = jwtdecode(token);
+    id = _id;
+  }
+
+  //!get all comments of a specific posts
+
+  const commentOfPost = async (postId) => {
+    const data = filterCommentData;
+    try {
+      if (data) {
+        const res = await axios.post(
+          "http://localhost:5555/api/comments/sortComments/display/" + postId,
+          filterCommentData
+        );
+        setPostComment(res.data);
+        return;
+      }
+      const res = await axios.post(
+        "http://localhost:5555/api/comments/sortComments/display/" + postId
+      );
+      setPostComment(res.data);
+    } catch (error) {
+      console.log(error);
+>>>>>>> e6c579cf3b688587f5c4d617614cf0f46d6de881
     }
 
     //!get all comments of a specific posts

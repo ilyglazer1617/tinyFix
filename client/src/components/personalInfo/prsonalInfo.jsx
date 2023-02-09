@@ -15,6 +15,12 @@ const PrsonalInfo = () => {
   }, []);
   return (
     <div className="personalInfo1">
+      <div
+        onClick={() => navigate("/Home")}
+        className="personalInfoLogoWrapper"
+      >
+        <img src="/images/logo.png" alt="" className="personalInfoLogo" />
+      </div>
       <div className="card-client">
         <div className="user-picture">
           <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +44,7 @@ const PrsonalInfo = () => {
             className="setPersonalInfo"
           >
             <CreateIcon />
-            לחץ כאן לעריכת מידע
+            לחץ כאן לעריכת מידע אישי
           </span>
         </p>
       </div>
