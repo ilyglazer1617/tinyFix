@@ -1,0 +1,73 @@
+.professionalityRating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.professionailtyRating > input {
+    display: none;
+}
+
+.professionailtyRating > label {
+    position: relative;
+    width: 1.1em;
+    font-size: 10vw;
+    color: #ffd700;
+    cursor: pointer;
+}
+
+.professionailtyRating > label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+}
+
+.professionailtyRating > label:hover:before,
+.professionailtyRating > label:hover ~ label:before {
+    opacity: 1 !important;
+}
+
+.professionailtyRating > input:checked ~ label:before {
+    opacity: 1;
+}
+
+.professionailtyRating:hover > input:checked ~ label:before {
+    opacity: 0.4;
+}
+
+.reliabilityRating {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+}
+
+.reliabilityRating > input {
+    display: none;
+}
+
+.reliabilityRating > label {
+    position: relative;
+    width: 1.1em;
+    font-size: 10vw;
+    color: #ffd700;
+    cursor: pointer;
+}
+
+.reliabilityRating > label::before {
+    content: "\2605";
+    position: absolute;
+    opacity: 0;
+}
+
+.reliabilityRating > label:hover:before,
+.reliabilityRating > label:hover ~ label:before {
+    opacity: 1 !important;
+}
+
+.reliabilityRating > input:checked ~ label:before {
+    opacity: 1;
+}
+
+.reliabilityRating:hover > input:checked ~ label:before {
+    opacity: 0.4;
+}

@@ -2,12 +2,14 @@ import { createContext, useState } from "react";
 import App from "./../App";
 import axios from "axios";
 import PostsProvider from "./PostsContext";
+import jwtDecode from "jwt-decode";
 export const GarageContext = createContext();
 
 const GarageProvider = (props) => {
     const { children } = props;
     const [registerInformation, setRegisterInformation] = useState([]);
     const [loginInformation, setLoginInformation] = useState([]);
+    const [garageInfo, setGarageInfo] = useState([]);
     const [image, setImg] = useState();
 
     async function registerSubmit(ev, info) {
@@ -48,6 +50,14 @@ const GarageProvider = (props) => {
         });
     };
 
+    async function getGarageById() {
+        const token = localStorage.getItem("token");
+        const token_info = await jwtDecode(token);
+        const garage = await axios.get(`http://localhost:5555/api/garage/${token_info._id}`);
+        console.log(garage.data.image.url);
+        setGarageInfo(garage.data);
+    }
+
     return (
         <GarageContext.Provider
             value={{
@@ -59,6 +69,8 @@ const GarageProvider = (props) => {
                 loginSubmit,
                 setLoginInformation,
                 loginInformation,
+                garageInfo,
+                getGarageById,
             }}
         >
             {children}

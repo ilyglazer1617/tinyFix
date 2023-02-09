@@ -13,8 +13,10 @@ import GarageLogin from "./components/garage/garageLogin";
 import GarageMainPage from "./components/garage/garageMainPage";
 import LandingPage from "./components/landingPage/landingPage";
 import CommentsPreview from "./components/commentsPreview/commentsPreview";
-import EditComments from './components/comments/EditComment';
+import EditComments from "./components/comments/EditComment";
 import EditPost from "./components/editPosts/EditPost";
+import GarageInfo from "./components/garageInfo/garageInfo";
+import AddReview from "./components/addReview/addReview";
 function App() {
     return (
         <div className="App">
@@ -41,6 +43,8 @@ function App() {
                 <Route path="/Home" element={<Home />} />
                 <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
                 <Route path="/LandingPage" element={<LandingPage />} />
+                <Route path="/GarageInfo" element={<GarageInfo />} />
+                <Route path="/AddReview" element={<AddReview />} />
             </Routes>
         </div>
     );
