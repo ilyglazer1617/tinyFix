@@ -119,8 +119,8 @@ app.post("/login", async function (req, res) {
         try {
             const garage = await Garage.find({ email: req.body.email });
             const _id = garage[0]._id;
-            const token = jwt.sign({ _id }, process.env.JWT_SECRET);
-            console.log(garage[0]._id);
+            const district = garage[0].district;
+            const token = jwt.sign({ _id, district }, process.env.JWT_SECRET);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {
