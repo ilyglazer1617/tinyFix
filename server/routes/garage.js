@@ -110,7 +110,7 @@ function registerValidate(garage) {
 }
 
 //!  ============garage login=====================
-
+//? test oif u see the update
 app.post("/login", async function (req, res) {
     const { error } = loginValidate(req.body);
     if (error) {
@@ -118,9 +118,9 @@ app.post("/login", async function (req, res) {
     } else {
         try {
             const garage = await Garage.find({ email: req.body.email });
-            const id = garage._id;
+            const id = garage[0]._id;
             const token = jwt.sign({ id }, process.env.JWT_SECRET);
-            console.log(garage);
+            console.log(garage[0]._id);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {

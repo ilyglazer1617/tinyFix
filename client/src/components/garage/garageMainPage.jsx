@@ -19,41 +19,30 @@ const GarageMainPage = () => {
             <header>
                 <img className="logo" src="Images/logo.png" alt="Logo" />
                 <nav>
-                    <ul className="nav__links">
-                        <li>
-                            <a onClick={() => getAllPosts()}>Services</a>
-                        </li>
-                        <li>
-                            <a href="#">Projects</a>
-                        </li>
-                        <li>
-                            <a href="#">About</a>
-                        </li>
-                        <select
-                            name=""
-                            id=""
-                            onChange={(ev) => {
-                                setFilterParams({
-                                    ...filterParams,
-                                    problem_classification: ev.target.value,
-                                });
-                            }}
-                        >
-                            <option onClick={() => setFilterParams({})}>סיווג התקלה</option>
-                            <option value="פח">פח</option>
-                            <option value="פנסים">פנסים</option>
-                            <option value="חלונות">חלונות</option>
-                            <option value="שמשה קדמית">שמשה קדמית</option>
-                            <option value="דלתות">דלתות</option>
-                            <option value="מנוע">מנוע</option>
-                            <option value="בלמים">בלמים</option>
-                            <option value="צמיגים">צמיגים</option>
-                            <option value="מראות">מראות</option>
-                            <option value="לוח מכוונים">לוח מכוונים</option>
-                            <option value="אחר">אחר</option>
-                        </select>
-                        <button onClick={() => setFilterParams({})}>נקה בחירה</button>
-                    </ul>
+                    <select
+                        name=""
+                        id=""
+                        onChange={(ev) => {
+                            setFilterParams({
+                                ...filterParams,
+                                problem_classification: ev.target.value,
+                            });
+                        }}
+                    >
+                        <option onClick={() => setFilterParams({})}>סיווג התקלה</option>
+                        <option value="פח">פח</option>
+                        <option value="פנסים">פנסים</option>
+                        <option value="חלונות">חלונות</option>
+                        <option value="שמשה קדמית">שמשה קדמית</option>
+                        <option value="דלתות">דלתות</option>
+                        <option value="מנוע">מנוע</option>
+                        <option value="בלמים">בלמים</option>
+                        <option value="צמיגים">צמיגים</option>
+                        <option value="מראות">מראות</option>
+                        <option value="לוח מכוונים">לוח מכוונים</option>
+                        <option value="אחר">אחר</option>
+                    </select>
+                    <button onClick={() => setFilterParams({})}>נקה בחירה</button>
                 </nav>
                 <a className="cta" href="#"></a>
             </header>
