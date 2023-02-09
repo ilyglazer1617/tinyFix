@@ -31,6 +31,7 @@ const MyPosts = () => {
                             <div className="card-top-part">
                                 <div className="left-part">
                                     <div className="user-name">
+                                        <button onClick={()=> }>עריכה</button>
                                         <p className="name">{post.description}</p>
                                         <p className="role"> בתהליך </p>
                                     </div>
