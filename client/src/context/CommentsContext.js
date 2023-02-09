@@ -6,78 +6,80 @@ import jwtDecode from "jwt-decode";
 export const CommentsContext = createContext();
 
 function CommentsProvider(props) {
-    const { children } = props;
+  const { children } = props;
 
-    const [newComment, setNewComment] = useState({});
-    const [comments, setComments] = useState([]);
-    const [commentsOpen, setCommentsOpen] = useState("false");
-    const [editComment, setEditComment] = useState({});
+  const [newComment, setNewComment] = useState({});
+  const [comments, setComments] = useState([]);
+  const [commentsOpen, setCommentsOpen] = useState("false");
+  const [editComment, setEditComment] = useState({});
 
-    useEffect(() => {
-        const sendWhenComment = async () => {
-            let token = localStorage.getItem("token");
-            let id;
-            if (token) {
-                const { _id } = await jwtdecode(token);
-                id = _id;
-            }
-            setNewComment({ ...newComment, garage_id: id });
-            return;
-        };
-        sendWhenComment();
-    }, []);
+  //!new comments====================
 
-    //!new comments====================
+  const uploudComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = await jwtDecode(token);
 
-    const uploudComment = async () => {
-        const token = localStorage.getItem("token");
-        const garage_id = await jwtDecode(token);
+    const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`, newComment);
+    console.log(req.data.newComment)
+    setComments([...comments, req.data.newComment].sort((a, b) => a.bid - b.bid));
 
-        const req = await axios.post(
-            `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`,
-            newComment
-        );
-    };
+  };
 
-    //!edit comments====================
+  //!edit comments====================
 
-    const editingComment = async () => {
-        const token = localStorage.getItem("token");
-        const garage_id = jwtDecode(token);
-        const req = await axios.put(
-            `http://localhost:5555/api/comments/${editComment.comment_id}`,
-            editComment
-        );
-    };
+  const editingComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = jwtDecode(token);
+    const req = await axios.put(`http://localhost:5555/api/comments/${editComment.comment_id}`, editComment);
 
-    //! get all comments ============================
+      setComments(comments.map((comment) => {
+        if (comment._id === editComment.comment_id) {
+            return {
+              ...comment,
+              bid: editComment.bid,
+              text: editComment.text,
+            };
+          }
+          else {
+              return comment
+          }
+      }));
+  };
 
-    async function getAllComments(postId) {
-        const comments = await axios.post(
-            "http://localhost:5555/api/comments/sortComments/display/" + postId
-        );
-        setComments(comments.data);
-        setCommentsOpen("true");
-    }
+  //! get all comments ============================
 
-    return (
-        <CommentsContext.Provider
-            value={{
-                newComment,
-                comments,
-                setComments,
-                setNewComment,
-                uploudComment,
-                getAllComments,
-                commentsOpen,
-                editComment,
-                editingComment,
-                setEditComment,
-            }}
-        >
-            {children}
-        </CommentsContext.Provider>
-    );
+  async function getAllComments(postId) {
+    const comments = await axios.post("http://localhost:5555/api/comments/sortComments/display/" + postId);
+    setComments(comments.data);
+    setCommentsOpen("true");
+  }
+
+  //! delete comment ============================
+
+  async function deleteComment(comment_id) {
+    const deleteC = await axios.delete(`http://localhost:5555/api/comments/${comment_id}`);
+    setComments(comments.filter((comment) => comment._id !== comment_id));
+  }
+
+  return (
+    <CommentsContext.Provider
+      value={{
+        newComment,
+        comments,
+        setComments,
+        setNewComment,
+        uploudComment,
+        getAllComments,
+        commentsOpen,
+        editComment,
+        editingComment,
+        setEditComment,
+        deleteComment,
+      }}
+    >
+      {children}
+    </CommentsContext.Provider>
+  );
 }
 
 export default CommentsProvider;
