@@ -1,9 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import { CommentsContext } from "../../context/CommentsContext";
+import { useNavigate } from "react-router-dom";
 
 function EditComments() {
     const { newComment, setNewComment, uploudComment, editComment,editingComment, setEditComment} = useContext(CommentsContext);
     const [inputValue, setInputValue] = useState("helo");
+    const navigate = useNavigate();
 
     return (
         <div className="App">
@@ -19,7 +21,7 @@ function EditComments() {
                 value={editComment.text}
                 onChange={(e) => setEditComment({ ...editComment, text: e.target.value })}
             />
-            <button onClick={() => editingComment()}>עדכן הצעה</button>
+            <button onClick={() => { editingComment(); navigate("/GarageMainPage/Comments") }}>עדכן הצעה</button>
         </div>
     );
 }
