@@ -5,14 +5,14 @@ import jwtdecode from "jwt-decode";
 export const PostsContext = createContext();
 
 function PostsProvider(props) {
-  const { children } = props;
+    const { children } = props;
 
   const [newPost, setNewPost] = useState({});
   const [posts, setPosts] = useState([]);
   const [filterParams, setFilterParams] = useState({});
   const [editPost, setEditPost] = useState({});
 
-  //!get user_id by token
+    //!get user_id by token
 
   let token = localStorage.getItem("token");
   let id;
@@ -23,9 +23,9 @@ function PostsProvider(props) {
 
 
 //! get all posts
-
+  
   async function getAllPosts(params) {
-    //todo change to the garage district from local storage==========================================
+
     const district = "מחוז תל אביב";
     console.log("function: ");
     const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
