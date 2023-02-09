@@ -6,6 +6,7 @@ import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useState } from "react";
 import { format } from "timeago.js";
 import ConstructionIcon from "@mui/icons-material/Construction";
+import { SocketContext } from "./../../context/socket";
 const MyPosts = () => {
   const {
     userPosts,
@@ -15,15 +16,26 @@ const MyPosts = () => {
     filterCommentData,
     setPostComment,
   } = useContext(UserContext);
+  const { newChat, newChatData, setnewChatData, getAllChats, allChats } =
+    useContext(SocketContext);
 
   const [visibility, setVisibility] = useState(null);
   const [hiddenOrNot, setHiddenOrNot] = useState(false);
   const [postId, setpostId] = useState(null);
-  //! להוריד למטה לכפתורים
+  //! comment of post
   useEffect(() => {
     commentOfPost(postId);
   }, [filterCommentData, postId]);
 
+  // //! create new chat
+  useEffect(() => {
+    newChat();
+  }, [newChatData]);
+
+  //! get all chats
+  useEffect(() => {
+    getAllChats();
+  }, [newChatData]);
   return (
     <div className="myPosts">
       <div className="myPostsHedear">
@@ -128,7 +140,18 @@ const MyPosts = () => {
                               <span class="spanComment">
                                 {format(comment.createdAt)}
                               </span>
-                              <button class="btnComment">פתח צ'אט</button>
+
+                              <button
+                                class="btnComment"
+                                onClick={() => {
+                                  setnewChatData({
+                                    ...newChatData,
+                                    receiverId: comment.garage_id._id,
+                                  });
+                                }}
+                              >
+                                פתח צ'אט
+                              </button>
                             </div>
                             <p class="h1Comment">
                               {comment.garage_id.garage_name}

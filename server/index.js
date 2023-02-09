@@ -5,6 +5,8 @@ const dotenv = require("dotenv"); //! מסתיר מידע סיסמאות ומפ�
 
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
+const conversationRoute = require("./routes/conversation");
+const messageRoute = require("./routes/message");
 const comments = require("./routes/commentsR");
 const posts = require("./routes/postsR");
 const garage = require("./routes/garage");
@@ -23,6 +25,8 @@ app.use("/api/login", authRoute);
 app.use("/api/comments", comments);
 app.use("/api/posts", posts);
 app.use("/api/garage", garage);
+app.use("/api/conversation", conversationRoute);
+app.use("/api/message", messageRoute);
 app.listen(5555, () => {
   console.log("backend Server on live !");
 });

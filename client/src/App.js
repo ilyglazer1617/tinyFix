@@ -13,35 +13,37 @@ import GarageLogin from "./components/garage/garageLogin";
 import GarageMainPage from "./components/garage/garageMainPage";
 import LandingPage from "./components/landingPage/landingPage";
 import CommentsPreview from "./components/commentsPreview/commentsPreview";
-import EditComments from './components/comments/EditComment';
+import EditComments from "./components/comments/EditComment";
+import AllChats from "./components/allChats/allChats";
 function App() {
-    return (
-        <div className="App">
-            <Routes>
-                <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Login />} />
-                <Route path="/SetInfo" element={<SetInfo />} />
-                <Route path="/Posts" element={<Posts />} />
-                <Route path="/Comments" element={<Comments />} />
-                <Route path="/EditComments" element={<EditComments />} />
-                <Route path="/GarageRegister" element={<GarageRegister />} />
-                <Route path="/GarageLogin" element={<GarageLogin />} />
-                <Route path="/GarageMainPage" element={<GarageMainPage />} />
-                <Route
-                    path="/GarageMainPage/Comments"
-                    element={
-                        <>
-                            <GarageMainPage />
-                            <CommentsPreview />
-                        </>
-                    }
-                />
-                <Route path="/Home" element={<Home />} />
-                <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
-                <Route path="/LandingPage" element={<LandingPage />} />
-            </Routes>
-        </div>
-    );
+  return (
+    <div className="App">
+      <Routes>
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Login />} />
+        <Route path="/SetInfo" element={<SetInfo />} />
+        <Route path="/Posts" element={<Posts />} />
+        <Route path="/Comments" element={<Comments />} />
+        <Route path="/EditComments" element={<EditComments />} />
+        <Route path="/GarageRegister" element={<GarageRegister />} />
+        <Route path="/GarageLogin" element={<GarageLogin />} />
+        <Route path="/GarageMainPage" element={<GarageMainPage />} />
+        <Route
+          path="/GarageMainPage/Comments"
+          element={
+            <>
+              <GarageMainPage />
+              <CommentsPreview />
+            </>
+          }
+        />
+        <Route path="/Home" element={<Home />} />
+        <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
+        <Route path="/LandingPage" element={<LandingPage />} />
+        <Route path="/allChats" element={<AllChats />} />
+      </Routes>
+    </div>
+  );
 }
 
 export default App;

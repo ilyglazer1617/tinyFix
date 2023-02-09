@@ -44,7 +44,11 @@ const Bottom = () => {
         sx={{ top: "auto", bottom: 0, background: "rgb(255, 136, 0)" }}
       >
         <Toolbar className="homeHead">
-          <IconButton color="inherit" aria-label="open drawer">
+          <IconButton
+            onClick={() => navigate("/allChats")}
+            color="inherit"
+            aria-label="open drawer"
+          >
             <MailIcon />
           </IconButton>
           <MapIcon />

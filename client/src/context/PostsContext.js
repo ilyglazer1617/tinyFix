@@ -32,6 +32,7 @@ function PostsProvider(props) {
 
   async function getAllPosts(params) {
     //todo change to the garage district from local storage==========================================
+
     const district = "מחוז תל אביב";
     console.log("function: ");
     const posts = await axios.post(

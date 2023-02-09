@@ -9,6 +9,7 @@ import { BrowserRouter } from "react-router-dom";
 import PostsProvider from "./context/PostsContext";
 import CommentsProvider from "./context/CommentsContext";
 import GarageProvider from "./context/garageContext";
+import SocketProvider from "./context/socket";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -17,7 +18,9 @@ root.render(
         <GarageProvider>
           <PostsProvider>
             <UserContextProvider>
-              <App />
+              <SocketProvider>
+                <App />
+              </SocketProvider>
             </UserContextProvider>
           </PostsProvider>
         </GarageProvider>

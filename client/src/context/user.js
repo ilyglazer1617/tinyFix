@@ -1,11 +1,12 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 import axios from "axios";
 import App from "./../App";
 export const UserContext = createContext();
 
-const UserContextProvider = () => {
+const UserContextProvider = (props) => {
+  const { children } = props;
   const navigate = useNavigate();
   const [registerData, setRegisterData] = useState({});
   const [carMake, setcarMake] = useState([]);
@@ -197,7 +198,7 @@ const UserContextProvider = () => {
           filterCommentData,
         }}
       >
-        <App />
+        {children}
       </UserContext.Provider>
     </div>
   );
