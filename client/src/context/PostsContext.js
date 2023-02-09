@@ -10,36 +10,32 @@ function PostsProvider(props) {
   const [newPost, setNewPost] = useState({});
   const [posts, setPosts] = useState([]);
   const [filterParams, setFilterParams] = useState({});
+  const [editPost, setEditPost] = useState({});
 
   //!get user_id by token
 
-  useEffect(() => {
-    const sendUserWhenPost = async () => {
-      let token = localStorage.getItem("token");
-      let id;
-      if (token) {
-        const { _id } = await jwtdecode(token);
-        id = _id;
-      }
-      setNewPost({ ...newPost, user_id: id });
-      return;
-    };
-    sendUserWhenPost();
-  }, []);
+  let token = localStorage.getItem("token");
+  let id;
+  if (token) {
+    const { _id } = jwtdecode(token);
+    id = _id;
+  }
 
-  //!new posts functions
-  //generate images and push to newPost
+
+//! get all posts
 
   async function getAllPosts(params) {
     //todo change to the garage district from local storage==========================================
     const district = "מחוז תל אביב";
     console.log("function: ");
-    const posts = await axios.post(
-      `http://localhost:5555/api/posts/withFilters/${district}`,
-      params
-    );
+    const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
     setPosts(posts.data);
   }
+
+
+  //!new posts functions
+  //generate images and push to newPost
+
 
   const generateIMGS = (e) => {
     if (e.target.files.length > 4) {
@@ -82,6 +78,13 @@ function PostsProvider(props) {
 
   //!new posts functions====================
 
+
+//!  editing post========================
+  
+  
+
+
+
   return (
     <PostsContext.Provider
       value={{
@@ -94,6 +97,8 @@ function PostsProvider(props) {
         getAllPosts,
         filterParams,
         setFilterParams,
+        editPost,
+        setEditPost,
       }}
     >
       {children}

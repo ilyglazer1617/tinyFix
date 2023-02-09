@@ -36,6 +36,7 @@ const MyPosts = () => {
               <div className="card-top-part">
                 <div className="left-part">
                   <div className="user-name">
+                  <button onClick={() => setEditComment({ ...editPost, comment_id: comment._id, text: comment.text, bid: comment.bid })}>עריכה</button>
                     <p className="name">{post.description}</p>
                     <p className="role"> בתהליך </p>
                   </div>
