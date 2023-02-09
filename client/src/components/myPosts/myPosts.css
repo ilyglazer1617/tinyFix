@@ -5,10 +5,19 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
+    padding-bottom: 53px;
+}
+
+.cardCommentWrraper {
+    width: 90vw;
+}
+
+.myPostsHedear {
+    display: flex;
 }
 
 .myPostscard {
-    width: 80vw;
+    width: 100%;
     height: 150px;
     background: whitesmoke;
     transition: .2s linear;
@@ -54,10 +63,10 @@
 
 .role {
     font-size: 10px;
-    color: lightcyan;
+    color: black;
     font-weight: bold;
     text-transform: lowercase;
-    background-color: rgb(185, 183, 31);
+    background-color: rgb(238, 196, 7);
     padding: 4px 10px;
     border-radius: 15px;
 }
@@ -143,7 +152,7 @@
     background: #353535;
     border-radius: 4px;
     display: flex;
-
+    margin-bottom: 2%;
     align-items: center;
     justify-content: left;
     backdrop-filter: blur(10px);
@@ -188,6 +197,9 @@
 
 .spanComment {
     font-size: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 4px;
 }
 
 .h1Comment {
@@ -207,8 +219,67 @@
     display: flex;
     justify-content: space-evenly;
 
+    flex-direction: column-reverse;
 }
 
 #bid {
     width: -webkit-fill-available;
+}
+
+.leftCommentSide {
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.btnComment {
+    position: fixed;
+    top: 2px;
+    left: 4px;
+    font-size: 50%;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1em 2.5em;
+    display: inline-block;
+    border-radius: 6em;
+    transition: all .2s;
+    border: none;
+    font-family: inherit;
+    font-weight: 700;
+    color: black;
+    background-color: rgb(7, 170, 34);
+    width: 30%;
+}
+
+.btnComment:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btnComment:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btnComment::after {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 100px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s;
+}
+
+.btnComment::after {
+    background-color: #fff;
+}
+
+.btnComment:hover::after {
+    transform: scaleX(1.4) scaleY(1.6);
+    opacity: 0;
 }

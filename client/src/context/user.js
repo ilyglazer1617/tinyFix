@@ -35,7 +35,7 @@ const UserContextProvider = () => {
       if (data) {
         const res = await axios.post(
           "http://localhost:5555/api/comments/sortComments/display/" + postId,
-          data
+          filterCommentData
         );
         setPostComment(res.data);
         return;

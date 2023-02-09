@@ -5,7 +5,7 @@ import "./myPosts.css";
 import RemoveRedEyeIcon from "@mui/icons-material/RemoveRedEye";
 import { useState } from "react";
 import { format } from "timeago.js";
-
+import ConstructionIcon from "@mui/icons-material/Construction";
 const MyPosts = () => {
   const {
     userPosts,
@@ -13,19 +13,22 @@ const MyPosts = () => {
     postComment,
     setFilterCommentData,
     filterCommentData,
+    setPostComment,
   } = useContext(UserContext);
 
   const [visibility, setVisibility] = useState(null);
   const [hiddenOrNot, setHiddenOrNot] = useState(false);
+  const [postId, setpostId] = useState(null);
   //! להוריד למטה לכפתורים
   useEffect(() => {
-    commentOfPost(userPosts._id);
-  }, [filterCommentData]);
+    commentOfPost(postId);
+  }, [filterCommentData, postId]);
 
-  console.log(postComment);
   return (
     <div className="myPosts">
-      התקלות שלי
+      <div className="myPostsHedear">
+        <ConstructionIcon /> התקלות שלי
+      </div>
       {userPosts.map((post, index) => {
         return (
           <div key={index}>
@@ -53,7 +56,8 @@ const MyPosts = () => {
                   <a
                     className="link"
                     onClick={() => {
-                      commentOfPost(post._id);
+                      setpostId(post._id);
+
                       setVisibility(index);
                     }}
                   >
@@ -90,10 +94,14 @@ const MyPosts = () => {
               }}
             >
               <div className="commentComments">
-                <button onClick={() => setFilterCommentData({})}> מחיר </button>
+                <button onClick={() => setFilterCommentData({})}>
+                  {" "}
+                  נקה סינונים{" "}
+                </button>
                 <button
                   onClick={() => {
                     setFilterCommentData({ reli: true });
+                    // commentOfPost(userPosts._id);
                   }}
                 >
                   {" "}
@@ -102,44 +110,50 @@ const MyPosts = () => {
                 <button
                   onClick={() => {
                     setFilterCommentData({ prof: true });
+                    // commentOfPost(userPosts._id);
                   }}
                 >
                   {" "}
                   מקצועיות{" "}
                 </button>
               </div>
-              {visibility === index &&
-                postComment.map((comment) => {
-                  return (
-                    <div class="cardComment" key={comment._id}>
-                      <div class="textBoxComment">
-                        <div class="textContentComment">
-                          <span class="spanComment">
-                            {format(comment.createdAt)}
-                          </span>
-                          <p class="h1Comment">
-                            {comment.garage_id.garage_name}
-                          </p>
+              <div className="cardCommentWrraper">
+                {visibility === index &&
+                  postComment.map((comment) => {
+                    return (
+                      <div class="cardComment" key={comment._id}>
+                        <div class="textBoxComment">
+                          <div class="textContentComment">
+                            <div className="leftCommentSide">
+                              <span class="spanComment">
+                                {format(comment.createdAt)}
+                              </span>
+                              <button class="btnComment">פתח צ'אט</button>
+                            </div>
+                            <p class="h1Comment">
+                              {comment.garage_id.garage_name}
+                            </p>
+                          </div>
+                          <div className="bidWrapper">
+                            <p class="pComment" id="bid">
+                              {comment.bid} :הצעה
+                            </p>
+                            <p class="pComment">{comment.text}</p>
+                          </div>
+                          <div></div>
                         </div>
-                        <div className="bidWrapper">
-                          <p class="pComment" id="bid">
-                            {comment.bid} :הצעה
-                          </p>
-                          <p class="pComment">{comment.text}</p>
+                        <div class="imgCommentWrap">
+                          <img
+                            className="imgComment"
+                            src={comment.garage_id.image.url}
+                            alt=""
+                          />
+                          <p></p>
                         </div>
-                        <div></div>
                       </div>
-                      <div class="imgCommentWrap">
-                        <img
-                          className="imgComment"
-                          src={comment.garage_id.image.url}
-                          alt=""
-                        />
-                        <p></p>
-                      </div>
-                    </div>
-                  );
-                })}
+                    );
+                  })}
+              </div>
             </div>
           </div>
         );
