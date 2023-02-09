@@ -72,7 +72,6 @@ function PostsProvider(props) {
   //generate images and push tu newPost===============
 
   const uploudPost = async () => {
-    // console.log("first");
     const req = await axios.post("http://localhost:5555/api/posts", newPost);
   };
 

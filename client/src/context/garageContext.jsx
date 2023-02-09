@@ -18,7 +18,6 @@ const GarageProvider = (props) => {
                 image: image,
             });
             localStorage.setItem("token", req.data.token);
-            console.log(req);
         } catch (error) {
             console.log(error);
         }
@@ -28,7 +27,6 @@ const GarageProvider = (props) => {
         ev.preventDefault();
         const garage = await axios.post("http://localhost:5555/api/garage/login", info);
         localStorage.setItem("token", garage.data);
-        console.log(garage);
     }
 
     // function that set the newArticle obj with imgUrl
@@ -39,18 +37,15 @@ const GarageProvider = (props) => {
 
         //func that get the image in base64 and add it to newArticle object
         reader.onloadend = () => {
-            console.log(reader.result);
             setImg(reader.result);
         };
     };
 
     const uploudImg = async () => {
-        // console.log("first");
         const req = await axios.post("http://localhost:5555/api/garage/register", {
             ...registerInformation,
             image: image,
         });
-        console.log("req.data  ", req.data);
     };
 
     return (

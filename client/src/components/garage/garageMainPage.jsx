@@ -6,13 +6,14 @@ import { useState, useContext, useEffect } from "react";
 import { PostsContext } from "../../context/PostsContext";
 import { CommentsContext } from "./../../context/CommentsContext";
 import { useNavigate } from "react-router-dom";
+
 const GarageMainPage = () => {
     const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
     const { getAllComments, setNewComment, newComment } = useContext(CommentsContext);
     const navigate = useNavigate();
     useEffect(() => {
-        console.log(filterParams);
         getAllPosts(filterParams);
+        
     }, [filterParams]);
     return (
         <>
@@ -49,7 +50,6 @@ const GarageMainPage = () => {
             <main>
                 <div className="postsList">
                     {posts.map((post, index) => {
-                        console.log(post);
                         return (
                             <div key={index} className="postCard">
                                 <div className="nameAndTime">
