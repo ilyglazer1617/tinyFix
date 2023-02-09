@@ -36,7 +36,7 @@ const UserContextProvider = (props) => {
       if (data) {
         const res = await axios.post(
           "http://localhost:5555/api/comments/sortComments/display/" + postId,
-          filterCommentData
+          data
         );
         setPostComment(res.data);
         return;
@@ -64,7 +64,6 @@ const UserContextProvider = (props) => {
     e.preventDefault();
     const data = setInfo;
     try {
-      console.log(data);
       const res = await axios.put(
         "http://localhost:5555/user/updateUser/" + id,
         data

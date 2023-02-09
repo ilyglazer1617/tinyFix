@@ -14,6 +14,9 @@ import GarageMainPage from "./components/garage/garageMainPage";
 import LandingPage from "./components/landingPage/landingPage";
 import CommentsPreview from "./components/commentsPreview/commentsPreview";
 import EditComments from "./components/comments/EditComment";
+import EditPost from "./components/editPosts/EditPost";
+import GarageInfo from "./components/garageInfo/garageInfo";
+import AddReview from "./components/addReview/addReview";
 import AllChats from "./components/allChats/allChats";
 function App() {
   return (
@@ -23,11 +26,14 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/SetInfo" element={<SetInfo />} />
         <Route path="/Posts" element={<Posts />} />
+        <Route path="/EditPost" element={<EditPost />} />
         <Route path="/Comments" element={<Comments />} />
         <Route path="/EditComments" element={<EditComments />} />
         <Route path="/GarageRegister" element={<GarageRegister />} />
         <Route path="/GarageLogin" element={<GarageLogin />} />
         <Route path="/GarageMainPage" element={<GarageMainPage />} />
+        <Route path="/allChats" element={<AllChats />} />
+
         <Route
           path="/GarageMainPage/Comments"
           element={
@@ -40,7 +46,8 @@ function App() {
         <Route path="/Home" element={<Home />} />
         <Route path="/PrsonalInfo" element={<PrsonalInfo />} />
         <Route path="/LandingPage" element={<LandingPage />} />
-        <Route path="/allChats" element={<AllChats />} />
+        <Route path="/GarageInfo" element={<GarageInfo />} />
+        <Route path="/AddReview" element={<AddReview />} />
       </Routes>
     </div>
   );

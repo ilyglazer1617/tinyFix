@@ -13,59 +13,52 @@ function CommentsProvider(props) {
   const [commentsOpen, setCommentsOpen] = useState("false");
   const [editComment, setEditComment] = useState({});
 
-  useEffect(() => {
-    const sendWhenComment = async () => {
-      let token = localStorage.getItem("token");
-      let id;
-      if (token) {
-        const { _id } = await jwtdecode(token);
-        id = _id;
-      }
-      setNewComment({ ...newComment, garage_id: id });
-      return;
-    };
-    sendWhenComment();
-  }, []);
-
   //!new comments====================
 
-    const uploudComment = async () => {
-        const token = localStorage.getItem("token");
-        console.log(token)
-        const garage_id = await jwtDecode(token);
-        console.log(garage_id)
+  const uploudComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = await jwtDecode(token);
 
+    const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`, newComment);
+    console.log(req.data.newComment)
+    setComments([...comments, req.data.newComment].sort((a, b) => a.bid - b.bid));
 
-        console.log(garage_id.id);
-        const req = await axios.post(
-            `http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`,
-            newComment
-        );
-    };
-    
+  };
 
   //!edit comments====================
 
+  const editingComment = async () => {
+    const token = localStorage.getItem("token");
+    const garage_id = jwtDecode(token);
+    const req = await axios.put(`http://localhost:5555/api/comments/${editComment.comment_id}`, editComment);
 
-    const editingComment = async () => {
-        const token = localStorage.getItem("token");
-        const garage_id = jwtDecode(token);
-        console.log(garage_id);
-        const req = await axios.put(
-          `http://localhost:5555/api/comments/${editComment.comment_id}`,
-          editComment
-        );
-      };
+      setComments(comments.map((comment) => {
+        if (comment._id === editComment.comment_id) {
+            return {
+              ...comment,
+              bid: editComment.bid,
+              text: editComment.text,
+            };
+          }
+          else {
+              return comment
+          }
+      }).sort((a, b) => a.bid - b.bid));
+  };
 
-
-    //! get all comments ============================
+  //! get all comments ============================
 
   async function getAllComments(postId) {
-    console.log(postId);
     const comments = await axios.post("http://localhost:5555/api/comments/sortComments/display/" + postId);
-    console.log(comments.data);
     setComments(comments.data);
     setCommentsOpen("true");
+  }
+
+  //! delete comment ============================
+
+  async function deleteComment(comment_id) {
+    const deleteC = await axios.delete(`http://localhost:5555/api/comments/${comment_id}`);
+    setComments(comments.filter((comment) => comment._id !== comment_id));
   }
 
   return (
@@ -81,6 +74,7 @@ function CommentsProvider(props) {
         editComment,
         editingComment,
         setEditComment,
+        deleteComment,
       }}
     >
       {children}

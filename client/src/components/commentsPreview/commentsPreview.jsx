@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Posts from "../comments/Comments";
 import { CommentsContext } from "./../../context/CommentsContext";
 import "./commentsPreview.css";
@@ -6,10 +6,15 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 const CommentsPreview = () => {
-  const { comments, editComment, setEditComment, newComment } = useContext(CommentsContext);
+  const { getAllComments,comments, editComment, setEditComment, newComment,deleteComment,setComments } = useContext(CommentsContext);
+
     const navigate = useNavigate();
-    
+
   
+
+  let token = localStorage.getItem("token");
+  const { _id } = jwtDecode(token);
+
   return (
     <>
       <div className="backgroundBlocker">
@@ -20,7 +25,6 @@ const CommentsPreview = () => {
           <div className="commentsContainer">
             {!comments.length == 0 ? (
               comments.map((comment) => {
-                console.log(comment);
                 return (
                   <>
                     <div className="comment">
@@ -30,8 +34,23 @@ const CommentsPreview = () => {
                       <div className="commentFix">
                         <h1>התיקון: {comment.text}</h1>
                       </div>
-                      {comment.garage_id === (jwtDecode(localStorage.getItem("token"))).id ? (
-                          <button onClick={() => setEditComment({ ...editComment, comment_id: comment._id, text: comment.text, bid: comment.bid })}>עריכת הצעה</button>
+                      {comment.garage_id._id == _id || comment.garage_id== _id? (
+                        <div>
+                          <button
+                            onClick={() => {
+                              setEditComment({
+                                ...editComment,
+                                comment_id: comment._id,
+                                text: comment.text,
+                                bid: comment.bid,
+                              });
+                              navigate("/EditComments");
+                            }}
+                          >
+                            עריכת הצעה
+                          </button>
+                          <button onClick={()=> deleteComment(comment._id)}>מחיקת הצעה</button>
+                        </div>
                       ) : null}
                     </div>
                   </>

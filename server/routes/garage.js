@@ -61,8 +61,8 @@ app.post("/register", async function (req, res) {
                 licanse: req.body.licanse,
             });
             const result = await garage.save();
-            const id = result._id;
-            const token = jwt.sign({ id }, process.env.JWT_SECRET);
+            const _id = result._id;
+            const token = jwt.sign({ _id }, process.env.JWT_SECRET);
             console.log(token);
             res.send({ result, token });
         } catch (error) {
@@ -118,9 +118,9 @@ app.post("/login", async function (req, res) {
     } else {
         try {
             const garage = await Garage.find({ email: req.body.email });
-            const id = garage[0]._id;
-            const token = jwt.sign({ id }, process.env.JWT_SECRET);
-            console.log(garage[0]._id);
+            const _id = garage[0]._id;
+            const district = garage[0].district;
+            const token = jwt.sign({ _id, district }, process.env.JWT_SECRET);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {
@@ -245,9 +245,8 @@ app.delete("/:garage_id", async function (req, res) {
 
 //!=================reviews on garage======================
 
-app.post("/addReviews/:garage_id", async function (req, res) {
-    const { prfessionalism, reliability, text } = req.body;
-    const { garage_id } = req.params;
+app.post("/addReviews", async function (req, res) {
+    const { prfessionalism, reliability, text, garage_id } = req.body;
     try {
         const garage = await Garage.findById(garage_id);
         if (!garage) return res.status(400).send({ error: "Garage not found" });

@@ -2,13 +2,16 @@ import { createContext, useState } from "react";
 import App from "./../App";
 import axios from "axios";
 import PostsProvider from "./PostsContext";
+import jwtDecode from "jwt-decode";
 export const GarageContext = createContext();
 
 const GarageProvider = (props) => {
     const { children } = props;
     const [registerInformation, setRegisterInformation] = useState([]);
     const [loginInformation, setLoginInformation] = useState([]);
+    const [garageInfo, setGarageInfo] = useState([]);
     const [image, setImg] = useState();
+    const [newReview, setNewReview] = useState({});
 
     async function registerSubmit(ev, info) {
         ev.preventDefault();
@@ -18,7 +21,6 @@ const GarageProvider = (props) => {
                 image: image,
             });
             localStorage.setItem("token", req.data.token);
-            console.log(req);
         } catch (error) {
             console.log(error);
         }
@@ -28,7 +30,6 @@ const GarageProvider = (props) => {
         ev.preventDefault();
         const garage = await axios.post("http://localhost:5555/api/garage/login", info);
         localStorage.setItem("token", garage.data);
-        console.log(garage);
     }
 
     // function that set the newArticle obj with imgUrl
@@ -39,19 +40,34 @@ const GarageProvider = (props) => {
 
         //func that get the image in base64 and add it to newArticle object
         reader.onloadend = () => {
-            console.log(reader.result);
             setImg(reader.result);
         };
     };
 
     const uploudImg = async () => {
-        // console.log("first");
         const req = await axios.post("http://localhost:5555/api/garage/register", {
             ...registerInformation,
             image: image,
         });
-        console.log("req.data  ", req.data);
     };
+
+    async function getGarageById() {
+        const token = localStorage.getItem("token");
+        const token_info = await jwtDecode(token);
+        const garage = await axios.get(`http://localhost:5555/api/garage/${token_info._id}`);
+        console.log(garage.data.image.url);
+        setGarageInfo(garage.data);
+    }
+
+    async function addReviewToGarage(ev) {
+        ev.preventDefault();
+        try {
+            const comment = await axios.post(`http://localhost:5555/api/garage/addReviews`, newReview);
+            console.log(comment);
+        } catch (err) {
+            console.log(err.message);
+        }
+    }
 
     return (
         <GarageContext.Provider
@@ -64,6 +80,11 @@ const GarageProvider = (props) => {
                 loginSubmit,
                 setLoginInformation,
                 loginInformation,
+                garageInfo,
+                getGarageById,
+                newReview,
+                setNewReview,
+                addReviewToGarage,
             }}
         >
             {children}

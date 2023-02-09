@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import jwtdecode from "jwt-decode";
+import { useContext } from "react";
 
 export const PostsContext = createContext();
 
@@ -10,30 +11,24 @@ function PostsProvider(props) {
   const [newPost, setNewPost] = useState({});
   const [posts, setPosts] = useState([]);
   const [filterParams, setFilterParams] = useState({});
+  const [editPost, setEditPost] = useState({});
 
   //!get user_id by token
 
-  useEffect(() => {
-    const sendUserWhenPost = async () => {
-      let token = localStorage.getItem("token");
-      let id;
-      if (token) {
-        const { _id } = await jwtdecode(token);
-        id = _id;
-      }
-      setNewPost({ ...newPost, user_id: id });
-      return;
-    };
-    sendUserWhenPost();
-  }, []);
+  let token = localStorage.getItem("token");
+  let id;
+  if (token) {
+    const { _id } = jwtdecode(token);
+    id = _id;
+  }
 
-  //!new posts functions
-  //generate images and push to newPost
+  //! get all posts
 
   async function getAllPosts(params) {
-    //todo change to the garage district from local storage==========================================
+    const token = localStorage.getItem("token");
+    const token_info = jwtdecode(token);
+    const district = token_info.district;
 
-    const district = "מחוז תל אביב";
     console.log("function: ");
     const posts = await axios.post(
       `http://localhost:5555/api/posts/withFilters/${district}`,
@@ -41,6 +36,9 @@ function PostsProvider(props) {
     );
     setPosts(posts.data);
   }
+
+  //!new posts functions
+  //generate images and push to newPost
 
   const generateIMGS = (e) => {
     if (e.target.files.length > 4) {
@@ -77,11 +75,12 @@ function PostsProvider(props) {
   //generate images and push tu newPost===============
 
   const uploudPost = async () => {
-    // console.log("first");
     const req = await axios.post("http://localhost:5555/api/posts", newPost);
   };
 
   //!new posts functions====================
+
+  //!  editing post========================
 
   return (
     <PostsContext.Provider
@@ -95,6 +94,8 @@ function PostsProvider(props) {
         getAllPosts,
         filterParams,
         setFilterParams,
+        editPost,
+        setEditPost,
       }}
     >
       {children}

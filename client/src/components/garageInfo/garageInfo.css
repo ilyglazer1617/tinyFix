@@ -1,0 +1,8 @@
+.garageImage {
+    max-width: 99dvw;
+}
+.reviews,
+.contactButtons {
+    display: flex;
+    justify-content: space-evenly;
+}
