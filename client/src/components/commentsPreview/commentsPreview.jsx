@@ -6,11 +6,11 @@ import { useNavigate } from "react-router-dom";
 import jwtDecode from "jwt-decode";
 
 const CommentsPreview = () => {
-  const { comments, editComment, setEditComment, newComment,deleteComment } = useContext(CommentsContext);
+  const { getAllComments,comments, editComment, setEditComment, newComment,deleteComment,setComments } = useContext(CommentsContext);
     const navigate = useNavigate();
-    useEffect(() => {
-        
-    },[comments])
+    // useEffect(() => {
+
+    // },[comments])
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
@@ -34,7 +34,7 @@ const CommentsPreview = () => {
                       <div className="commentFix">
                         <h1>התיקון: {comment.text}</h1>
                       </div>
-                      {comment.garage_id._id == _id ? (
+                      {comment.garage_id._id == _id || comment.garage_id== _id? (
                         <div>
                           <button
                             onClick={() => {

@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { PostsContext } from "../../context/PostsContext";
+// import { UserContext } from "./../../context/user";
+
 
 function EditPost() {
     const { newPost, setNewPost, uploudPost, generateIMGS,editPost, setEditPost } = useContext(PostsContext);

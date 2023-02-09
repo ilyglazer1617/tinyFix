@@ -20,7 +20,7 @@ function CommentsProvider(props) {
     const garage_id = await jwtDecode(token);
 
     const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`, newComment);
-    console.log(req.data)
+    console.log(req.data.newComment)
     setComments([...comments, req.data.newComment].sort((a, b) => a.bid - b.bid));
 
   };

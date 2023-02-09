@@ -177,6 +177,7 @@ const UserContextProvider = () => {
                     postComment,
                     setFilterCommentData,
                     filterCommentData,
+                    setUserPosts
                 }}
             >
                 <App />
