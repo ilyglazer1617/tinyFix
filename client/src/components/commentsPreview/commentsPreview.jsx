@@ -7,10 +7,10 @@ import jwtDecode from "jwt-decode";
 
 const CommentsPreview = () => {
   const { getAllComments,comments, editComment, setEditComment, newComment,deleteComment,setComments } = useContext(CommentsContext);
-    const navigate = useNavigate();
-    // useEffect(() => {
 
-    // },[comments])
+    const navigate = useNavigate();
+
+  
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
