@@ -5,6 +5,7 @@ import "./garageInfo.css";
 const GarageInfo = () => {
     const { getGarageById, garageInfo, setNewReview, newReview } = useContext(GarageContext);
     const Navigate = useNavigate();
+    let prfessionalism = 
     useEffect(() => {
         getGarageById();
     }, []);
