@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 
 const ConversationSchema = new mongoose.Schema(
   {
-    members: {
-      type: Array,
+    userChat_side: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
-    userChat_side: {},
+    garageChat_side: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Garage",
+    },
   },
   { timestamps: true }
 );

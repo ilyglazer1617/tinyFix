@@ -16,8 +16,7 @@ const MyPosts = () => {
     filterCommentData,
     setPostComment,
   } = useContext(UserContext);
-  const { newChat, newChatData, setnewChatData, getAllChats, allChats } =
-    useContext(SocketContext);
+  const { newChat, getAllChats, allChats } = useContext(SocketContext);
 
   const [visibility, setVisibility] = useState(null);
   const [hiddenOrNot, setHiddenOrNot] = useState(false);
@@ -27,15 +26,6 @@ const MyPosts = () => {
     commentOfPost(postId);
   }, [filterCommentData, postId]);
 
-  // //! create new chat
-  useEffect(() => {
-    newChat();
-  }, [newChatData]);
-
-  //! get all chats
-  useEffect(() => {
-    getAllChats();
-  }, [newChatData]);
   return (
     <div className="myPosts">
       <div className="myPostsHedear">
@@ -140,18 +130,18 @@ const MyPosts = () => {
                               <span class="spanComment">
                                 {format(comment.createdAt)}
                               </span>
-
-                              <button
-                                class="btnComment"
-                                onClick={() => {
-                                  setnewChatData({
-                                    ...newChatData,
-                                    receiverId: comment.garage_id._id,
-                                  });
-                                }}
-                              >
-                                פתח צ'אט
-                              </button>
+                              {hiddenOrNot ? (
+                                <>בתהליך</>
+                              ) : (
+                                <button
+                                  class="btnComment"
+                                  onClick={() => {
+                                    newChat(comment.garage_id._id);
+                                  }}
+                                >
+                                  פתח צ'אט
+                                </button>
+                              )}
                             </div>
                             <p class="h1Comment">
                               {comment.garage_id.garage_name}
