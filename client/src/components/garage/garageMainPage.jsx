@@ -182,9 +182,9 @@ const GarageMainPage = () => {
             <option value="Tesla">Tesla</option>
           </select>
         </div> */}
-      </main>
-    </>
-  );
+            </main>
+        </>
+    );
 };
 
 export default GarageMainPage;

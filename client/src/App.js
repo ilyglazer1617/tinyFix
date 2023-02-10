@@ -18,6 +18,7 @@ import EditPost from "./components/editPosts/EditPost";
 import GarageInfo from "./components/garageInfo/garageInfo";
 import AddReview from "./components/addReview/addReview";
 import AllChats from "./components/allChats/allChats";
+import Chat from "./components/chat/chat";
 function App() {
   return (
     <div className="App">
@@ -33,6 +34,7 @@ function App() {
         <Route path="/GarageLogin" element={<GarageLogin />} />
         <Route path="/GarageMainPage" element={<GarageMainPage />} />
         <Route path="/allChats" element={<AllChats />} />
+        <Route path="/Chat" element={<Chat />} />
 
         <Route
           path="/GarageMainPage/Comments"
