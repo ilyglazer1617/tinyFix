@@ -55,7 +55,6 @@ const GarageProvider = (props) => {
         const token = localStorage.getItem("token");
         const token_info = await jwtDecode(token);
         const garage = await axios.get(`http://localhost:5555/api/garage/${token_info._id}`);
-        console.log(garage.data.image.url);
         setGarageInfo(garage.data);
     }
 
