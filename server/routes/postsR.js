@@ -151,38 +151,65 @@ router.get("/districtFilter/:district", async (req, res) => {
 //   }
 // });
 
-//!get posts by district,problem,car_make
+//!get posts by district,problem,car_make, garage_id comments
 router.post("/withFilters/:district", async (req, res) => {
   const district = req.params.district;
   const car_make = req.body.car_make;
   const problem_classification = req.body.problem_classification;
+  const garage_id = req.body.garage_id;
 
   try {
-    // let posts = await Post.find({  }).populate({
-    //   path: "user_id",
-    //   // match: { district: req.params.district },
-    // });
-    let posts = await Post.aggregate([
-      {
-        $lookup: {
-          from: "users",
-          localField: "user_id",
-          foreignField: "_id",
-          as: "user",
+    let posts = null;
+
+    if (garage_id) {
+      const comments = await Comment.find({ garage_id: garage_id });
+      if (!comments) {
+        return res.status(404).send({ error: "No comments found." });
+      }
+      const postIds = comments.map((comment) => comment.post_id);
+
+      posts = await Post.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "user_id",
+            foreignField: "_id",
+            as: "user",
+          },
         },
-      },
-      {
-        $match: {
-          "user.district": district,
+        {
+          $match: {
+            _id: { $in: postIds },
+          },
         },
-      },
-    ]);
+      ]);
+        console.log(posts)
+
+      if (posts.length == 0) {
+        res.send("no bids to this garage");
+      }
+    } else {
+      posts = await Post.aggregate([
+        {
+          $lookup: {
+            from: "users",
+            localField: "user_id",
+            foreignField: "_id",
+            as: "user",
+          },
+        },
+        {
+          $match: {
+            "user.district": district,
+          },
+        },
+      ]);
+    }
     // posts = posts.filter((post) => post.user_id.district === district);
 
     if (car_make) {
       posts = posts.filter((post) => post.user[0].car_make === car_make);
     }
-
 
     if (problem_classification) {
       posts = posts.filter((post) => post.problem_classification == problem_classification);
@@ -194,44 +221,44 @@ router.post("/withFilters/:district", async (req, res) => {
   }
 });
 
-//! get all the posts that specific garage comment on them
+// //! get all the posts that specific garage comment on them
 
-router.get("/myBids/:garage_id", async (req, res) => {
-  //   console.log(req.params);
-  try {
-    const comments = await Comment.find({ garage_id: req.params.garage_id });
-    if (!comments) {
-      return res.status(404).send({ error: "No comments found." });
-    }
-    // console.log(comments)
-    const postIds = comments.map((comment) => comment.post_id);
-    //   const posts = await Post.find({ _id: { $in: postIds } });
-      
-      let posts = await Post.aggregate([
-        {
-          $lookup: {
-            from: "users",
-            localField: "user_id",
-            foreignField: "_id",
-            as: "user",
-          },
-        },
-        {
-          $match: {
-            "_id": { $in: postIds } ,
-          },
-        },
-      ]);
+// router.get("/myBids/:garage_id", async (req, res) => {
+//   //   console.log(req.params);
+//   try {
+//     const comments = await Comment.find({ garage_id: req.params.garage_id });
+//     if (!comments) {
+//       return res.status(404).send({ error: "No comments found." });
+//     }
+//     // console.log(comments)
+//     const postIds = comments.map((comment) => comment.post_id);
+//     //   const posts = await Post.find({ _id: { $in: postIds } });
 
-    if (posts.length == 0) {
-      res.send("no bids to this garage");
-    }
-    console.log(posts);
-    res.status(200).send(posts);
-  } catch (error) {
-    res.status(400).send({ error: error.message });
-  }
-});
+//     let posts = await Post.aggregate([
+//       {
+//         $lookup: {
+//           from: "users",
+//           localField: "user_id",
+//           foreignField: "_id",
+//           as: "user",
+//         },
+//       },
+//       {
+//         $match: {
+//           _id: { $in: postIds },
+//         },
+//       },
+//     ]);
+
+//     if (posts.length == 0) {
+//       res.send("no bids to this garage");
+//     }
+//     console.log(posts);
+//     res.status(200).send(posts);
+//   } catch (error) {
+//     res.status(400).send({ error: error.message });
+//   }
+// });
 
 //!GARAGE====================
 

@@ -9,11 +9,10 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "./../../context/user";
 import jwtDecode from "jwt-decode";
 
-
 const GarageMainPage = () => {
-  const { getAllPosts, posts, filterParams, setFilterParams, myOpenComments } = useContext(PostsContext);
+  const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
   const { getAllComments, setNewComment, newComment } = useContext(CommentsContext);
-    const { carMake, getAllCars } = useContext(UserContext);
+  const { carMake, getAllCars } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     getAllPosts(filterParams);
@@ -27,10 +26,27 @@ const GarageMainPage = () => {
       <header>
         <img className="logo" src="Images/logo.png" alt="Logo" />
         <nav>
-          <button onClick={() => myOpenComments(_id)}>ההצעות שלי</button>
+          <label>ההצעות שלי</label>
+          <input
+            type="checkbox"
+            id="Checkbox"
+            onChange={(ev) => {
+              if (ev.target.checked) {
+                setFilterParams({
+                  ...filterParams,
+                  garage_id: _id,
+                });
+              } else {
+                setFilterParams({
+                  ...filterParams,
+                  garage_id: undefined,
+                });
+              }
+            }}
+          />
           <select
             name=""
-            id=""
+            id="selectedProblem"
             onChange={(ev) => {
               setFilterParams({
                 ...filterParams,
@@ -51,23 +67,33 @@ const GarageMainPage = () => {
             <option value="לוח מכוונים">לוח מכוונים</option>
             <option value="אחר">אחר</option>
           </select>
-                    <select
-                        onChange={(e) => {
-                            setFilterParams({ ...filterParams, car_make: e.target.value });
-                        }}
-                        name=""
-                        id=""
-                    >
-                        <option value="">חברה</option>
-                        {carMake.map((car, index) => {
-                            return (
-                                <option value={car} key={index}>
-                                    {car}
-                                </option>
-                            );
-                        })}
-                    </select>
-          <button onClick={() => setFilterParams({})}>נקה בחירה</button>
+          <select id="selectedCar"
+            onChange={(e) => {
+              setFilterParams({ ...filterParams, car_make: e.target.value });
+            }}
+            name=""
+          >
+            <option >
+              סוג הרכב
+            </option>
+            {carMake.map((car, index) => {
+              return (
+                <option value={car} key={index}>
+                  {car}
+                </option>
+              );
+            })}
+          </select>
+          <button
+            onClick={() => {
+              setFilterParams({});
+              document.getElementById("Checkbox").checked = false;
+              document.getElementById("selectedProblem").value = "סיווג התקלה";
+              document.getElementById("selectedCar").value = "סוג הרכב";
+            }}
+          >
+            נקה בחירה
+          </button>
         </nav>
         <a className="cta" href="#"></a>
       </header>
