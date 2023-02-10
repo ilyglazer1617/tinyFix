@@ -19,6 +19,8 @@ const GarageMainPage = () => {
     getAllCars();
   }, [filterParams]);
 
+  useEffect(() => {}, [posts]);
+
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
   return (
@@ -67,15 +69,14 @@ const GarageMainPage = () => {
             <option value="לוח מכוונים">לוח מכוונים</option>
             <option value="אחר">אחר</option>
           </select>
-          <select id="selectedCar"
+          <select
+            id="selectedCar"
             onChange={(e) => {
               setFilterParams({ ...filterParams, car_make: e.target.value });
             }}
             name=""
           >
-            <option >
-              סוג הרכב
-            </option>
+            <option>סוג הרכב</option>
             {carMake.map((car, index) => {
               return (
                 <option value={car} key={index}>
@@ -123,6 +124,7 @@ const GarageMainPage = () => {
                   <div className="problemInfo">
                     <h2 className="problemClasification">סיווג הבעיה: {post.problem_classification}</h2>
                     <h3>תיאור מפורט של הבעיה: {post.description}</h3>
+                    {post.comments[0] ? post.comments[0].garage_id === _id ? <h3>כל הכבוד! ההצעה הנמוכה ביותר היא שלך: {post.comments[0].bid}</h3> : <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3> : <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>}
                   </div>
                 </div>
                 <div className="imagesList">
@@ -182,9 +184,9 @@ const GarageMainPage = () => {
             <option value="Tesla">Tesla</option>
           </select>
         </div> */}
-            </main>
-        </>
-    );
+      </main>
+    </>
+  );
 };
 
 export default GarageMainPage;

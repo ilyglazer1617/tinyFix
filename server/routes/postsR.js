@@ -161,6 +161,7 @@ router.post("/withFilters/:district", async (req, res) => {
   try {
     let posts = null;
 
+    //if gararge want the posts that he comment on tham
     if (garage_id) {
       const comments = await Comment.find({ garage_id: garage_id });
       if (!comments) {
@@ -182,13 +183,40 @@ router.post("/withFilters/:district", async (req, res) => {
             _id: { $in: postIds },
           },
         },
+        {
+          $lookup: {
+            from: "comments",
+            let: { post_id: "$_id" },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$post_id", "$$post_id"],
+                  },
+                },
+              },
+              {
+                $sort: {
+                  bid: 1,
+                },
+              },
+              {
+                $limit: 1,
+              },
+            ],
+            as: "comments",
+          },
+        },
       ]);
-        console.log(posts)
+
+      console.log(posts);
 
       if (posts.length == 0) {
         res.send("no bids to this garage");
       }
-    } else {
+    }
+    // all post in a district
+    else {
       posts = await Post.aggregate([
         {
           $lookup: {
@@ -203,9 +231,32 @@ router.post("/withFilters/:district", async (req, res) => {
             "user.district": district,
           },
         },
+        {
+          $lookup: {
+            from: "comments",
+            let: { post_id: "$_id" },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$post_id", "$$post_id"],
+                  },
+                },
+              },
+              {
+                $sort: {
+                  bid: 1,
+                },
+              },
+              {
+                $limit: 1,
+              },
+            ],
+            as: "comments",
+          },
+        },
       ]);
     }
-    // posts = posts.filter((post) => post.user_id.district === district);
 
     if (car_make) {
       posts = posts.filter((post) => post.user[0].car_make === car_make);
