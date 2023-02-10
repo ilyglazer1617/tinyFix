@@ -30,12 +30,16 @@ function PostsProvider(props) {
     const district = token_info.district;
 
     console.log("function: ");
-    const posts = await axios.post(
-      `http://localhost:5555/api/posts/withFilters/${district}`,
-      params
-    );
+    const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
     setPosts(posts.data);
   }
+
+  //!get post that specific garage comment on them
+
+  const myOpenComments = async (_id) => {
+    const posts = await axios.get(`http://localhost:5555/api/posts/myBids/${_id}`);
+    setPosts(posts.data);
+  };
 
   //!new posts functions
   //generate images and push to newPost
@@ -96,6 +100,7 @@ function PostsProvider(props) {
         setFilterParams,
         editPost,
         setEditPost,
+        myOpenComments,
       }}
     >
       {children}
