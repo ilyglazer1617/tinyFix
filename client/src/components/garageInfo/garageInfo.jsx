@@ -5,11 +5,19 @@ import "./garageInfo.css";
 const GarageInfo = () => {
     const { getGarageById, garageInfo, setNewReview, newReview } = useContext(GarageContext);
     const Navigate = useNavigate();
-    let prfessionalism = 
+
+    function avarage(array) {
+        if (!array) return;
+        let sum = 0;
+        for (let i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return Math.round(sum / array.length);
+    }
+
     useEffect(() => {
         getGarageById();
     }, []);
-    console.log(garageInfo);
     return (
         <>
             <div className="garageInfoContainer">
@@ -27,8 +35,8 @@ const GarageInfo = () => {
                     </h2>
                 </div>
                 <div className="reviews">
-                    <h3>מקצועיות: {garageInfo.reviews?.prfessionalism[0]}</h3>
-                    <h3>אמינות: {garageInfo.reviews?.reliability[0]}</h3>
+                    <h3>מקצועיות: {avarage(garageInfo.reviews?.prfessionalism)}</h3>
+                    <h3>אמינות: {avarage(garageInfo.reviews?.reliability)}</h3>
                 </div>
                 <div className="contactButtons">
                     <button>צור קשר</button>
@@ -40,6 +48,7 @@ const GarageInfo = () => {
                     >
                         הוסף ביקורת
                     </button>
+                    {/* <h1>{avarage(garageInfo.reviews?.reliability)}</h1> */}
                 </div>
             </div>
         </>
