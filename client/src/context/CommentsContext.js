@@ -21,6 +21,9 @@ function CommentsProvider(props) {
 
     const req = await axios.post(`http://localhost:5555/api/comments/${newComment.post_id}/${garage_id._id}`, newComment);
     console.log(req.data.newComment)
+    // if (req.data == "duplicate comments") {
+      // alert("כבר נתת הצעה על תקלה זו, אתה יכול לערוך את ההצעה הנוכחית שלך")
+    // }
     setComments([...comments, req.data.newComment].sort((a, b) => a.bid - b.bid));
 
   };

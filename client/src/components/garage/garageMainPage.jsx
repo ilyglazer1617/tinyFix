@@ -104,7 +104,15 @@ const GarageMainPage = () => {
             return (
               <div key={index} className="postCard">
                 <div className="nameAndTime">
-                  <h3>12:31 20/4/2022</h3>
+                  {/* {function formatDate(dateString) {
+                    const date = new Date(dateString);
+                    const year = date.getFullYear();
+                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
+                    const day = ("0" + date.getDate()).slice(-2);
+                    return month + "/" + day + "/" + year;
+                  }}
+                  <h3>{formatDate(post.createdAt)}</h3> */}
+
                   <h1>{post.user[0].full_name}</h1>
                 </div>
                 <div className="topContainer">
