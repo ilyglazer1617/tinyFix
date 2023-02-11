@@ -11,18 +11,29 @@ import jwtDecode from "jwt-decode";
 
 const GarageMainPage = () => {
   const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-  const { getAllComments, setNewComment, newComment } = useContext(CommentsContext);
+  const { getAllComments, setNewComment, newComment, editComment,comments } = useContext(CommentsContext);
   const { carMake, getAllCars } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
     getAllPosts(filterParams);
     getAllCars();
-  }, [filterParams]);
+  }, [filterParams, newComment, editComment, comments]);
 
   useEffect(() => {}, [posts]);
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
+
+  //extraxt date
+  const extractDate = (date) => {
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+
+    let extractedDate = day + "/" + month + "/" + year;
+    return extractedDate;
+  };
+
   return (
     <>
       <header>
@@ -104,15 +115,7 @@ const GarageMainPage = () => {
             return (
               <div key={index} className="postCard">
                 <div className="nameAndTime">
-                  {/* {function formatDate(dateString) {
-                    const date = new Date(dateString);
-                    const year = date.getFullYear();
-                    const month = ("0" + (date.getMonth() + 1)).slice(-2);
-                    const day = ("0" + date.getDate()).slice(-2);
-                    return month + "/" + day + "/" + year;
-                  }}
-                  <h3>{formatDate(post.createdAt)}</h3> */}
-
+                  <h5>{extractDate(post.createdAt)} </h5>
                   <h1>{post.user[0].full_name}</h1>
                 </div>
                 <div className="topContainer">
