@@ -21,20 +21,23 @@ const Chat = () => {
     getMessage,
     arrivalMessage,
     updateMessages,
+    messageToSend,
     connectToSocketServer,
   } = useContext(SocketContext);
 
-  //!===============scroll down===============
+  //!=========================scroll down============================
   const scrollRef = useRef();
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  //!===============GET ALL MESSAGES===============
+  //!===============GET ALL MESSAGES WHEN PAGE OPEN FIRST TIME===============
   useEffect(() => {
     getChatMessages(localStorage.getItem("chat_Id"));
     console.log(currentChat);
   }, []);
+  //!===============GET ALL DURING THE CHAT===============
+
   useEffect(() => {
     getMessage();
   }, [messages]);
@@ -43,6 +46,7 @@ const Chat = () => {
     updateMessages();
     getMessage();
   }, [arrivalMessage, currentChat]);
+
   return (
     <div className="chat">
       <button
@@ -68,6 +72,7 @@ const Chat = () => {
           })}
       </div>
       <input
+        value={messageToSend}
         onChange={(e) => setMessageToSend(e.target.value)}
         type="text"
         placeholder="הודעה שלך"
