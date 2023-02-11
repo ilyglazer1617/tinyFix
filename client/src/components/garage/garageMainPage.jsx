@@ -12,7 +12,7 @@ import jwtDecode from "jwt-decode";
 const GarageMainPage = () => {
   const { getAllPosts, posts, filterParams, setFilterParams } =
     useContext(PostsContext);
-  const { getAllComments, setNewComment, newComment } =
+  const { getAllComments, setNewComment, newComment, editComment, comments } =
     useContext(CommentsContext);
   const { carMake, getAllCars } = useContext(UserContext);
   const navigate = useNavigate();
