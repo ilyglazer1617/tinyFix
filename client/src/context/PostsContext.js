@@ -31,6 +31,7 @@ function PostsProvider(props) {
 
     const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
     setPosts(posts.data);
+    console.log(posts.data);
   }
 
   //!new posts functions

@@ -6,7 +6,14 @@ const Post = require("../models/Posts");
 // !add new comment
 
 router.post("/:post_id/:garage_id", async (req, res) => {
+    
     try {
+
+        // const checkDuplicate = await Comment.find({ garage_id: req.params.garage_id,
+        //     post_id: req.params.post_id,})
+        // if (checkDuplicate.length > 0) {
+        //     res.status(400).send("duplicate comments")
+        // }
         const newComment = new Comment({
             garage_id: req.params.garage_id,
             post_id: req.params.post_id,
@@ -15,7 +22,7 @@ router.post("/:post_id/:garage_id", async (req, res) => {
         });
 
         await newComment.save();
-        
+        // console.log(checkDuplicate)
         res.status(201).send({ newComment });
     } catch (error) {
         res.status(400).send({ error: error.message });
@@ -126,5 +133,9 @@ router.post("/sortComments/display/:post_id", async (req, res) => {
 //     res.status(500).send({ message: error.message });
 //   }
 // });
+
+
+
+
 
 module.exports = router;
