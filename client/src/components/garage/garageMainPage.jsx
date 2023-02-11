@@ -10,18 +10,19 @@ import { UserContext } from "./../../context/user";
 import jwtDecode from "jwt-decode";
 
 const GarageMainPage = () => {
-  const { getAllPosts, posts, filterParams, setFilterParams } =
-    useContext(PostsContext);
-  const { getAllComments, setNewComment, newComment, editComment, comments } =
-    useContext(CommentsContext);
-  const { carMake, getAllCars } = useContext(UserContext);
-  const navigate = useNavigate();
-  useEffect(() => {
-    getAllPosts(filterParams);
-    getAllCars();
-  }, [filterParams, newComment, editComment, comments]);
+    const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
 
-  useEffect(() => {}, [posts]);
+    const { getAllComments, setNewComment, newComment, editComment, comments } = useContext(CommentsContext);
+
+    const { carMake, getAllCars } = useContext(UserContext);
+
+    const navigate = useNavigate();
+    useEffect(() => {
+        getAllPosts(filterParams);
+        getAllCars();
+    }, [filterParams, newComment, editComment, comments]);
+
+    useEffect(() => {}, [posts]);
 
     let token = localStorage.getItem("token");
     const { _id } = jwtDecode(token);
@@ -149,47 +150,9 @@ const GarageMainPage = () => {
                         );
                     })}
                 </div>
-                {/* <div className="filterContainer">
-          <select
-            name=""
-            id=""
-            onChange={(ev) => {
-              setFilterParams({
-                ...filterParams,
-                problemClassification: ev.target.value,
-              });
-            }}
-          >
-            <option value="Windows">Windows</option>
-            <option value="BodyWork">BodyWork</option>
-            <option value="Mirrors">Mirrors</option>
-          </select>
-          <select
-            name=""
-            id=""
-            onChange={(ev) => {
-              setFilterParams({ ...filterParams, district: ev.target.value });
-            }}
-          >
-            <option value="Markez">Markez</option>
-            <option value="Zufen">Zufen</option>
-            <option value="Durem">Durem</option>
-          </select>
-          <select
-            name=""
-            id=""
-            onChange={(ev) => {
-              setFilterParams({ ...filterParams, make: ev.target.value });
-            }}
-          >
-            <option value="Mazda">Mazda</option>
-            <option value="Ferrari">Ferrari</option>
-            <option value="Tesla">Tesla</option>
-          </select>
-        </div> */}
-      </main>
-    </>
-  );
+            </main>
+        </>
+    );
 };
 
 export default GarageMainPage;
