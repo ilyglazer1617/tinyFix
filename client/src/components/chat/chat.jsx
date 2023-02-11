@@ -1,6 +1,6 @@
 import "./chat.css";
 import { SocketContext } from "./../../context/socket";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 
@@ -12,14 +12,37 @@ const Chat = () => {
     const { _id } = jwtdecode(token);
     id = _id;
   }
-  const { messages, setMessageToSend, postNewMessage, getChatMessages } =
-    useContext(SocketContext);
+  const {
+    messages,
+    setMessageToSend,
+    postNewMessage,
+    getChatMessages,
+    currentChat,
+    getMessage,
+    arrivalMessage,
+    updateMessages,
+    connectToSocketServer,
+  } = useContext(SocketContext);
 
-  //!GET ALL MESSAGES
+  //!===============scroll down===============
+  const scrollRef = useRef();
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
+  //!===============GET ALL MESSAGES===============
   useEffect(() => {
     getChatMessages(localStorage.getItem("chat_Id"));
+    console.log(currentChat);
   }, []);
+  useEffect(() => {
+    getMessage();
+  }, [messages]);
 
+  useEffect(() => {
+    updateMessages();
+    getMessage();
+  }, [arrivalMessage, currentChat]);
   return (
     <div className="chat">
       <button
@@ -32,13 +55,13 @@ const Chat = () => {
       </button>
       <div className="AllmessageWrap">
         {messages &&
-          messages.map((message, index) => {
+          messages?.map((message, index) => {
             return (
               <div
+                ref={scrollRef}
                 key={index}
                 className={message.sender === id ? "user" : "otherSide"}
               >
-                {console.log(id)}
                 <p>{message.text}</p>
               </div>
             );

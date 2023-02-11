@@ -1,8 +1,10 @@
-import { createContext, useState } from "react";
+import { createContext, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 import axios from "axios";
 import App from "./../App";
+import { io } from "socket.io-client";
+
 export const SocketContext = createContext();
 
 const SocketProvider = (props) => {
@@ -18,24 +20,77 @@ const SocketProvider = (props) => {
   const [messages, setMessages] = useState([]);
   const [messageToSend, setMessageToSend] = useState({});
   const [currentChatId, setCurrentChatId] = useState(null);
+  const [currentChat, setCurrentChat] = useState([]);
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+  const socket = useRef();
+  const user = localStorage.getItem("user");
 
-  //! send new message
-  const postNewMessage = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await axios.post("http://localhost:5555/api/message", {
-        conversationId: currentChatId,
-        sender: id,
-        text: messageToSend,
+  //! ===============connect to socket server===============
+
+  const connectToSocketServer = () => {
+    socket.current = io("ws://localhost:4040");
+  };
+  //! ===============get Users===============
+  const getUsers = () => {
+    socket.current.on("getUsers", (users) => {
+      // console.log(users);
+    });
+  };
+  //! ===============send to socket server id and socketId===============
+  const sendToSocket = () => {
+    socket.current.emit("addUser", id);
+  };
+
+  //! =============== set messages =================
+  const updateMessages = () => {
+    console.log("currentChat", currentChat);
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+    console.log(messages);
+  };
+  //! ===============get new messageby socket===============
+  const getMessage = () => {
+    if (socket.current) {
+      socket.current.on("getMessage", (data) => {
+        setArrivalMessage({
+          sender: data.senderId,
+          text: data.text,
+          createdAt: Date.now(),
+        });
       });
-      console.log(res.data);
+    }
+  };
+  //!=============== send new message===============
+  const postNewMessage = async (e) => {
+    // console.log(currentChat.members);
+    e.preventDefault();
+    const message = {
+      conversationId: localStorage.getItem("chat_Id"),
+      sender: id,
+      text: messageToSend,
+    };
 
-      setMessages([...messages, res.data]);
+    const reciverId = currentChat.members.find((member) => member !== id);
+    // console.log("reciverId=", reciverId);
+    socket.current.emit("sendMessage", {
+      senderId: id,
+      reciverId,
+      text: messageToSend,
+    });
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5555/api/message",
+        message
+      );
+      console.log(res.data.text);
+      setMessages([...messages, res.data.text]);
     } catch (error) {
       console.log(error.message);
     }
   };
-  //! get all messages of current chat
+  //!=============== get all messages of current chat===============
 
   const getChatMessages = async (chatId) => {
     try {
@@ -44,12 +99,13 @@ const SocketProvider = (props) => {
       );
       setMessages(res.data);
       setCurrentChatId(chatId);
-      navigate("/chat");
+      setMessageToSend("");
+      // navigate("/chat");
     } catch (error) {
       console.log(error.message);
     }
   };
-  //!get all chats of the user
+  //!===============get all chats of the user===============
 
   const getAllChats = async () => {
     try {
@@ -62,7 +118,7 @@ const SocketProvider = (props) => {
     }
   };
 
-  //! create a new conv
+  //!=============== create a new conv===============
 
   const newChat = async (garage_id) => {
     try {
@@ -84,10 +140,19 @@ const SocketProvider = (props) => {
           allChats,
           getChatMessages,
           messages,
-
           setMessageToSend,
           setMessages,
           postNewMessage,
+          socket,
+          sendToSocket,
+          id,
+          getUsers,
+          connectToSocketServer,
+          currentChat,
+          setCurrentChat,
+          arrivalMessage,
+          getMessage,
+          updateMessages,
         }}
       >
         {children}

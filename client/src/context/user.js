@@ -92,6 +92,7 @@ const UserContextProvider = (props) => {
         loginData
       );
       localStorage.setItem("token", res.headers["x-auth-token"]);
+      localStorage.setItem("user", "user");
       navigate("/Home");
       console.log(res);
     } catch (error) {

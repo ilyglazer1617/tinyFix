@@ -10,8 +10,10 @@ import { UserContext } from "./../../context/user";
 import jwtDecode from "jwt-decode";
 
 const GarageMainPage = () => {
-  const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-  const { getAllComments, setNewComment, newComment } = useContext(CommentsContext);
+  const { getAllPosts, posts, filterParams, setFilterParams } =
+    useContext(PostsContext);
+  const { getAllComments, setNewComment, newComment } =
+    useContext(CommentsContext);
   const { carMake, getAllCars } = useContext(UserContext);
   const navigate = useNavigate();
   useEffect(() => {
@@ -28,6 +30,7 @@ const GarageMainPage = () => {
       <header>
         <img className="logo" src="Images/logo.png" alt="Logo" />
         <nav>
+          <button onClick={() => navigate("/allChats")}>הצ'אטים שלי</button>
           <label>ההצעות שלי</label>
           <input
             type="checkbox"
@@ -122,9 +125,22 @@ const GarageMainPage = () => {
                     </p>
                   </div>
                   <div className="problemInfo">
-                    <h2 className="problemClasification">סיווג הבעיה: {post.problem_classification}</h2>
+                    <h2 className="problemClasification">
+                      סיווג הבעיה: {post.problem_classification}
+                    </h2>
                     <h3>תיאור מפורט של הבעיה: {post.description}</h3>
-                    {post.comments[0] ? post.comments[0].garage_id === _id ? <h3>כל הכבוד! ההצעה הנמוכה ביותר היא שלך: {post.comments[0].bid}</h3> : <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3> : <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>}
+                    {post.comments[0] ? (
+                      post.comments[0].garage_id === _id ? (
+                        <h3>
+                          כל הכבוד! ההצעה הנמוכה ביותר היא שלך:{" "}
+                          {post.comments[0].bid}
+                        </h3>
+                      ) : (
+                        <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3>
+                      )
+                    ) : (
+                      <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>
+                    )}
                   </div>
                 </div>
                 <div className="imagesList">
