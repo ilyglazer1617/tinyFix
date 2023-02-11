@@ -19,12 +19,23 @@ const GarageMainPage = () => {
   useEffect(() => {
     getAllPosts(filterParams);
     getAllCars();
-  }, [filterParams]);
+  }, [filterParams, newComment, editComment, comments]);
 
   useEffect(() => {}, [posts]);
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
+
+  //extraxt date
+  const extractDate = (date) => {
+    let year = date.substring(0, 4);
+    let month = date.substring(5, 7);
+    let day = date.substring(8, 10);
+
+    let extractedDate = day + "/" + month + "/" + year;
+    return extractedDate;
+  };
+
   return (
     <>
       <header>
@@ -107,7 +118,7 @@ const GarageMainPage = () => {
             return (
               <div key={index} className="postCard">
                 <div className="nameAndTime">
-                  <h3>12:31 20/4/2022</h3>
+                  <h5>{extractDate(post.createdAt)} </h5>
                   <h1>{post.user[0].full_name}</h1>
                 </div>
                 <div className="topContainer">

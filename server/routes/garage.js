@@ -62,7 +62,8 @@ app.post("/register", async function (req, res) {
             });
             const result = await garage.save();
             const _id = result._id;
-            const token = jwt.sign({ _id }, process.env.JWT_SECRET);
+            const garage_name = result.garage_name;
+            const token = jwt.sign({ _id,garage_name }, process.env.JWT_SECRET);
             console.log(token);
             res.send({ result, token });
         } catch (error) {
@@ -120,7 +121,8 @@ app.post("/login", async function (req, res) {
             const garage = await Garage.find({ email: req.body.email });
             const _id = garage[0]._id;
             const district = garage[0].district;
-            const token = jwt.sign({ _id, district }, process.env.JWT_SECRET);
+            const garage_name = garage[0].garage_name;
+            const token = jwt.sign({ _id, district,garage_name }, process.env.JWT_SECRET);
             if (garage === []) {
                 res.status(400).send("email or password are incorrect");
             } else {
