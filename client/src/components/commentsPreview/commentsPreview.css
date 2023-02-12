@@ -19,11 +19,14 @@
 }
 
 .comment {
-    background-color: rgb(250, 249, 249);
+    padding: 1rem;
+    background-color: rgb(255, 255, 255);
     margin: 2rem;
+    border: 1px solid #dfefef;
 }
 
 .personalComment {
     margin: 2rem;
-    background: linear-gradient(45deg, rgb(250, 249, 249) 90%, gold 10%);
+    border: 1px solid #dfefef;
+    background: linear-gradient(45deg, rgb(255, 255, 255) 90%, gold 10%);
 }

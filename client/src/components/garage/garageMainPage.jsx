@@ -57,6 +57,9 @@ const GarageMainPage = () => {
                 <div className="navbarButtons">
                     <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
                     <button>ביקורות</button>
+                    <button>
+                        
+                    </button>
                     <img
                         className="navbarProfilePicture"
                         src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"

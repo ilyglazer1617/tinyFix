@@ -9,17 +9,21 @@ function Posts() {
         <div className="fixInputCntainer">
             <input
                 className="fixPriceInput"
+                pattern="\d+"
                 type="text"
-                placeholder="הצעת מחיר"
+                placeholder="מחיר"
                 onChange={(e) => setNewComment({ ...newComment, bid: e.target.value })}
             />
+
             <input
                 className="fixInfoInput"
                 type="text"
                 placeholder="פירוט הטיפול"
                 onChange={(e) => setNewComment({ ...newComment, text: e.target.value })}
             />
-            <button onClick={() => uploudComment()}>העלה הצעה </button>
+            <button className="submitButton" onClick={() => uploudComment()}>
+                העלה הצעה{" "}
+            </button>
         </div>
     );
 }
