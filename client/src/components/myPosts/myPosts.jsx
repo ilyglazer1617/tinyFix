@@ -38,8 +38,8 @@ const MyPosts = () => {
                   <div className="editPost">
                     <button
                       onClick={() => {
-                        console.log(post._id);
-                        setEditPost({ post_Id: post._id,  });
+                        console.log(post);
+                        setEditPost(post);
                         navigate("/EditPost");
                       }}
                     >

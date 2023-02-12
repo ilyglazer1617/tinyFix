@@ -6,15 +6,13 @@ function EditPost() {
   const { newPost, setNewPost, uploudPost, generateIMGS, editingPost, editPost, setEditPost } = useContext(PostsContext);
   return (
     <div className="App">
-      <input type="text" placeholder="תיאור התקלה" onChange={(e) => setNewPost({ ...newPost, description: e.target.value })} />
+      <input type="text" placeholder="תיאור התקלה" onChange={(e) => setEditPost({ ...editPost, description: e.target.value })} />
 
       <select
-        name=""
         placeholder="סיווג תקלה"
-        id=""
         onChange={(ev) =>
-          setNewPost({
-            ...newPost,
+            setEditPost({
+            ...editPost,
             problem_classification: ev.target.value,
           })
         }
@@ -33,8 +31,8 @@ function EditPost() {
         <option value="בלמים">בלמים</option>
         <option value="אחר">אחר</option>
       </select>
-      <input id="inputImages" type="file" accept="image/*" multiple onChange={(e) => generateIMGS(e)} />
-      <button onClick={() => uploudPost()}>העלה בקשה לתיקון</button>
+      <input id="inputImages" type="file" accept="image/*" multiple onChange={(e) => generateIMGS(e, true)} />
+      <button onClick={() => editingPost(editPost._id)}>העלה בקשה לתיקון</button>
     </div>
   );
 }

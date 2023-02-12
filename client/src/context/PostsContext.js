@@ -2,100 +2,102 @@ import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import jwtdecode from "jwt-decode";
 import { useContext } from "react";
+import { UserContext } from "./user";
 
 export const PostsContext = createContext();
 
 function PostsProvider(props) {
-    const { children } = props;
+  const { children } = props;
 
-    const [newPost, setNewPost] = useState({});
-    const [posts, setPosts] = useState([]);
-    const [filterParams, setFilterParams] = useState({});
-    const [editPost, setEditPost] = useState({});
+  const { userPosts, setUserPosts } = useContext(UserContext);
 
+  const [newPost, setNewPost] = useState({});
+  const [posts, setPosts] = useState([]);
+  const [filterParams, setFilterParams] = useState({});
+  const [editPost, setEditPost] = useState({});
 
+  //! get all posts
 
+  async function getAllPosts(params) {
+    const token = localStorage.getItem("token");
+    const token_info = jwtdecode(token);
+    const district = token_info.district;
 
-    //! get all posts
+    const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
+    setPosts(posts.data);
+    console.log(posts.data);
+  }
 
-    async function getAllPosts(params) {
-        const token = localStorage.getItem("token");
-        const token_info = jwtdecode(token);
-        const district = token_info.district;
+  //!new posts functions
+  //generate images and push to newPost
+  // setNewPost({ ...newPost, user_id: id });
 
-        const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
-        setPosts(posts.data);
-        console.log(posts.data);
+  const generateIMGS = (e, edit = false) => {
+    if (e.target.files.length > 4) {
+      const input = document.getElementById("inputImages");
+      input.value = "";
+      input.type = "";
+      input.type = "file";
+      alert("You can only select a maximum of 4 files");
+    } else {
+      setImgUrls(e, edit);
     }
+  };
 
-    //!new posts functions
-    //generate images and push to newPost
-    // setNewPost({ ...newPost, user_id: id });
+  const setImgUrls = (e, edit) => {
+    const files = e.target.files;
+    const base64Array = [];
 
-    const generateIMGS = (e) => {
-        if (e.target.files.length > 4) {
-            const input = document.getElementById("inputImages");
-            input.value = "";
-            input.type = "";
-            input.type = "file";
-            alert("You can only select a maximum of 4 files");
-        } else {
-            setImgUrls(e);
-        }
+    for (let i = 0; i < files.length; i++) {
+      const reader = new FileReader();
+      readFile(reader, files[i], base64Array, setNewPost, files.length, edit);
+    }
+  };
+
+  const readFile = (reader, file, base64Array, setNewPost, total, edit) => {
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      base64Array.push(reader.result);
+      if (base64Array.length === total) {
+        edit == false ? setNewPost({ ...newPost, images: base64Array }) : setEditPost({ ...editPost, images: base64Array });
+      }
     };
+  };
 
-    const setImgUrls = (e) => {
-        const files = e.target.files;
-        const base64Array = [];
+  const uploudPost = async () => {
+    const req = await axios.post("http://localhost:5555/api/posts", newPost);
+    setUserPosts([...userPosts, req.data]);
+  };
 
-        for (let i = 0; i < files.length; i++) {
-            const reader = new FileReader();
-            readFile(reader, files[i], base64Array, setNewPost, files.length);
-        }
-    };
-
-    const readFile = (reader, file, base64Array, setNewPost, total) => {
-        reader.readAsDataURL(file);
-        reader.onloadend = () => {
-            base64Array.push(reader.result);
-            if (base64Array.length === total) {
-                setNewPost({ ...newPost, images: base64Array });
-            }
-        };
-    };
-
-
-    const uploudPost = async () => {
-        const req = await axios.post("http://localhost:5555/api/posts", newPost);
-    };
-
-    //!new posts functions====================
+  //!new posts functions====================
 
   //!  editing post========================
-  const editingPost = async (post_id) => {
-    console.log(post_id);
+  const editingPost = async (post_Id) => {
+    const req = await axios.put(`http://localhost:5555/api/posts/${post_Id}`, editPost);
+    // console.log(req.data);
+    // console.log(userPosts);
+    setUserPosts([...userPosts, req.data]);
   };
-    return (
-        <PostsContext.Provider
-            value={{
-                newPost,
-                setNewPost,
-                uploudPost,
-                generateIMGS,
-                posts,
-                setPosts,
-                getAllPosts,
-                filterParams,
-                setFilterParams,
-                editingPost,
-                editPost,
-                setEditPost,
-               
-            }}
-        >
-            {children}
-        </PostsContext.Provider>
-    );
+  return (
+    <PostsContext.Provider
+      value={{
+        newPost,
+        setNewPost,
+        uploudPost,
+        generateIMGS,
+        posts,
+        setPosts,
+        getAllPosts,
+        filterParams,
+        setFilterParams,
+        editingPost,
+        editPost,
+        setEditPost,
+      }}
+    >
+      {children}
+    </PostsContext.Provider>
+  );
 }
 
 export default PostsProvider;

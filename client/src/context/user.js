@@ -21,7 +21,6 @@ const UserContextProvider = (props) => {
   const [userPosts, setUserPosts] = useState([]);
   const [postComment, setPostComment] = useState([]);
 
-
   let token = localStorage.getItem("token");
   let id;
   if (token) {
@@ -131,8 +130,6 @@ const UserContextProvider = (props) => {
     }
   };
 
-
-
   return (
     <div>
       <UserContext.Provider
@@ -161,6 +158,7 @@ const UserContextProvider = (props) => {
           setSetInfo,
           updateUserInfo,
           userPosts,
+          setUserPosts,
           getUserPosts,
           commentOfPost,
           postComment,
