@@ -35,14 +35,14 @@ const Chat = () => {
 
   //!===============GET ALL MESSAGES WHEN PAGE OPEN FIRST TIME===============
   useEffect(() => {
-    getChatMessages(localStorage.getItem("chat_Id"));
+    // getChatMessages(localStorage.getItem("chat_Id"));
     // console.log(currentChat);
     // postNewMessage();
   }, []);
   //!===============GET ALL DURING THE CHAT===============
 
   useEffect(() => {
-    //getMessage();
+    getMessage();
     // updateMessages();
   }, []);
 
