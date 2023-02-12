@@ -26,52 +26,48 @@ import MapIcon from "@mui/icons-material/Map";
 import { useNavigate } from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 const StyledFab = styled(Fab)({
-  position: "absolute",
-  zIndex: 1,
-  top: -30,
-  left: 0,
-  right: 0,
-  margin: "0 auto",
+    position: "absolute",
+    zIndex: 1,
+    top: -30,
+    left: 0,
+    right: 0,
+    margin: "0 auto",
 });
 
 const Bottom = () => {
-  const navigate = useNavigate();
-  return (
-    <div>
-      <AppBar
-        position="fixed"
-        color=""
-        sx={{ top: "auto", bottom: 0, background: "rgb(255, 136, 0)" }}
-      >
-        <Toolbar className="homeHead">
-          <IconButton
-            onClick={() => navigate("/allChats")}
-            color="inherit"
-            aria-label="open drawer"
-          >
-            <MailIcon />
-          </IconButton>
-          <MapIcon />
-          <StyledFab
-            sx={{
-              backgroundColor: "#b71c1c",
-              color: "wheat",
-            }}
-            aria-label="add"
-          >
-            <AddIcon onClick={() => navigate("/Posts")} />
-          </StyledFab>
-          <Box sx={{ flexGrow: 1 }} />
-          <IconButton color="inherit">
-            <PersonIcon onClick={() => navigate("/PrsonalInfo")} />
-          </IconButton>
-          <IconButton color="inherit" onClick={() => navigate("/Home")}>
-            <HomeIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+    const navigate = useNavigate();
+    return (
+        <div>
+            <AppBar position="fixed" color="" sx={{ top: "auto", bottom: 0, background: "rgb(255, 136, 0)" }}>
+                <Toolbar className="homeHead">
+                    <IconButton
+                        onClick={() => navigate("/UserChatsList")}
+                        color="inherit"
+                        aria-label="open drawer"
+                    >
+                        <MailIcon />
+                    </IconButton>
+                    <MapIcon />
+                    <StyledFab
+                        sx={{
+                            backgroundColor: "#b71c1c",
+                            color: "wheat",
+                        }}
+                        aria-label="add"
+                    >
+                        <AddIcon onClick={() => navigate("/UploadPost")} />
+                    </StyledFab>
+                    <Box sx={{ flexGrow: 1 }} />
+                    <IconButton color="inherit">
+                        <PersonIcon onClick={() => navigate("/UserPersonalInfo")} />
+                    </IconButton>
+                    <IconButton color="inherit" onClick={() => navigate("/UserMainPage")}>
+                        <HomeIcon />
+                    </IconButton>
+                </Toolbar>
+            </AppBar>
+        </div>
+    );
 };
 
 export default Bottom;
