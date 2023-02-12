@@ -12,7 +12,7 @@ const AllChats = () => {
     getAllChats,
     getChatMessages,
     socket,
-    sendToSocket,
+    // sendToSocket,
     id,
     getUsers,
     connectToSocketServer,
@@ -26,7 +26,7 @@ const AllChats = () => {
   }, []);
   //! connect to socket
   useEffect(() => {
-    sendToSocket();
+    // sendToSocket();
     getUsers();
   }, [id]);
 

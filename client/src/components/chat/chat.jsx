@@ -18,10 +18,12 @@ const Chat = () => {
     postNewMessage,
     getChatMessages,
     currentChat,
+    socket,
     getMessage,
     arrivalMessage,
     updateMessages,
     messageToSend,
+    setMessages,
     connectToSocketServer,
   } = useContext(SocketContext);
 
@@ -34,13 +36,23 @@ const Chat = () => {
   //!===============GET ALL MESSAGES WHEN PAGE OPEN FIRST TIME===============
   useEffect(() => {
     getChatMessages(localStorage.getItem("chat_Id"));
-    console.log(currentChat);
+    // console.log(currentChat);
+    // postNewMessage();
   }, []);
   //!===============GET ALL DURING THE CHAT===============
 
   useEffect(() => {
-    getMessage();
-  }, [messages]);
+    //getMessage();
+    // updateMessages();
+  }, []);
+
+  useEffect(() => {
+    socket.on("receive_message", (data) => {
+      console.log(data);
+      setMessages([...messages, data]);
+      console.log(messages);
+    });
+  }, [socket]);
 
   useEffect(() => {
     updateMessages();
@@ -66,7 +78,7 @@ const Chat = () => {
                 key={index}
                 className={message.sender === id ? "user" : "otherSide"}
               >
-                <p>{message.text}</p>
+                <p>{message?.text}</p>
               </div>
             );
           })}
@@ -78,8 +90,8 @@ const Chat = () => {
         placeholder="הודעה שלך"
       />
       <button
-        onClick={(e) => {
-          postNewMessage(e);
+        onClick={async (e) => {
+          await postNewMessage(e);
           getChatMessages(localStorage.getItem("chat_Id"));
         }}
       >
