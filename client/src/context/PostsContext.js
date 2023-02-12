@@ -78,6 +78,13 @@ function PostsProvider(props) {
     // console.log(userPosts);
     setUserPosts([...userPosts, req.data]);
   };
+
+  //!  delete post========================
+  const deletePost = async (post_Id) => {
+    const req = await axios.delete(`http://localhost:5555/api/posts/${post_Id}`);
+    setUserPosts(userPosts.filter((post) => post._id != post_Id));
+  };
+
   return (
     <PostsContext.Provider
       value={{
@@ -93,6 +100,7 @@ function PostsProvider(props) {
         editingPost,
         editPost,
         setEditPost,
+        deletePost,
       }}
     >
       {children}

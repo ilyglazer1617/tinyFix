@@ -72,6 +72,7 @@ const MyPosts = () => {
                     </span>
                     תגובות
                   </a>
+                  <p> {post.numberOfComments}</p>
                 </div>
                 <div className="bottom-part" value={post._id}>
                   <a className="link">

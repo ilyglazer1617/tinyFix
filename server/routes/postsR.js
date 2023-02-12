@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/Posts");
 const Comment = require("../models/Comments");
+const mongoose = require("mongoose");
 
 const cloudinary = require("cloudinary").v2;
 
@@ -96,12 +97,42 @@ router.delete("/:post_Id", async (req, res) => {
 
 router.get("/:user_id", async (req, res) => {
   try {
-    const posts = await Post.find({ user_id: req.params.user_id });
+    const posts = await Post.aggregate([
+      {
+        $match: {
+          user_id: mongoose.Types.ObjectId(req.params.user_id),
+        },
+      },
+      {
+        $lookup: {
+          from: "comments",
+          localField: "_id",
+          foreignField: "post_id",
+          as: "comments",
+        },
+      },
+      {
+        $addFields: {
+          numberOfComments: { $size: "$comments" },
+        },
+      },
+    ]);
+    // console.log(posts);
     res.send(posts);
   } catch (err) {
+    console.log(err.message);
     res.status(500).send({ message: "Error retrieving posts" });
   }
 });
+
+// router.get("/:user_id", async (req, res) => {
+//   try {
+//     const posts = await Post.find({ user_id: req.params.user_id });
+//     res.send(posts);
+//   } catch (err) {
+//     res.status(500).send({ message: "Error retrieving posts" });
+//   }
+// });
 
 //!CLIENT!!!------------------
 //?-------------------------
@@ -136,18 +167,6 @@ router.get("/districtFilter/:district", async (req, res) => {
     res.status(500).send(err.message);
   }
 });
-
-// router.post("/filter", async (req, res) => {
-//   try {
-//     const posts = await Post.find(req.body.params).populate({
-//       path: "user_id",
-//     });
-//     console.log(posts);
-//     res.send(posts);
-//   } catch (err) {
-//     res.status(500).send(err.message);
-//   }
-// });
 
 //!get posts by district,problem,car_make, garage_id comments
 router.post("/withFilters/:district", async (req, res) => {
@@ -193,16 +212,13 @@ router.post("/withFilters/:district", async (req, res) => {
                   },
                 },
               },
-              {
-                $sort: {
-                  bid: 1,
-                },
-              },
-              {
-                $limit: 1,
-              },
             ],
             as: "comments",
+          },
+        },
+        {
+          $addFields: {
+            numberOfComments: { $size: "$comments" },
           },
         },
       ]);
@@ -246,11 +262,13 @@ router.post("/withFilters/:district", async (req, res) => {
                   bid: 1,
                 },
               },
-              {
-                $limit: 1,
-              },
             ],
             as: "comments",
+          },
+        },
+        {
+          $addFields: {
+            numberOfComments: { $size: "$comments" },
           },
         },
       ]);
