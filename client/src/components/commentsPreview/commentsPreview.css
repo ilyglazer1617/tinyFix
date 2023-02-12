@@ -26,7 +26,26 @@
 }
 
 .personalComment {
+    padding: 1rem;
     margin: 2rem;
     border: 1px solid #dfefef;
-    background: linear-gradient(45deg, rgb(255, 255, 255) 90%, gold 10%);
+    background: linear-gradient(45deg, rgb(255, 255, 255) 90%, rgb(210, 224, 224) 10%);
+}
+
+.manageComment {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #dfefef;
+    align-items: center;
+    min-height: fit-content;
+}
+.editComment,
+.deleteComment {
+    background: none;
+    border: none;
+    height: 4rem;
+}
+
+.manageComment p {
+    margin: 0;
 }

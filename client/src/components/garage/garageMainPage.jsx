@@ -57,9 +57,7 @@ const GarageMainPage = () => {
                 <div className="navbarButtons">
                     <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
                     <button>ביקורות</button>
-                    <button>
-                        
-                    </button>
+                    <button></button>
                     <img
                         className="navbarProfilePicture"
                         src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
@@ -105,7 +103,6 @@ const GarageMainPage = () => {
                                         <h2 className="problemClasification">
                                             סיווג הבעיה: {post.problem_classification}
                                         </h2>
-                                        <h3>תיאור מפורט של הבעיה: {post.description}</h3>
                                         {post.comments[0] ? (
                                             post.comments[0].garage_id === _id ? (
                                                 <h3>
@@ -118,6 +115,7 @@ const GarageMainPage = () => {
                                         ) : (
                                             <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>
                                         )}
+                                        <h3>תיאור מפורט של הבעיה: {post.description}</h3>
                                     </div>
                                 </div>
                                 <div className="imagesList">
