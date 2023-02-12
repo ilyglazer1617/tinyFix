@@ -13,7 +13,6 @@ function PostsProvider(props) {
     const [filterParams, setFilterParams] = useState({});
     const [editPost, setEditPost] = useState({});
 
-    //!get user_id by token
 
 
 
@@ -72,8 +71,10 @@ function PostsProvider(props) {
 
     //!new posts functions====================
 
-    //!  editing post========================
-
+  //!  editing post========================
+  const editingPost = async (post_id) => {
+    console.log(post_id);
+  };
     return (
         <PostsContext.Provider
             value={{
@@ -86,8 +87,10 @@ function PostsProvider(props) {
                 getAllPosts,
                 filterParams,
                 setFilterParams,
+                editingPost,
                 editPost,
                 setEditPost,
+               
             }}
         >
             {children}

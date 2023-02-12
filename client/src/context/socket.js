@@ -222,9 +222,7 @@ const SocketProvider = (props) => {
     // console.log("currentChat", currentChat);
     console.log(messages);
     // console.log(arrivalMessage);
-    arrivalMessage &&
-      currentChat?.members.includes(arrivalMessage.sender) &&
-      setMessages((prev) => [...prev, arrivalMessage]);
+    arrivalMessage && currentChat?.members.includes(arrivalMessage.sender) && setMessages((prev) => [...prev, arrivalMessage]);
   };
   // //! ===============get new messageby socket===============
   const getMessage = () => {
@@ -280,10 +278,7 @@ const SocketProvider = (props) => {
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:5555/api/message",
-        message
-      );
+      const res = await axios.post("http://localhost:5555/api/message", message);
       console.log(res.data);
       // setMessages([...messages, res.data]);
       setMessageToSend("");
@@ -295,9 +290,7 @@ const SocketProvider = (props) => {
 
   const getChatMessages = async (chatId) => {
     try {
-      const res = await axios.get(
-        "http://localhost:5555/api/message/" + chatId
-      );
+      const res = await axios.get("http://localhost:5555/api/message/" + chatId);
       setMessages(res.data);
       setCurrentChatId(chatId);
       setMessageToSend("");
@@ -316,9 +309,8 @@ const SocketProvider = (props) => {
 
   const getAllChats = async () => {
     try {
-      const res = await axios.get(
-        "http://localhost:5555/api/conversation/" + id
-      );
+      console.log(id);
+      const res = await axios.get("http://localhost:5555/api/conversation/" + id);
       setallChats(res.data);
     } catch (error) {
       console.log(error.message);
@@ -328,10 +320,7 @@ const SocketProvider = (props) => {
   //!=============== create a new conv===============
   const newChat = async (garage_id) => {
     try {
-      const newConversation = await axios.post(
-        "http://localhost:5555/api/conversation",
-        { senderId: id, receiverId: garage_id }
-      );
+      const newConversation = await axios.post("http://localhost:5555/api/conversation", { senderId: id, receiverId: garage_id });
       setRoom(localStorage.getItem("chat_Id"));
       setUsername(user ? "user" : "garage");
       if (username !== "" && room !== "") {
