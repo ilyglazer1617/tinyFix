@@ -77,7 +77,6 @@ function PostsProvider(props) {
 
   //!new posts functions====================
 
-  //!  editing post========================
 
   return (
     <PostsContext.Provider

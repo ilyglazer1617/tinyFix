@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 import axios from "axios";
 import App from "./../App";
+import EditPost from "./../components/editPosts/EditPost";
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
@@ -20,7 +21,7 @@ const UserContextProvider = (props) => {
   const [setInfo, setSetInfo] = useState({});
   const [userPosts, setUserPosts] = useState([]);
   const [postComment, setPostComment] = useState([]);
-  const [filterCommentData, setFilterCommentData] = useState({});
+
   let token = localStorage.getItem("token");
   let id;
   if (token) {
@@ -31,24 +32,14 @@ const UserContextProvider = (props) => {
   //!get all comments of a specific posts
 
   const commentOfPost = async (postId) => {
-    const data = filterCommentData;
     try {
-      if (data) {
-        const res = await axios.post(
-          "http://localhost:5555/api/comments/sortComments/display/" + postId,
-          data
-        );
-        setPostComment(res.data);
-        return;
-      }
-      const res = await axios.post(
-        "http://localhost:5555/api/comments/sortComments/display/" + postId
-      );
+      const res = await axios.post("http://localhost:5555/api/comments/sortComments/display/" + postId);
       setPostComment(res.data);
     } catch (error) {
       console.log(error);
     }
   };
+
   //! get user posts
   const getUserPosts = async () => {
     try {
@@ -64,10 +55,7 @@ const UserContextProvider = (props) => {
     e.preventDefault();
     const data = setInfo;
     try {
-      const res = await axios.put(
-        "http://localhost:5555/user/updateUser/" + id,
-        data
-      );
+      const res = await axios.put("http://localhost:5555/user/updateUser/" + id, data);
       setUserInfo(res.data);
     } catch (error) {
       console.log(error.message);
@@ -87,10 +75,7 @@ const UserContextProvider = (props) => {
   const login = async () => {
     try {
       console.log("hi");
-      const res = await axios.post(
-        "http://localhost:5555/api/login",
-        loginData
-      );
+      const res = await axios.post("http://localhost:5555/api/login", loginData);
       localStorage.setItem("token", res.headers["x-auth-token"]);
       localStorage.setItem("user", "user");
       navigate("/Home");
@@ -104,15 +89,8 @@ const UserContextProvider = (props) => {
   const getCarYear = async () => {
     try {
       const data = { make: carCompany.make, model: userCarModel.model };
-      const carYears = await axios.post(
-        "http://localhost:5555/user/getCarYear",
-        data
-      );
-      setCarYears(
-        carYears.data
-          .map((obj) => obj.year)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      );
+      const carYears = await axios.post("http://localhost:5555/user/getCarYear", data);
+      setCarYears(carYears.data.map((obj) => obj.year).filter((value, index, self) => self.indexOf(value) === index));
     } catch (error) {
       console.log(error.message);
     }
@@ -121,15 +99,8 @@ const UserContextProvider = (props) => {
   //! get all car models
   const getAllCarModels = async () => {
     try {
-      let allModels = await axios.post(
-        "http://localhost:5555/user/getCarModel",
-        carCompany
-      );
-      setCarModels(
-        allModels.data
-          .map((item) => item.model)
-          .filter((value, index, self) => self.indexOf(value) === index)
-      );
+      let allModels = await axios.post("http://localhost:5555/user/getCarModel", carCompany);
+      setCarModels(allModels.data.map((item) => item.model).filter((value, index, self) => self.indexOf(value) === index));
     } catch (error) {
       console.log(error);
     }
@@ -151,16 +122,18 @@ const UserContextProvider = (props) => {
     console.log(registerData);
     try {
       e.preventDefault();
-      const res = await axios.post(
-        "http://localhost:5555/user/register",
-        registerData
-      );
+      const res = await axios.post("http://localhost:5555/user/register", registerData);
 
       e.target.reset();
       navigate("/");
     } catch (error) {
       console.log(error.message);
     }
+  };
+
+  //!  editing post========================
+  const editingPost = async (post_id) => {
+    console.log(post_id);
   };
 
   return (
@@ -194,8 +167,9 @@ const UserContextProvider = (props) => {
           getUserPosts,
           commentOfPost,
           postComment,
-          setFilterCommentData,
-          filterCommentData,
+       
+          editingPost,
+          setPostComment,
         }}
       >
         {children}
