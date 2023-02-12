@@ -1,21 +1,8 @@
 .commentsPreview {
-    position: fixed;
-    top: 15vh;
-    left: 20vw;
-    height: 70vh;
-    width: 60vw;
     padding: 1rem;
-    background-color: rgb(245, 235, 235);
+    background-color: rgb(255, 255, 255);
     overflow-y: auto;
     scrollbar-width: thin;
-}
-
-.backgroundBlocker {
-    position: fixed;
-    top: 0;
-    min-width: 100dvw;
-    min-height: 100dvh;
-    background-color: rgba(45, 29, 48, 0.445);
 }
 
 .exitButton {
@@ -32,6 +19,11 @@
 }
 
 .comment {
-    background-color: rgb(233, 219, 219);
+    background-color: rgb(250, 249, 249);
     margin: 2rem;
+}
+
+.personalComment {
+    margin: 2rem;
+    background: linear-gradient(45deg, rgb(250, 249, 249) 90%, gold 10%);
 }

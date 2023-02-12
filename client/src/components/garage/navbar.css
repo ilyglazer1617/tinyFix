@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
-header {
+.garageMainHeader {
     background: url("https://media.discordapp.net/attachments/1064472273538519114/1074282139325050960/P01SeN_photo-realistic_garage_cars_tools_machines_c45d20ec-c859-43b4-a65b-6514850ae55a.png?width=1025&height=683");
     height: 60vh;
     background-size: cover;
