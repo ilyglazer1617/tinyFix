@@ -94,7 +94,7 @@ io.on("connection", (socket) => {
   //=======send and recive message=======
   socket.on("send_message", (data) => {
     console.table(data);
-    socket.to(data.room).emit("receive_message", data);
+    socket.to(data.conversationId).emit("receive_message", data);
   });
 
   //=======disconect from socket=======
