@@ -36,7 +36,7 @@ const Login = () => {
                     style={{ backgroundColor: "darkslateblue" }}
                     href="#"
                     class="btn"
-                    onClick={() => navigate("/register")}
+                    onClick={() => navigate("/UserRegister")}
                 >
                     הרשמה
                 </a>

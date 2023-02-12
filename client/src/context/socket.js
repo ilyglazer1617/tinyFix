@@ -86,6 +86,7 @@ const SocketProvider = (props) => {
       );
       console.log(res.data.text);
       setMessages([...messages, res.data.text]);
+      setMessageToSend("");
     } catch (error) {
       console.log(error.message);
     }
@@ -140,6 +141,7 @@ const SocketProvider = (props) => {
           allChats,
           getChatMessages,
           messages,
+          messageToSend,
           setMessageToSend,
           setMessages,
           postNewMessage,

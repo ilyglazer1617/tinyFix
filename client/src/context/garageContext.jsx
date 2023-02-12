@@ -3,9 +3,11 @@ import App from "./../App";
 import axios from "axios";
 import PostsProvider from "./PostsContext";
 import jwtDecode from "jwt-decode";
+import { useNavigate, Navigate } from "react-router-dom";
 export const GarageContext = createContext();
 
 const GarageProvider = (props) => {
+    const Navigate = useNavigate();
     const { children } = props;
     const [registerInformation, setRegisterInformation] = useState([]);
     const [loginInformation, setLoginInformation] = useState([]);
@@ -30,6 +32,7 @@ const GarageProvider = (props) => {
         ev.preventDefault();
         const garage = await axios.post("http://localhost:5555/api/garage/login", info);
         localStorage.setItem("token", garage.data);
+        Navigate("/GarageMainPage");
     }
 
     // function that set the newArticle obj with imgUrl

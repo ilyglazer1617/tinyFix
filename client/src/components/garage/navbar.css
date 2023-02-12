@@ -1,12 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 10%;
-    background-color: #334756;
-    height: 5rem;
+    background: url("https://media.discordapp.net/attachments/1064472273538519114/1074282139325050960/P01SeN_photo-realistic_garage_cars_tools_machines_c45d20ec-c859-43b4-a65b-6514850ae55a.png?width=1025&height=683");
+    height: 60vh;
+    background-size: cover;
+    background-position-y: -50vh;
 }
 
 .logo {
@@ -14,3 +12,5 @@ header {
     width: 15rem;
     transform: translateY(4rem);
 }
+
+
