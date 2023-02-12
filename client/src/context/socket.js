@@ -240,9 +240,9 @@ const SocketProvider = (props) => {
     }
   };
   // //!=============== send new message===============
-  const postNewMessage = async () => {
+  const postNewMessage = async (e) => {
     // console.log(currentChat._id);
-    // e.preventDefault();
+    e.preventDefault();
     const message = {
       conversationId: localStorage.getItem("chat_Id"),
       sender: id,
@@ -259,21 +259,23 @@ const SocketProvider = (props) => {
     // console.log(currentChat._id);
     // const sendMessage = async () => {
     if (messageToSend !== "") {
-      const messageData = {
-        room: localStorage.getItem("chat_Id"),
-        author: id,
-        message: messageToSend,
-        time:
-          new Date(Date.now()).getHours() +
-          ":" +
-          new Date(Date.now()).getMinutes(),
-      };
-      console.log(messageData);
-      socket.emit("send_message", messageData);
+      // const messageData = {
+      //   room: localStorage.getItem("chat_Id"),
+      //   author: id,
+      //   message: messageToSend,
+      //   time:
+      //     new Date(Date.now()).getHours() +
+      //     ":" +
+      //     new Date(Date.now()).getMinutes(),
+      // };
+      console.log(message);
+      socket.emit("send_message", message);
       // socket.current.emit("send_message", messageData);
-      setMessageList((list) => [...list, messageData]);
-      setMessages((prev) => [...prev, messageToSend]);
-      setCurrentMessage("");
+      // setMessageList((list) => [...list, messageData]);
+
+      setMessages([...messages, message]);
+      // setMessages((prev) => [...prev, messageToSend]);
+      setMessageToSend("");
       // }
     }
 
@@ -337,7 +339,7 @@ const SocketProvider = (props) => {
         // navigate("/chat");
       }
 
-      navigate("/allChats");
+      navigate("/UserChatsList");
     } catch (error) {
       console.log(error);
     }

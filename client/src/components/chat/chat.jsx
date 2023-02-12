@@ -92,7 +92,7 @@ const Chat = () => {
       <button
         onClick={async (e) => {
           await postNewMessage(e);
-          getChatMessages(localStorage.getItem("chat_Id"));
+          // getChatMessages(localStorage.getItem("chat_Id"));
         }}
       >
         שלח הודעה
