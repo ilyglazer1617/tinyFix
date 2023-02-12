@@ -220,11 +220,9 @@ const SocketProvider = (props) => {
   // //! =============== set messages =================
   const updateMessages = () => {
     // console.log("currentChat", currentChat);
-    console.log(messages);
-    // console.log(arrivalMessage);
-    arrivalMessage &&
-      currentChat?.members.includes(arrivalMessage.sender) &&
-      setMessages((prev) => [...prev, arrivalMessage]);
+    // arrivalMessage &&
+    //   currentChat?.members.includes(arrivalMessage.sender) &&
+    //   setMessages((prev) => [...prev, arrivalMessage]);
   };
   // //! ===============get new messageby socket===============
   const getMessage = () => {
@@ -273,6 +271,7 @@ const SocketProvider = (props) => {
       // socket.current.emit("send_message", messageData);
       // setMessageList((list) => [...list, messageData]);
 
+      // setMessages((perv) => [...perv, message]);
       setMessages([...messages, message]);
       // setMessages((prev) => [...prev, messageToSend]);
       setMessageToSend("");
@@ -285,8 +284,8 @@ const SocketProvider = (props) => {
         message
       );
       console.log(res.data);
-      // setMessages([...messages, res.data]);
-      setMessageToSend("");
+      setMessages([...messages, res.data]);
+      // setMessageToSend("");
     } catch (error) {
       console.log(error.message);
     }
@@ -316,6 +315,7 @@ const SocketProvider = (props) => {
 
   const getAllChats = async () => {
     try {
+      console.log("id", id);
       const res = await axios.get(
         "http://localhost:5555/api/conversation/" + id
       );
@@ -328,6 +328,12 @@ const SocketProvider = (props) => {
   //!=============== create a new conv===============
   const newChat = async (garage_id) => {
     try {
+      const conv = await axios.get(
+        "http://localhost:5555/api/conversation/" + id
+      );
+      console.log(conv.data);
+      const arr = conv.data;
+
       const newConversation = await axios.post(
         "http://localhost:5555/api/conversation",
         { senderId: id, receiverId: garage_id }
@@ -336,10 +342,9 @@ const SocketProvider = (props) => {
       setUsername(user ? "user" : "garage");
       if (username !== "" && room !== "") {
         socket.emit("join_room", room);
-        // navigate("/chat");
       }
 
-      navigate("/UserChatsList");
+      navigate("/chat");
     } catch (error) {
       console.log(error);
     }
