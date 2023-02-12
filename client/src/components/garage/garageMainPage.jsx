@@ -16,18 +16,25 @@ import GarageInfo from "../garageInfo/garageInfo";
 import FactoryIcon from "@mui/icons-material/Factory";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ScheduleIcon from "@mui/icons-material/Schedule";
+import CommentsPreview from "./../commentsPreview/commentsPreview";
 
 const GarageMainPage = () => {
     const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-    const { getAllComments, setNewComment, newComment, editComment, comments } = useContext(CommentsContext);
+    const {
+        getAllComments,
+        setNewComment,
+        newComment,
+        editComment,
+        comments,
+        commentsOpen,
+        setCommentsOpen,
+    } = useContext(CommentsContext);
     const { carMake, getAllCars } = useContext(UserContext);
     const navigate = useNavigate();
     useEffect(() => {
         getAllPosts(filterParams);
         getAllCars();
     }, [filterParams, newComment, editComment, comments]);
-
-    useEffect(() => {}, [posts]);
 
     let token = localStorage.getItem("token");
     const { _id } = jwtDecode(token);
@@ -44,7 +51,7 @@ const GarageMainPage = () => {
 
     return (
         <>
-            <header></header>
+            <header className="garageMainHeader"></header>
             <div className="navbar">
                 <div></div>
                 <div className="navbarButtons">
@@ -127,7 +134,7 @@ const GarageMainPage = () => {
                                 <div
                                     className="comments"
                                     onClick={() => {
-                                        navigate("/GarageMainPage/PostComments");
+                                        setCommentsOpen(commentsOpen === index ? null : index);
                                         getAllComments(post._id);
                                         setNewComment({ ...newComment, post_id: post._id });
                                     }}
@@ -137,6 +144,7 @@ const GarageMainPage = () => {
                                         <p>הצעות</p>
                                     </div>
                                 </div>
+                                {commentsOpen === index ? <CommentsPreview /> : ""}
                             </div>
                         );
                     })}

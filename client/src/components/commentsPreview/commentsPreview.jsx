@@ -7,8 +7,21 @@ import jwtDecode from "jwt-decode";
 import GarageInfo from "./../garageInfo/garageInfo";
 
 const CommentsPreview = () => {
-    const { getAllComments, comments, editComment, setEditComment, newComment, deleteComment, setComments } =
-        useContext(CommentsContext);
+    const {
+        commentsOpen,
+        setCommentsOpen,
+        getAllComments,
+        comments,
+        editComment,
+        setEditComment,
+        newComment,
+        deleteComment,
+        setComments,
+    } = useContext(CommentsContext);
+
+    useEffect(() => {
+        console.log(commentsOpen);
+    }, []);
 
     const navigate = useNavigate();
 
@@ -41,14 +54,20 @@ const CommentsPreview = () => {
             <div className="backgroundBlocker">
                 <div className="commentsPreview">
                     <h4 className="exitButton">
-                        <span onClick={() => navigate("/GarageMainPage")}>❌</span>
+                        <span onClick={() => setCommentsOpen(null)}>❌</span>
                     </h4>
                     <div className="commentsContainer">
                         {!comments.length == 0 ? (
                             comments.map((comment) => {
                                 return (
                                     <>
-                                        <div className="comment">
+                                        <div
+                                            className={
+                                                comment.garage_id._id == _id || comment.garage_id == _id
+                                                    ? "personalComment"
+                                                    : "comment"
+                                            }
+                                        >
                                             {comment.garage_id._id == _id || comment.garage_id == _id ? (
                                                 <div className="commentGarageName">
                                                     <h1>
