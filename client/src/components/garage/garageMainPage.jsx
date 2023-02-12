@@ -216,7 +216,7 @@ const GarageMainPage = () => {
                                 setFilterParams({});
                                 document.getElementById("Checkbox").checked = false;
                                 document.getElementById("selectedProblem").value = "סיווג התקלה";
-                                document.getElementById("selectedCar").value = "סוג הרכב";
+                                document.getElementById("selectedCar").value = "חברה";
                             }}
                         >
                             נקה בחירה

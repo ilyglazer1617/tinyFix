@@ -1,7 +1,5 @@
-/* .fixInputCntainer{
-} */
-
-.fixPriceInput {
-    width: 50%;
-    height: 2rem;
+.fixPriceInput:focus,
+.fixInfoInput:focus {
+    width: 150px;
+    transform: rotate(0);
 }
