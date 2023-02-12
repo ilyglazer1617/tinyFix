@@ -1,8 +1,10 @@
 import { useContext, useState } from "react";
 import "./garage.css";
+import { useNavigate } from "react-router-dom";
 
 import { GarageContext } from "../../context/garageContext";
 const GarageLogin = () => {
+    const Navigate = useNavigate();
     const {
         registerSubmit,
         setRegisterInformation,

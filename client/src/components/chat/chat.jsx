@@ -64,7 +64,7 @@ const Chat = () => {
       <button
         onClick={() => {
           localStorage.removeItem("chat_Id");
-          navigate("/allChats");
+          navigate("/UserChatsList");
         }}
       >
         חזור לשאר הצעות המוסכים

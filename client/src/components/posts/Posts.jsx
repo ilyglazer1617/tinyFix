@@ -1,9 +1,17 @@
 import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { PostsContext } from "../../context/PostsContext";
+import jwtdecode from "jwt-decode";
 
 function Posts() {
     const { newPost, setNewPost, uploudPost, generateIMGS } = useContext(PostsContext);
+
+    let token = localStorage.getItem("token");
+    let id;
+    if (token) {
+        const { _id } = jwtdecode(token);
+        id = _id;
+    }
 
     return (
         <div className="App">
@@ -39,7 +47,14 @@ function Posts() {
                 <option value="אחר">אחר</option>
             </select>
             <input id="inputImages" type="file" accept="image/*" multiple onChange={(e) => generateIMGS(e)} />
-            <button onClick={() => uploudPost()}>העלה בקשה לתיקון</button>
+            <button
+                onClick={() => {
+                    setNewPost({ ...newPost, user_id: id });
+                    uploudPost();
+                }}
+            >
+                העלה בקשה לתיקון
+            </button>
         </div>
     );
 }
