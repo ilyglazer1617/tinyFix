@@ -109,6 +109,7 @@ const GarageProvider = (props) => {
         setNewReview,
         addReviewToGarage,
         logout,
+       
       }}
     >
       {children}
