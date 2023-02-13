@@ -61,10 +61,12 @@ function Posts() {
         multiple
         onChange={(e) => generateIMGS(e)}
       />
-      <button onClick={() => uploudPost()}>העלה בקשה לתיקון</button>
+      <button className="postBtn" onClick={() => uploudPost()}>
+        העלה בקשה לתיקון
+      </button>
       <div className="funny">
         <div className="funnyContent">
-          אולי עשית תאונה אבל........ לפחות עכשיו יש לך תירוץ מצוין לשדרג לרכב
+          אולי עשית תאונה אבל.... לפחות עכשיו יש לך תירוץ מצוין לשדרג לרכב
           הספורט הזה שתמיד רצית
         </div>
       </div>
