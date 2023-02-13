@@ -20,24 +20,6 @@ import CommentsPreview from "./../commentsPreview/commentsPreview";
 import { GarageContext } from "./../../context/garageContext";
 
 const GarageMainPage = () => {
-  // const { getAllPosts, posts, filterParams, setFilterParams } =
-  //   useContext(PostsContext);
-  // const {
-  //   getAllComments,
-  //   setNewComment,
-  //   newComment,
-  //   editComment,
-  //   comments,
-  //   commentsOpen,
-  //   setCommentsOpen,
-  // } = useContext(CommentsContext);
-  // const { carMake, getAllCars } = useContext(UserContext);
-  // const { logout } = useContext(GarageContext);
-  // const navigate = useNavigate();
-  // useEffect(() => {
-  //   getAllPosts(filterParams);
-  //   getAllCars();
-  // }, [filterParams, newComment, editComment, comments]);
   const { getAllPosts, posts, filterParams, setFilterParams } =
     useContext(PostsContext);
   const {
@@ -162,7 +144,7 @@ const GarageMainPage = () => {
                     <button>ביקורות</button>
                     <button onClick={() => logout()} style={{ color: "red" }}>
                         התנתק
-                    </button>{" "}
+                    </button>
                     <img
                         className="navbarProfilePicture"
                         src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
