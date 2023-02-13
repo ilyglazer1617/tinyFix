@@ -37,6 +37,9 @@ const AllChats = () => {
       {allChats?.map((chat, index) => {
         return (
           <div className="allChatsWrapper" key={chat._id}>
+            {/* <img src={user
+                ? chat.garageChat_side.garage_name
+                : chat.userChat_side.full_name} alt="" /> */}
             <p
               onClick={() => {
                 getChatMessages(chat._id);
