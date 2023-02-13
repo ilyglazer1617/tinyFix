@@ -17,6 +17,7 @@ import FactoryIcon from "@mui/icons-material/Factory";
 import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import ScheduleIcon from "@mui/icons-material/Schedule";
 import CommentsPreview from "./../commentsPreview/commentsPreview";
+import { GarageContext } from "./../../context/garageContext";
 
 const GarageMainPage = () => {
     const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
@@ -30,6 +31,7 @@ const GarageMainPage = () => {
         setCommentsOpen,
     } = useContext(CommentsContext);
     const { carMake, getAllCars } = useContext(UserContext);
+    const { logout } = useContext(GarageContext);
     const navigate = useNavigate();
     useEffect(() => {
         getAllPosts(filterParams);
@@ -57,7 +59,9 @@ const GarageMainPage = () => {
                 <div className="navbarButtons">
                     <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
                     <button>ביקורות</button>
-                    <button></button>
+                    <button onClick={() => logout()} style={{ color: "red" }}>
+                        התנתק
+                    </button>
                     <img
                         className="navbarProfilePicture"
                         src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
