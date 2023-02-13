@@ -38,24 +38,6 @@ const GarageMainPage = () => {
     getAllPosts(filterParams);
     getAllCars();
   }, [filterParams, newComment, editComment, comments]);
-  const { getAllPosts, posts, filterParams, setFilterParams } =
-    useContext(PostsContext);
-  const {
-    getAllComments,
-    setNewComment,
-    newComment,
-    editComment,
-    comments,
-    commentsOpen,
-    setCommentsOpen,
-  } = useContext(CommentsContext);
-  const { carMake, getAllCars } = useContext(UserContext);
-  const { logout } = useContext(GarageContext);
-  const navigate = useNavigate();
-  useEffect(() => {
-    getAllPosts(filterParams);
-    getAllCars();
-  }, [filterParams, newComment, editComment, comments]);
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
