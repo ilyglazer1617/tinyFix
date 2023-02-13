@@ -39,7 +39,6 @@ function EditPost() {
       <button
         onClick={() => {
           editingPost(editPost._id);
-          navigate("/UserMainPage");
         }}
       >
 עדכן      </button>
@@ -47,7 +46,6 @@ function EditPost() {
       <button
         onClick={() => {
           deletePost(editPost._id);
-          navigate("/UserMainPage");
         }}
       >
         מחיקת תקלה
