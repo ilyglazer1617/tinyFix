@@ -24,6 +24,7 @@ function PostsProvider(props) {
     const district = token_info.district;
 
     const posts = await axios.post(`http://localhost:5555/api/posts/withFilters/${district}`, params);
+    console.log("first");
     setPosts(posts.data);
     console.log(posts.data);
   }
@@ -64,19 +65,18 @@ function PostsProvider(props) {
     };
   };
 
+  //!new posts functions====================
   const uploudPost = async () => {
     const req = await axios.post("http://localhost:5555/api/posts", newPost);
     setUserPosts([...userPosts, req.data]);
   };
-
-  //!new posts functions====================
 
   //!  editing post========================
   const editingPost = async (post_Id) => {
     const req = await axios.put(`http://localhost:5555/api/posts/${post_Id}`, editPost);
     // console.log(req.data);
     // console.log(userPosts);
-    setUserPosts([...userPosts, req.data]);
+    // setUserPosts([...userPosts, req.data]);
   };
 
   //!  delete post========================

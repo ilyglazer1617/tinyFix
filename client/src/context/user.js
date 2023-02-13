@@ -56,6 +56,8 @@ const UserContextProvider = (props) => {
     try {
       const res = await axios.put("http://localhost:5555/user/updateUser/" + id, data);
       setUserInfo(res.data);
+      alert("המידע עודכן בהצלחה");
+      navigate("/UserPersonalInfo");
     } catch (error) {
       console.log(error.message);
     }
