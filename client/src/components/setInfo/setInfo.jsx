@@ -8,6 +8,8 @@ const SetInfo = () => {
     setInfo,
     setSetInfo,
     updateUserInfo,
+    userInfo,
+    setUserInfo,
     // carMake,
     // getAllCars,
     // carCompany,
@@ -33,7 +35,14 @@ const SetInfo = () => {
     userCarModel,
     getCarYear,
     carYears,
+    getUserInfo,
   } = useContext(UserContext);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+  console.log(userInfo);
+
   //! get all makes
   useEffect(() => {
     getAllCars();
@@ -50,46 +59,44 @@ const SetInfo = () => {
   }, [userCarModel]);
   const navigate = useNavigate();
 
+  console.log(userInfo);
+
   return (
     <div>
       <div className="SetInfoForm">
         {" "}
         <h3 className="P_SetInfo">
           {" "}
-          <input
-            type="text"
-            onChange={(e) =>
-              setSetInfo({ ...setInfo, full_name: e.target.value })
-            }
-          />
+          <input type="text" defaultValue={userInfo.full_name} onChange={(e) => setSetInfo({ ...setInfo, full_name: e.target.value })} />
           :שם משתמש
         </h3>
         <h3 className="P_SetInfo">
-          <input
-            type="text"
-            onChange={(e) => setSetInfo({ ...setInfo, email: e.target.value })}
-          />
+          <input type="text" defaultValue={userInfo.email} onChange={(e) => setSetInfo({ ...setInfo, email: e.target.value })} />
           :אימייל
         </h3>
         <h3 className="P_SetInfo">
-          <input
-            type="text"
-            className="P_SetInfo_input"
-            onChange={(e) => setSetInfo({ ...setInfo, phone: e.target.value })}
-          />
+          <input type="text" defaultValue={userInfo.phone} className="P_SetInfo_input" onChange={(e) => setSetInfo({ ...setInfo, phone: e.target.value })} />
           :מספר פלאפון
         </h3>
         <h3 className="P_SetInfo">
-          <input
-            type="text"
-            onChange={(e) =>
-              setSetInfo({ ...setInfo, district: e.target.value })
-            }
-          />
-          :אזור
+          <select
+            // defaultValue={userInfo.district}
+            onChange={(e) => setSetInfo({ ...setInfo, district: e.target.value })}
+            className="P_SetInfo"
+          >
+            <option value="">אזור בארץ</option>
+            <option value="מחוז הצפון">מחוז הצפון</option>
+            <option value="מחוז חיפה">מחוז חיפה</option>
+            <option value="מחוז תל אביב">מחוז תל אביב</option>
+            <option value="מחוז המרכז">מחוז המרכז</option>
+            <option value="מחוז ירושלים">מחוז ירושלים</option>
+            <option value="מחוז הדרום">מחוז הדרום</option>
+            <option value="מחוז יהודה ושומרון">מחוז יהודה ושומרון</option>
+          </select>
         </h3>
         <h3 className="P_SetInfo">
           <select
+            // defaultValue={userInfo.car_model}
             onChange={(e) => {
               setCarCompany({ make: e.target.value });
               setSetInfo({ ...setInfo, car_make: e.target.value });
@@ -98,7 +105,7 @@ const SetInfo = () => {
             id=""
             // className="registerSelect"
           >
-            <option value="">חברה</option>
+            <option>חברה</option>
             {carMake.map((car, index) => {
               return (
                 <option value={car} key={index}>
@@ -106,11 +113,10 @@ const SetInfo = () => {
                 </option>
               );
             })}
-          </select>{" "}
+          </select>
           :חברת רכב
         </h3>
         <h3 className="P_SetInfo">
-          {" "}
           <select
             onChange={(e) => {
               setUserCarModel({ model: e.target.value });
@@ -153,8 +159,6 @@ const SetInfo = () => {
         <button
           onClick={(e) => {
             updateUserInfo(e);
-            alert("המידע עודכן בהצלחה");
-            navigate("/Home");
           }}
         >
           עדכן מידע{" "}

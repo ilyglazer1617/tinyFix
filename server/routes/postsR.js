@@ -50,11 +50,26 @@ router.post("/", async (req, res) => {
 //! PUT endpoint to edit a post
 router.put("/:post_Id", async (req, res) => {
   try {
+    const images = req.body.images;
+    const urlArray = [];
+
+    for (let i = 0; i < images.length && i < 4; i++) {
+      const imgUploud = await cloudinary.uploader.upload(images[i], {
+        folder: "posts",
+      });
+      urlArray.push(imgUploud.secure_url);
+    }
+    console.log(urlArray);
+
     // Get post_Id from the URL path parameters
     const post_Id = req.params.post_Id;
 
     // Get updates from the request body
-    const updates = req.body;
+    const updates = {
+      description: req.body.description,
+      problem_classification: req.body.problem_classification,
+      images: urlArray,
+    };
 
     // Update the post in the database
     const updatedPost = await Post.findByIdAndUpdate(post_Id, updates, {
@@ -63,6 +78,7 @@ router.put("/:post_Id", async (req, res) => {
 
     // Return success response with the updated post
     return res.status(200).send(updatedPost);
+    console.log("yessssssssssssssssss")
   } catch (error) {
     // Return error response if there was an error updating the post
     return res.status(500).send({

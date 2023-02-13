@@ -19,6 +19,7 @@ const MyPosts = () => {
   const [hiddenOrNot, setHiddenOrNot] = useState(false);
 
   const navigate = useNavigate();
+  // console.log(userInfo);
 
   return (
     <div className="myPosts">

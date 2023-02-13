@@ -65,6 +65,8 @@ const UserContextProvider = (props) => {
         data
       );
       setUserInfo(res.data);
+      alert("המידע עודכן בהצלחה");
+      navigate("/UserPersonalInfo");
     } catch (error) {
       console.log(error.message);
     }

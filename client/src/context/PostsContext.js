@@ -80,8 +80,6 @@ function PostsProvider(props) {
     navigate("/UserMainPage");
   };
 
-  //!new posts functions====================
-
   //!  editing post========================
   const editingPost = async (post_Id) => {
     const req = await axios.put(
