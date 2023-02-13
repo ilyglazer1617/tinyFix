@@ -57,7 +57,7 @@
 //!=========================================================room===============================
 const io = require("socket.io")(4040, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "https://main--friendly-moxie-5a1544.netlify.app",
   },
 });
 

@@ -6,6 +6,7 @@ import jwtdecode from "jwt-decode";
 
 const Chat = () => {
   const navigate = useNavigate();
+  const user = localStorage.getItem("user");
   let token = localStorage.getItem("token");
   let id;
   if (token) {
@@ -95,20 +96,31 @@ const Chat = () => {
             );
           })}
       </div>
-      <input
-        value={messageToSend}
-        onChange={(e) => setMessageToSend(e.target.value)}
-        type="text"
-        placeholder="הודעה שלך"
-      />
-      <button
-        onClick={async (e) => {
-          await postNewMessage(e);
-          // getChatMessages(localStorage.getItem("chat_Id"));
-        }}
-      >
-        שלח הודעה
-      </button>
+      <div className="chat-footer">
+        <input
+          value={messageToSend}
+          onChange={(e) => setMessageToSend(e.target.value)}
+          type="text"
+          placeholder="הודעה שלך"
+          className="inputChat"
+        />
+        <button
+          onClick={async (e) => {
+            await postNewMessage(e);
+            // getChatMessages(localStorage.getItem("chat_Id"));
+          }}
+        >
+          &#9658;
+        </button>
+        {/* <button
+          onClick={async (e) => {
+            await postNewMessage(e);
+            // getChatMessages(localStorage.getItem("chat_Id"));
+          }}
+        >
+          שלח הודעה
+        </button> */}
+      </div>
     </div>
   );
 };
