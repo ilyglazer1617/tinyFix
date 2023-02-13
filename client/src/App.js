@@ -20,6 +20,8 @@ import AddReview from "./components/addReview/addReview";
 import AllChats from "./components/allChats/allChats";
 import Chat from "./components/chat/chat";
 import ChatConteiner from "./components/chatConteiner/chatConteiner";
+import GarageReviews from "./components/garageReviews/GarageReviews";
+
 import GarageInfoUSER from "./components/garageInfoUSER/garageInfoUSER";
 function App() {
   const user = localStorage.getItem("user");
@@ -68,6 +70,7 @@ function App() {
         <Route path="/GarageMainPage" element={<GarageMainPage />} />
         <Route path="/UserChatsList" element={<AllChats />} />
         <Route path="/Chat" element={<Chat />} />
+        <Route path="/GarageReviews" element={<GarageReviews />} />
         <Route
           path="/GarageMainPage/PostComments"
           element={

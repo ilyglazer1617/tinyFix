@@ -15,6 +15,7 @@ const GarageProvider = (props) => {
   const [image, setImg] = useState();
   const [newReview, setNewReview] = useState({});
 
+
   async function registerSubmit(ev, info) {
     ev.preventDefault();
     try {
@@ -26,6 +27,7 @@ const GarageProvider = (props) => {
         }
       );
       localStorage.setItem("token", req.data.token);
+      Navigate("/GarageMainPage")
     } catch (error) {
       console.log(error);
     }
@@ -116,6 +118,7 @@ const GarageProvider = (props) => {
         setNewReview,
         addReviewToGarage,
         logout,
+       
       }}
     >
       {children}

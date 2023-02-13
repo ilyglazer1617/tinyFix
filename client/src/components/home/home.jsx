@@ -14,45 +14,41 @@ import Explanation from "../explanation/explanation";
 import MyPosts from "../myPosts/myPosts";
 
 const StyledFab = styled(Fab)({
-  position: "absolute",
-  zIndex: 1,
-  top: -30,
-  left: 0,
-  right: 0,
-  margin: "0 auto",
+    position: "absolute",
+    zIndex: 1,
+    top: -30,
+    left: 0,
+    right: 0,
+    margin: "0 auto",
 });
 
 export default function Home() {
-  const { getUserInfo, userPosts, getUserPosts } = useContext(UserContext);
-  useEffect(() => {
-    getUserInfo();
-  }, []);
-  useEffect(() => {
-    getUserPosts();
-  }, []);
-  return (
-    <div className="home">
-      <React.Fragment>
-        <CssBaseline />
-        <Paper square sx={{ pb: "50px" }}>
-          <Typography
-            variant="h5"
-            gutterBottom
-            component="div"
-            // className="homeHead"
-            sx={{ p: 2, pb: 0 }}
-          >
-            <div className="homeImgWrap">
-              <img className="homeLogoImg" src="/images/logo.png" alt="" />
-            </div>
-          </Typography>
-          {/* {console.log(userPosts)} */}
-          {userPosts.length ? <MyPosts /> : <Explanation />}
-        </Paper>
-        <div className="buttomHome">
-          <Bottom className="bottomHomeC" />
+    const { getUserInfo, userPosts, getUserPosts } = useContext(UserContext);
+    useEffect(() => {
+        getUserInfo();
+    }, []);
+    useEffect(() => {
+        getUserPosts();
+    }, []);
+    return (
+        <div className="home">
+            <React.Fragment>
+                {/* <CssBaseline />
+                <Paper square sx={{ pb: "50px", boxShadow: "none" }}>
+                    <Typography
+                        variant="h5"
+                        gutterBottom
+                        component="div"
+                        // className="homeHead"
+                        sx={{ p: 2, pb: 0 }}
+                    ></Typography>
+                    {console.log(userPosts)} */}
+                    {userPosts.length ? <MyPosts /> : <Explanation />}
+                {/* </Paper> */}
+                <div className="buttomHome">
+                    <Bottom className="bottomHomeC" />
+                </div>
+            </React.Fragment>
         </div>
-      </React.Fragment>
-    </div>
-  );
+    );
 }
