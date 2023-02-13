@@ -68,13 +68,13 @@ function PostsProvider(props) {
         };
     };
 
+    //!new posts functions====================
     const uploudPost = async () => {
         const req = await axios.post("http://localhost:5555/api/posts", newPost);
         setUserPosts([...userPosts, req.data]);
         navigate("/UserMainPage");
     };
 
-    //!new posts functions====================
 
     //!  editing post========================
     const editingPost = async (post_Id) => {

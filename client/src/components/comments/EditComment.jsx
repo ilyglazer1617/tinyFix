@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 function EditComments() {
     const { newComment, setNewComment, uploudComment, editComment, editingComment, setEditComment } =
         useContext(CommentsContext);
-    const [inputValue, setInputValue] = useState("helo");
     const navigate = useNavigate();
 
     return (
