@@ -67,7 +67,7 @@ const Chat = () => {
             navigate("/UserChatsList");
           }}
         >
-          חזור לשאר הצעות המוסכים
+          {user ? "חזור לשאר הצעות המוסכים" : "חזור לראות לקוחות פוטנציאלים"}
         </button>
         {user ? (
           <button
