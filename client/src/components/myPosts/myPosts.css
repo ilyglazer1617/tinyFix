@@ -4,7 +4,7 @@
     width: 100vw;
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 1rem;
     padding-bottom: 53px;
 }
 
@@ -18,34 +18,34 @@
 
 .myPostscard {
     width: 100%;
-    height: 150px;
+    min-height: 150px;
     background: whitesmoke;
-    transition: .2s linear;
+    transition: 0.2s linear;
     box-shadow: 1px 1px 10px lightslategray;
     cursor: default;
     margin-bottom: 12px;
+    border-radius: 15px;
 }
 
 .card-top-part {
     width: 100%;
     height: 70%;
     padding: 15px;
-    display: flex;
 }
 
 .left-part {
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
 .right-part {
-    width: 30%;
+    width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: flex-end;
+    /* align-items: center; */
+    justify-content: center;
 }
 
 .user-name {
@@ -79,13 +79,10 @@
     width: 100%;
     height: 30%;
     display: flex;
-    border: 1px solid rgb(231, 227, 227);
-    border-bottom-left-radius: inherit;
-    border-bottom-right-radius: inherit;
 }
 
 .user-photo {
-    width: 60px;
+    width: 100%;
     height: 100%;
     overflow: hidden;
     border: 1px solid rgb(231, 227, 227);
@@ -97,7 +94,6 @@
 
 .photo {
     width: 100%;
-
 }
 
 .bottom-part {
@@ -109,7 +105,7 @@
     justify-content: center;
 }
 
-.bottom-part:hover>.link {
+.bottom-part:hover > .link {
     transform: scale(1.1);
 }
 
@@ -120,7 +116,7 @@
     font-size: 14px;
     gap: 5.5px;
     font-weight: bold;
-    transition: .2s linear;
+    transition: 0.2s linear;
 }
 
 .icon {
@@ -142,15 +138,34 @@
     gap: 20px;
     justify-content: center;
     align-items: center;
-    border: 1px solid black;
     padding: 4px;
+}
+
+.commentComments {
+    margin-bottom: 1rem;
+}
+
+.commentComments button {
+    width: 33%;
+    border: none;
+    background-color: #9198e5;
+    cursor: pointer;
+    height: 3rem;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.dirug {
+    display: flex;
+    gap: 1rem;
+    flex-direction: row-reverse;
 }
 
 .cardComment {
     width: 100%;
-    height: 70px;
-    background: #353535;
-    border-radius: 4px;
+    height: 200px;
+    background: #ffffff;
+    border-radius: 15px;
     display: flex;
     margin-bottom: 2%;
     align-items: center;
@@ -158,11 +173,6 @@
     backdrop-filter: blur(10px);
     transition: 0.5s ease-in-out;
     text-align: right;
-}
-
-.cardComment:hover {
-    cursor: pointer;
-    transform: scale(1.05);
 }
 
 .imgCommentWrap {
@@ -177,7 +187,7 @@
     width: 100%;
 }
 
-.cardComment:hover>.img {
+.cardComment:hover > .img {
     transition: 0.5s ease-in-out;
     background: linear-gradient(#9198e5, #712020);
 }
@@ -185,8 +195,7 @@
 .textBoxComment {
     width: calc(100% - 90px);
     margin-left: 10px;
-    color: white;
-    font-family: 'Poppins' sans-serif;
+    font-family: "Poppins" sans-serif;
 }
 
 .textContentComment {
@@ -209,10 +218,8 @@
 }
 
 .pComment {
-    font-size: 12px;
-    font-weight: lighter;
-    margin: 0;
-
+    font-size: 16px;
+    margin-bottom: 0;
 }
 
 .bidWrapper {
@@ -231,8 +238,6 @@
     flex-direction: column;
 }
 
-
-
 .btnComment {
     position: fixed;
     top: 2px;
@@ -243,7 +248,7 @@
     padding: 1em 2.5em;
     display: inline-block;
     border-radius: 6em;
-    transition: all .2s;
+    transition: all 0.2s;
     border: none;
     font-family: inherit;
     font-weight: 700;
@@ -252,10 +257,10 @@
     width: 30%;
 }
 
-.btnComment:hover {
+/* .btnComment:hover {
     transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
+} */
 
 .btnComment:active {
     transform: translateY(-1px);
@@ -272,14 +277,14 @@
     top: 0;
     left: 0;
     z-index: -1;
-    transition: all .4s;
+    transition: all 0.4s;
 }
 
 .btnComment::after {
     background-color: #fff;
 }
-
+/* 
 .btnComment:hover::after {
     transform: scaleX(1.4) scaleY(1.6);
     opacity: 0;
-}
+} */
