@@ -38,6 +38,24 @@ const GarageMainPage = () => {
     getAllPosts(filterParams);
     getAllCars();
   }, [filterParams, newComment, editComment, comments]);
+  const { getAllPosts, posts, filterParams, setFilterParams } =
+    useContext(PostsContext);
+  const {
+    getAllComments,
+    setNewComment,
+    newComment,
+    editComment,
+    comments,
+    commentsOpen,
+    setCommentsOpen,
+  } = useContext(CommentsContext);
+  const { carMake, getAllCars } = useContext(UserContext);
+  const { logout } = useContext(GarageContext);
+  const navigate = useNavigate();
+  useEffect(() => {
+    getAllPosts(filterParams);
+    getAllCars();
+  }, [filterParams, newComment, editComment, comments]);
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
@@ -134,6 +152,88 @@ const GarageMainPage = () => {
                     })}
                   </Carousel>
                   {/* {post.images.map((image, index) => {
+    return (
+        <>
+            <header className="garageMainHeader"></header>
+            <div className="navbar">
+                <div></div>
+                <div className="navbarButtons">
+                    <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
+                    <button>ביקורות</button>
+                    <button onClick={() => logout()} style={{ color: "red" }}>
+                        התנתק
+                    </button>{" "}
+                    <img
+                        className="navbarProfilePicture"
+                        src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
+                        alt=""
+                        onClick={() => navigate("/GarageInfo")}
+                    />
+                </div>
+            </div>
+            <main>
+                <div className="leftPlaceHolder">
+                    <GarageInfo />
+                </div>
+                <div className="postsList">
+                    {posts.map((post, index) => {
+                        return (
+                            <div key={index} className="postCard">
+                                <div className="userInfo">
+                                    <img
+                                        className="profilePicture"
+                                        src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
+                                        alt=""
+                                    />
+                                    <div className="nameAndTime">
+                                        <h1>{post.user[0].full_name}</h1>
+                                        <h5>{extractDate(post.createdAt)} </h5>
+                                    </div>
+                                </div>
+                                <div className="topContainer">
+                                    <div className="carInfo">
+                                        <h2>:מידע על הרכב</h2>
+                                        <p>
+                                            <FactoryIcon />
+                                            {post.user[0].car_make}
+                                        </p>
+                                        <p>
+                                            <DirectionsCarIcon /> {post.user[0].car_model}
+                                        </p>
+                                        <p>
+                                            <ScheduleIcon /> {post.user[0].car_year}
+                                        </p>
+                                    </div>
+                                    <div className="problemInfo">
+                                        <h2 className="problemClasification">
+                                            סיווג הבעיה: {post.problem_classification}
+                                        </h2>
+                                        {post.comments[0] ? (
+                                            post.comments[0].garage_id === _id ? (
+                                                <h3>
+                                                    כל הכבוד! ההצעה הנמוכה ביותר היא שלך:{" "}
+                                                    {post.comments[0].bid}
+                                                </h3>
+                                            ) : (
+                                                <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3>
+                                            )
+                                        ) : (
+                                            <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>
+                                        )}
+                                        <h3>תיאור מפורט של הבעיה: {post.description}</h3>
+                                    </div>
+                                </div>
+                                <div className="imagesList">
+                                    <Carousel width={"70%"} centerSlidePercentage={"10"}>
+                                        {post.images.map((image, index) => {
+                                            return (
+                                                <div>
+                                                    <img key={index} src={image} />
+                                                </div>
+                                            );
+                                        })}
+                                    </Carousel>
+                                    {/* {post.images.map((image, index) => {
                                         return <img className="carouselImage" key={index} src={image} />;
                                     })} */}
                 </div>
@@ -147,8 +247,7 @@ const GarageMainPage = () => {
                 >
                   <div className="icon">
                     <MessageIcon />
-                    <p>הצעות</p>
-                    <p>{post.numberOfComments}</p>
+                    <p>{post.numberOfComments} :הצעות</p>
                   </div>
                 </div>
                 {commentsOpen === index ? <CommentsPreview /> : ""}
