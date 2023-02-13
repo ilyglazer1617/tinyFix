@@ -76,8 +76,8 @@ const MyPosts = () => {
                                     <p> </p>
                                 </div>
                                 <div className="bottom-part" value={post._id}>
-                                    <div className="editPost">
                                         <button
+                                            className="link"
                                             onClick={() => {
                                                 console.log(post);
                                                 setEditPost(post);
@@ -86,7 +86,6 @@ const MyPosts = () => {
                                         >
                                             עריכה
                                         </button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
