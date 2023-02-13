@@ -23,7 +23,8 @@ const MyPosts = () => {
     return (
         <div className="myPosts">
             <div className="myPostsHedear">
-                <ConstructionIcon /> התקלות שלי
+                <ConstructionIcon />
+                <p>התקלות שלי</p>
             </div>
             {userPosts.map((post, index) => {
                 return (
@@ -76,16 +77,16 @@ const MyPosts = () => {
                                     <p> </p>
                                 </div>
                                 <div className="bottom-part" value={post._id}>
-                                        <button
-                                            className="link"
-                                            onClick={() => {
-                                                console.log(post);
-                                                setEditPost(post);
-                                                navigate("/EditPost");
-                                            }}
-                                        >
-                                            עריכה
-                                        </button>
+                                    <button
+                                        className="link"
+                                        onClick={() => {
+                                            console.log(post);
+                                            setEditPost(post);
+                                            navigate("/EditPost");
+                                        }}
+                                    >
+                                        עריכה
+                                    </button>
                                 </div>
                             </div>
                         </div>

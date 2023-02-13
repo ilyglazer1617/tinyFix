@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 100vw;
     justify-content: center;
-    align-items: center;
     gap: 1rem;
     padding-bottom: 53px;
 }
@@ -13,7 +12,15 @@
 }
 
 .myPostsHedear {
+    margin-top: 2rem;
     display: flex;
+    justify-content: center;
+    display: flex;
+}
+
+.myPostsHedear p {
+    font-size: 20px;
+    margin: 0;
 }
 
 .myPostscard {
