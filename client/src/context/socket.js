@@ -253,7 +253,7 @@ const SocketProvider = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5555/api/message",
+        "https://tinyfix.onrender.com/api/message",
         message
       );
       console.log("res data", res.data);
@@ -269,7 +269,7 @@ const SocketProvider = (props) => {
   const getChatMessages = async (chatId) => {
     try {
       const res = await axios.get(
-        "http://localhost:5555/api/message/" + chatId
+        "https://tinyfix.onrender.com/api/message/" + chatId
       );
       setMessages(res.data);
       setCurrentChatId(chatId);
@@ -291,7 +291,7 @@ const SocketProvider = (props) => {
     try {
       console.log("id", id);
       const res = await axios.get(
-        "http://localhost:5555/api/conversation/" + id
+        "https://tinyfix.onrender.com/api/conversation/" + id
       );
       setallChats(res.data);
     } catch (error) {
@@ -303,13 +303,13 @@ const SocketProvider = (props) => {
   const newChat = async (garage_id) => {
     try {
       const conv = await axios.get(
-        "http://localhost:5555/api/conversation/" + id
+        "https://tinyfix.onrender.com/api/conversation/" + id
       );
       console.log(conv.data);
       const arr = conv.data;
 
       const newConversation = await axios.post(
-        "http://localhost:5555/api/conversation",
+        "https://tinyfix.onrender.com/api/conversation",
         { senderId: id, receiverId: garage_id }
       );
       setRoom(localStorage.getItem("chat_Id"));

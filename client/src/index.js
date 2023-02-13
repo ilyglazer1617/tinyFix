@@ -5,7 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import UserContextProvider, { UserContext } from "./context/user";
 import { BrowserRouter } from "react-router-dom";
-
 import PostsProvider from "./context/PostsContext";
 import CommentsProvider from "./context/CommentsContext";
 import GarageProvider from "./context/garageContext";

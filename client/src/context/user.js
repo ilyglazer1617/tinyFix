@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 import axios from "axios";
 import App from "./../App";
+
 export const UserContext = createContext();
 
 const UserContextProvider = (props) => {
@@ -32,7 +33,10 @@ const UserContextProvider = (props) => {
 
   const commentOfPost = async (postId) => {
     try {
-      const res = await axios.post("http://localhost:5555/api/comments/sortComments/display/" + postId);
+      const res = await axios.post(
+        "https://tinyfix.onrender.com/api/comments/sortComments/display/" +
+          postId
+      );
       setPostComment(res.data);
     } catch (error) {
       console.log(error);
@@ -42,7 +46,9 @@ const UserContextProvider = (props) => {
   //! get user posts
   const getUserPosts = async () => {
     try {
-      const res = await axios.get("http://localhost:5555/api/posts/" + id);
+      const res = await axios.get(
+        "https://tinyfix.onrender.com/api/posts/" + id
+      );
       setUserPosts(res.data);
       // console.log(userPosts);
     } catch (error) {
@@ -54,7 +60,10 @@ const UserContextProvider = (props) => {
     e.preventDefault();
     const data = setInfo;
     try {
-      const res = await axios.put("http://localhost:5555/user/updateUser/" + id, data);
+      const res = await axios.put(
+        "https://tinyfix.onrender.com/user/updateUser/" + id,
+        data
+      );
       setUserInfo(res.data);
     } catch (error) {
       console.log(error.message);
@@ -63,7 +72,7 @@ const UserContextProvider = (props) => {
   //! get User info
   const getUserInfo = async () => {
     try {
-      const res = await axios.get("http://localhost:5555/user/" + id);
+      const res = await axios.get("https://tinyfix.onrender.com/user/" + id);
 
       setUserInfo(res.data);
     } catch (error) {
@@ -74,7 +83,10 @@ const UserContextProvider = (props) => {
   const login = async () => {
     try {
       console.log("hi");
-      const res = await axios.post("http://localhost:5555/api/login", loginData);
+      const res = await axios.post(
+        "https://tinyfix.onrender.com/api/login",
+        loginData
+      );
       localStorage.setItem("token", res.headers["x-auth-token"]);
       localStorage.setItem("user", "user");
       navigate("/UserMainPage");
@@ -88,8 +100,15 @@ const UserContextProvider = (props) => {
   const getCarYear = async () => {
     try {
       const data = { make: carCompany.make, model: userCarModel.model };
-      const carYears = await axios.post("http://localhost:5555/user/getCarYear", data);
-      setCarYears(carYears.data.map((obj) => obj.year).filter((value, index, self) => self.indexOf(value) === index));
+      const carYears = await axios.post(
+        "https://tinyfix.onrender.com/user/getCarYear",
+        data
+      );
+      setCarYears(
+        carYears.data
+          .map((obj) => obj.year)
+          .filter((value, index, self) => self.indexOf(value) === index)
+      );
     } catch (error) {
       console.log(error.message);
     }
@@ -98,8 +117,15 @@ const UserContextProvider = (props) => {
   //! get all car models
   const getAllCarModels = async () => {
     try {
-      let allModels = await axios.post("http://localhost:5555/user/getCarModel", carCompany);
-      setCarModels(allModels.data.map((item) => item.model).filter((value, index, self) => self.indexOf(value) === index));
+      let allModels = await axios.post(
+        "https://tinyfix.onrender.com/user/getCarModel",
+        carCompany
+      );
+      setCarModels(
+        allModels.data
+          .map((item) => item.model)
+          .filter((value, index, self) => self.indexOf(value) === index)
+      );
     } catch (error) {
       console.log(error);
     }
@@ -108,7 +134,9 @@ const UserContextProvider = (props) => {
   //!get all car make
   const getAllCars = async () => {
     try {
-      let allCars = await axios.post("http://localhost:5555/user/getCarMake");
+      let allCars = await axios.post(
+        "https://tinyfix.onrender.com/user/getCarMake"
+      );
       setcarMake(allCars.data);
     } catch (error) {
       console.log(error);
@@ -121,7 +149,10 @@ const UserContextProvider = (props) => {
     console.log(registerData);
     try {
       e.preventDefault();
-      const res = await axios.post("http://localhost:5555/user/register", registerData);
+      const res = await axios.post(
+        "https://tinyfix.onrender.com/user/register",
+        registerData
+      );
 
       e.target.reset();
       navigate("/UserMainPage");
