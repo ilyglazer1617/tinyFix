@@ -20,34 +20,24 @@ import CommentsPreview from "./../commentsPreview/commentsPreview";
 import { GarageContext } from "./../../context/garageContext";
 
 const GarageMainPage = () => {
-<<<<<<< HEAD
-    const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-    const {
-        getAllComments,
-        setNewComment,
-        newComment,
-        editComment,
-        comments,
-        commentsOpen,
-        setCommentsOpen,
-    } = useContext(CommentsContext);
-    const { carMake, getAllCars } = useContext(UserContext);
-    const { logout } = useContext(GarageContext);
-    const navigate = useNavigate();
-    useEffect(() => {
-        getAllPosts(filterParams);
-        getAllCars();
-    }, [filterParams, newComment, editComment, comments]);
-=======
-  const { getAllPosts, posts, filterParams, setFilterParams } = useContext(PostsContext);
-  const { getAllComments, setNewComment, newComment, editComment, comments, commentsOpen, setCommentsOpen } = useContext(CommentsContext);
+  const { getAllPosts, posts, filterParams, setFilterParams } =
+    useContext(PostsContext);
+  const {
+    getAllComments,
+    setNewComment,
+    newComment,
+    editComment,
+    comments,
+    commentsOpen,
+    setCommentsOpen,
+  } = useContext(CommentsContext);
   const { carMake, getAllCars } = useContext(UserContext);
+  const { logout } = useContext(GarageContext);
   const navigate = useNavigate();
   useEffect(() => {
     getAllPosts(filterParams);
     getAllCars();
   }, [filterParams, newComment, editComment, comments]);
->>>>>>> 715c0fc969ed5a18eeea587564dcf3fd5d221e03
 
   let token = localStorage.getItem("token");
   const { _id } = jwtDecode(token);
@@ -62,25 +52,6 @@ const GarageMainPage = () => {
     return extractedDate;
   };
 
-<<<<<<< HEAD
-    return (
-        <>
-            <header className="garageMainHeader"></header>
-            <div className="navbar">
-                <div></div>
-                <div className="navbarButtons">
-                    <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
-                    <button>ביקורות</button>
-                    <button onClick={() => logout()} style={{ color: "red" }}>
-                        התנתק
-                    </button>
-                    <img
-                        className="navbarProfilePicture"
-                        src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
-                        alt=""
-                        onClick={() => navigate("/GarageInfo")}
-                    />
-=======
   return (
     <>
       <header className="garageMainHeader"></header>
@@ -89,8 +60,15 @@ const GarageMainPage = () => {
         <div className="navbarButtons">
           <button onClick={() => navigate("/UserChatsList")}>צ'אטים</button>
           <button>ביקורות</button>
-          <button></button>
-          <img className="navbarProfilePicture" src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg" alt="" onClick={() => navigate("/GarageInfo")} />
+          <button onClick={() => logout()} style={{ color: "red" }}>
+            התנתק
+          </button>
+          <img
+            className="navbarProfilePicture"
+            src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
+            alt=""
+            onClick={() => navigate("/GarageInfo")}
+          />
         </div>
       </div>
       <main>
@@ -102,12 +80,15 @@ const GarageMainPage = () => {
             return (
               <div key={index} className="postCard">
                 <div className="userInfo">
-                  <img className="profilePicture" src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg" alt="" />
+                  <img
+                    className="profilePicture"
+                    src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
+                    alt=""
+                  />
                   <div className="nameAndTime">
                     <h1>{post.user[0].full_name}</h1>
                     <h5>{extractDate(post.createdAt)} </h5>
                   </div>
->>>>>>> 715c0fc969ed5a18eeea587564dcf3fd5d221e03
                 </div>
                 <div className="topContainer">
                   <div className="carInfo">
@@ -124,8 +105,21 @@ const GarageMainPage = () => {
                     </p>
                   </div>
                   <div className="problemInfo">
-                    <h2 className="problemClasification">סיווג הבעיה: {post.problem_classification}</h2>
-                    {post.comments[0] ? post.comments[0].garage_id === _id ? <h3>כל הכבוד! ההצעה הנמוכה ביותר היא שלך: {post.comments[0].bid}</h3> : <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3> : <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>}
+                    <h2 className="problemClasification">
+                      סיווג הבעיה: {post.problem_classification}
+                    </h2>
+                    {post.comments[0] ? (
+                      post.comments[0].garage_id === _id ? (
+                        <h3>
+                          כל הכבוד! ההצעה הנמוכה ביותר היא שלך:{" "}
+                          {post.comments[0].bid}
+                        </h3>
+                      ) : (
+                        <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3>
+                      )
+                    ) : (
+                      <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>
+                    )}
                     <h3>תיאור מפורט של הבעיה: {post.description}</h3>
                   </div>
                 </div>
@@ -228,7 +222,8 @@ const GarageMainPage = () => {
               onClick={() => {
                 setFilterParams({});
                 document.getElementById("Checkbox").checked = false;
-                document.getElementById("selectedProblem").value = "סיווג התקלה";
+                document.getElementById("selectedProblem").value =
+                  "סיווג התקלה";
                 document.getElementById("selectedCar").value = "חברה";
               }}
             >

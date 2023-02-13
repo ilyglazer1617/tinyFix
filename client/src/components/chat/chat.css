@@ -1,7 +1,10 @@
 .user {
     display: flex;
+    align-self: flex-end;
     justify-content: right;
+    width: -moz-fit-content;
     width: fit-content;
+    text-align: initial;
     background-color: rgb(13, 120, 207);
     color: aliceblue;
 }
@@ -25,4 +28,5 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding: 3px;
 }
