@@ -2,9 +2,11 @@ import axios from "axios";
 import React, { useContext, useState, useEffect } from "react";
 import { PostsContext } from "../../context/PostsContext";
 import jwtdecode from "jwt-decode";
-
+import "./posts.css";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
 function Posts() {
-  const { newPost, setNewPost, uploudPost, generateIMGS } = useContext(PostsContext);
+  const { newPost, setNewPost, uploudPost, generateIMGS } =
+    useContext(PostsContext);
   useEffect(() => {
     let token = localStorage.getItem("token");
     let id;
@@ -16,11 +18,19 @@ function Posts() {
   }, []);
 
   return (
-    <div className="App">
-      <input type="text" placeholder="תיאור התקלה" onChange={(e) => setNewPost({ ...newPost, description: e.target.value })} />
-
+    <div className="postT">
+      <input
+        type="text"
+        placeholder="תיאור התקלה"
+        onChange={(e) =>
+          setNewPost({ ...newPost, description: e.target.value })
+        }
+        className="input"
+      />
+      <label htmlFor="">סיווג התקלה</label>
       <select
         name=""
+        className="input"
         placeholder="סיווג תקלה"
         id=""
         onChange={(ev) =>
@@ -44,8 +54,20 @@ function Posts() {
         <option value="בלמים">בלמים</option>
         <option value="אחר">אחר</option>
       </select>
-      <input id="inputImages" type="file" accept="image/*" multiple onChange={(e) => generateIMGS(e)} />
+      <input
+        id="inputImages"
+        type="file"
+        accept="image/*"
+        multiple
+        onChange={(e) => generateIMGS(e)}
+      />
       <button onClick={() => uploudPost()}>העלה בקשה לתיקון</button>
+      <div className="funny">
+        <div className="funnyContent">
+          אולי עשית תאונה אבל........ לפחות עכשיו יש לך תירוץ מצוין לשדרג לרכב
+          הספורט הזה שתמיד רצית
+        </div>
+      </div>
     </div>
   );
 }
