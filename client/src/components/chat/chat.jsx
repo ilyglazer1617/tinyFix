@@ -35,29 +35,41 @@ const Chat = () => {
 
   //!===============GET ALL MESSAGES WHEN PAGE OPEN FIRST TIME===============
   useEffect(() => {
-    // getChatMessages(localStorage.getItem("chat_Id"));
+    //getChatMessages(localStorage.getItem("chat_Id"));
     // console.log(currentChat);
     // postNewMessage();
   }, []);
   //!===============GET ALL DURING THE CHAT===============
 
   useEffect(() => {
-    getMessage();
+    // getMessage();
     // updateMessages();
   }, []);
 
   useEffect(() => {
-    socket.on("receive_message", (data) => {
-      console.log(data);
-      setMessages([...messages, data]);
-      console.log(messages);
-    });
-  }, [socket]);
+    socket.on(
+      "receive_message",
+      (data) => {
+        console.log(typeof messages);
+        console.log("data", data);
+        // setMessages((prev) => [...prev, data]);
+        setMessages([...messages, data]);
+        // setMessages((prev) => [...prev, data]);
+        console.log(messages);
+      },
+      [socket]
+    );
+    // return () => {
+    //   socket.emit("leave_room", {
+    //     room: localStorage.getItem("chat_Id"),
+    //   });
+    // };
+  });
 
-  useEffect(() => {
-    updateMessages();
-    getMessage();
-  }, [arrivalMessage, currentChat]);
+  // useEffect(() => {
+  //   updateMessages();
+  //   getMessage();
+  // }, [arrivalMessage, currentChat]);
 
   return (
     <div className="chat">

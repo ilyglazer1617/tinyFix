@@ -179,8 +179,6 @@ const socket = io.connect(url);
 
 export const ChatContext = createContext();
 const SocketProvider = (props) => {
-  // const socket = useRef();
-
   const navigate = useNavigate();
   const { children } = props;
   let token = localStorage.getItem("token");
@@ -213,9 +211,6 @@ const SocketProvider = (props) => {
     // socket.current.on("getUsers", (users) => {});
   };
   // //! ===============send to socket server id and socketId===============
-  // const sendToSocket = () => {
-  //   socket.current.emit("addUser", id);
-  // };
 
   // //! =============== set messages =================
   const updateMessages = () => {
@@ -239,7 +234,6 @@ const SocketProvider = (props) => {
   };
   // //!=============== send new message===============
   const postNewMessage = async (e) => {
-    // console.log(currentChat._id);
     e.preventDefault();
     const message = {
       conversationId: localStorage.getItem("chat_Id"),
@@ -247,33 +241,12 @@ const SocketProvider = (props) => {
       text: messageToSend,
     };
 
-    // const reciverId = currentChat.members.find((member) => member !== id);
-    // console.log("reciverId=", reciverId);
-    // socket.current.emit("join_room", {
-    //   senderId: id,
-    //   reciverId,
-    //   text: messageToSend,
-    // });
-    // console.log(currentChat._id);
-    // const sendMessage = async () => {
     if (messageToSend !== "") {
-      // const messageData = {
-      //   room: localStorage.getItem("chat_Id"),
-      //   author: id,
-      //   message: messageToSend,
-      //   time:
-      //     new Date(Date.now()).getHours() +
-      //     ":" +
-      //     new Date(Date.now()).getMinutes(),
-      // };
       console.log(message);
-      socket.emit("send_message", message);
-      // socket.current.emit("send_message", messageData);
-      // setMessageList((list) => [...list, messageData]);
+      await socket.emit("send_message", message);
+      setMessages([...messages, { message: message }]);
 
-      // setMessages((perv) => [...perv, message]);
-      setMessages([...messages, message]);
-      // setMessages((prev) => [...prev, messageToSend]);
+      // setMessages((prev) => [...prev, message]);
       setMessageToSend("");
       // }
     }
@@ -283,8 +256,9 @@ const SocketProvider = (props) => {
         "http://localhost:5555/api/message",
         message
       );
-      console.log(res.data);
+      console.log("res data", res.data);
       setMessages([...messages, res.data]);
+      // setMessages((prev) => [...prev, res.data]);
       // setMessageToSend("");
     } catch (error) {
       console.log(error.message);
