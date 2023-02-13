@@ -4,9 +4,15 @@
     justify-content: right;
     width: -moz-fit-content;
     width: fit-content;
+    min-width: 20%;
     text-align: initial;
     background-color: rgb(13, 120, 207);
     color: aliceblue;
+    border-radius: 9px;
+    padding-right: 9px;
+    margin-top: 4px;
+    height: calc(fit-content+5px);
+
 }
 
 .otherSide {
@@ -15,6 +21,10 @@
     width: fit-content;
     background-color: rgb(98, 198, 32);
     color: rgb(0, 0, 0);
+    border-radius: 9px;
+    padding-left: 9px;
+    min-width: 20%;
+    margin-top: 4px;
 }
 
 .chat {
@@ -29,4 +39,42 @@
     flex-direction: column;
     justify-content: center;
     padding: 3px;
+}
+
+.chat-footer {
+    height: 40px;
+    border: 1px solid #263238;
+    border-top: none;
+    display: flex;
+
+}
+
+.chat-footer input {
+    height: 100%;
+    flex: 85%;
+    border: 0;
+    padding: 0 0.7em;
+    font-size: 1em;
+    border-right: 1px dotted #607d8b;
+
+    outline: none;
+    font-family: "Open Sans", sans-serif;
+}
+
+.chat-footer button {
+    border: 0;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    flex: 15%;
+    height: 100%;
+    background: transparent;
+    outline: none;
+    font-size: 25px;
+    color: rgb(46, 164, 113);
+    background-color: honeydew;
+}
+
+.chat-footer button:hover {
+    color: #43a047;
 }

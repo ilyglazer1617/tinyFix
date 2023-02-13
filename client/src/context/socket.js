@@ -174,7 +174,7 @@ import App from "./../App";
 import { io } from "socket.io-client";
 
 export const SocketContext = createContext();
-const url = "ws://localhost:4040";
+const url = "https://tinyfixsocketserver.onrender.com";
 const socket = io.connect(url);
 
 export const ChatContext = createContext();
