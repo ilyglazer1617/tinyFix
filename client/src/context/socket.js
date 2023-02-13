@@ -279,10 +279,7 @@ const SocketProvider = (props) => {
     }
 
     try {
-      const res = await axios.post(
-        "http://localhost:5555/api/message",
-        message
-      );
+      const res = await axios.post("http://localhost:5555/api/message", message);
       console.log(res.data);
       setMessages([...messages, res.data]);
       // setMessageToSend("");
@@ -294,9 +291,7 @@ const SocketProvider = (props) => {
 
   const getChatMessages = async (chatId) => {
     try {
-      const res = await axios.get(
-        "http://localhost:5555/api/message/" + chatId
-      );
+      const res = await axios.get("http://localhost:5555/api/message/" + chatId);
       setMessages(res.data);
       setCurrentChatId(chatId);
       setMessageToSend("");

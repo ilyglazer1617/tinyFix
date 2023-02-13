@@ -16,13 +16,13 @@ root.render(
     <BrowserRouter>
       <CommentsProvider>
         <GarageProvider>
-          <PostsProvider>
-            <UserContextProvider>
+          <UserContextProvider>
+            <PostsProvider>
               <SocketProvider>
                 <App />
               </SocketProvider>
-            </UserContextProvider>
-          </PostsProvider>
+            </PostsProvider>
+          </UserContextProvider>
         </GarageProvider>
       </CommentsProvider>
     </BrowserRouter>
