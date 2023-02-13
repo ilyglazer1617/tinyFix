@@ -1,0 +1,31 @@
+.postT {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 10px;
+    margin-top: 10%;
+}
+
+.funny {
+    margin-top: 20%;
+    width: fit-cont;
+    height: fit-content;
+    border-radius: 50px;
+    background: #e0e0e0;
+    box-shadow: 20px 20px 60px #bebebe,
+        -20px -20px 60px #ffffff;
+    display: flex;
+    justify-content: center;
+}
+
+.postBtn {
+    background-color: aquamarine;
+}
+
+.funnyContent {
+    width: 80%;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: 800;
+}

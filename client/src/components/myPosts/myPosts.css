@@ -3,7 +3,6 @@
     flex-direction: column;
     width: 100vw;
     justify-content: center;
-    align-items: center;
     gap: 1rem;
     padding-bottom: 53px;
 }
@@ -13,7 +12,15 @@
 }
 
 .myPostsHedear {
+    margin-top: 2rem;
     display: flex;
+    justify-content: center;
+    display: flex;
+}
+
+.myPostsHedear p {
+    font-size: 20px;
+    margin: 0;
 }
 
 .myPostscard {
@@ -30,7 +37,6 @@
 .card-top-part {
     width: 100%;
     height: 70%;
-    padding: 15px;
 }
 
 .left-part {
@@ -85,28 +91,22 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    border: 1px solid rgb(231, 227, 227);
-    box-shadow: 2px 2px 10px lightslategray;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .photo {
-    width: 100%;
+    margin-top: 1rem;
+    width: 90%;
 }
 
 .bottom-part {
     width: 50%;
-    height: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-}
-
-.bottom-part:hover > .link {
-    transform: scale(1.1);
 }
 
 .link {
@@ -114,9 +114,9 @@
     align-items: center;
     justify-content: center;
     font-size: 14px;
-    gap: 5.5px;
-    font-weight: bold;
-    transition: 0.2s linear;
+    gap: 1rem;
+    background: none;
+    border: none;
 }
 
 .icon {
@@ -242,9 +242,7 @@
     position: fixed;
     top: 2px;
     left: 4px;
-    font-size: 50%;
-    text-transform: uppercase;
-    text-decoration: none;
+    font-size: 75%;
     padding: 1em 2.5em;
     display: inline-block;
     border-radius: 6em;
@@ -253,38 +251,7 @@
     font-family: inherit;
     font-weight: 700;
     color: black;
-    background-color: rgb(7, 170, 34);
+    background-color: #eeeef1;
     width: 30%;
+    cursor: pointer;
 }
-
-/* .btnComment:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-} */
-
-.btnComment:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btnComment::after {
-    content: "";
-    display: inline-block;
-    height: 100%;
-    width: 100%;
-    border-radius: 100px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    transition: all 0.4s;
-}
-
-.btnComment::after {
-    background-color: #fff;
-}
-/* 
-.btnComment:hover::after {
-    transform: scaleX(1.4) scaleY(1.6);
-    opacity: 0;
-} */
