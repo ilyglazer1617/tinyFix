@@ -144,7 +144,7 @@ const GarageMainPage = () => {
                     <button>ביקורות</button>
                     <button onClick={() => logout()} style={{ color: "red" }}>
                         התנתק
-                    </button>{" "}
+                    </button>
                     <img
                         className="navbarProfilePicture"
                         src="https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
