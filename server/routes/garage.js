@@ -39,33 +39,36 @@ app.post("/register", async function (req, res) {
                     // width: 300,
                     // crop: "scale",
                 });
-            }
+            
 
-            const garage = new Garage({
-                garage_name: req.body.garage_name,
-                owner: req.body.owner,
-                district: req.body.district,
-                city: req.body.city,
-                street: req.body.street,
-                street_number: req.body.street_number,
-                zip_code: req.body.zip_code,
-                phone: req.body.phone,
-                email: req.body.email,
-                password: password,
-                garage_info: req.body.garage_info,
-                image: {
-                    public_id: imgUploud.public_id,
-                    url: imgUploud.secure_url,
-                },
-                operation_time: req.body.operation_time,
-                licanse: req.body.licanse,
-            });
-            const result = await garage.save();
-            const _id = result._id;
-            const garage_name = result.garage_name;
-            const token = jwt.sign({ _id,garage_name }, process.env.JWT_SECRET);
-            console.log(token);
-            res.send({ result, token });
+                const garage = new Garage({
+                    garage_name: req.body.garage_name,
+                    owner: req.body.owner,
+                    district: req.body.district,
+                    city: req.body.city,
+                    street: req.body.street,
+                    street_number: req.body.street_number,
+                    zip_code: req.body.zip_code,
+                    phone: req.body.phone,
+                    email: req.body.email,
+                    password: password,
+                    garage_info: req.body.garage_info,
+                    image: {
+                        public_id: imgUploud.public_id,
+                        url: imgUploud.secure_url,
+                    },
+                    operation_time: req.body.operation_time,
+                    licanse: req.body.licanse,
+                });
+                const result = await garage.save();
+                const _id = result._id;
+                const garage_name = result.garage_name;
+                const token = jwt.sign({ _id, garage_name }, process.env.JWT_SECRET);
+                console.log(token);
+                res.send({ result, token });
+            } else {
+                res.status(400).send("this email has already been registerd")
+            }
         } catch (error) {
             res.status(400).send(error.message);
         }
