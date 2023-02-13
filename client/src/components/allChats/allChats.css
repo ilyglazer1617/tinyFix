@@ -1,0 +1,34 @@
+.allChats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.allChatsCotrert {
+    font-size: x-large;
+    padding: 5%;
+}
+
+.chatImgWraper {
+    width: 20%;
+
+}
+
+.chatName {
+    font-size: larger;
+    font-weight: 700;
+    color: black;
+}
+
+.allChatsWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5%;
+}
+
+.allChatImg {
+    width: 100%;
+    border-radius: 50%;
+}

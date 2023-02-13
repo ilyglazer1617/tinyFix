@@ -174,7 +174,8 @@ import App from "./../App";
 import { io } from "socket.io-client";
 
 export const SocketContext = createContext();
-const url = "https://tinyfixsocketserver.onrender.com";
+// const url = "https://tinyfixsocketserver.onrender.com";
+const url = "ws://localhost:4040";
 const socket = io.connect(url);
 
 export const ChatContext = createContext();
@@ -198,6 +199,7 @@ const SocketProvider = (props) => {
   const [showChat, setShowChat] = useState(false);
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
+  const [garageId, setGarageId] = useState(null);
   const user = localStorage.getItem("user");
 
   //! ===============connect to socket server===============
@@ -289,7 +291,6 @@ const SocketProvider = (props) => {
 
   const getAllChats = async () => {
     try {
-      console.log("id", id);
       const res = await axios.get(
         "https://tinyfix.onrender.com/api/conversation/" + id
       );
@@ -335,7 +336,6 @@ const SocketProvider = (props) => {
           // messageToSend,
           setMessageToSend,
           setMessages,
-
           socket,
           postNewMessage,
           // socket,
@@ -348,6 +348,8 @@ const SocketProvider = (props) => {
           // arrivalMessage,
           getMessage,
           updateMessages,
+          garageId,
+          setGarageId,
         }}
       >
         {children}

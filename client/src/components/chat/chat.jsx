@@ -3,6 +3,7 @@ import { SocketContext } from "./../../context/socket";
 import { useContext, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
+import { GarageContext } from "./../../context/garageContext";
 
 const Chat = () => {
   const navigate = useNavigate();
@@ -20,14 +21,17 @@ const Chat = () => {
     getChatMessages,
     currentChat,
     socket,
+
     getMessage,
     arrivalMessage,
     updateMessages,
     messageToSend,
     setMessages,
     connectToSocketServer,
+    garageId,
+    setGarageId,
   } = useContext(SocketContext);
-
+  const { getGarageById } = useContext(GarageContext);
   //!=========================scroll down============================
   const scrollRef = useRef();
   useEffect(() => {
@@ -36,16 +40,10 @@ const Chat = () => {
 
   //!===============GET ALL MESSAGES WHEN PAGE OPEN FIRST TIME===============
   useEffect(() => {
-    //getChatMessages(localStorage.getItem("chat_Id"));
-    // console.log(currentChat);
-    // postNewMessage();
+    getChatMessages(localStorage.getItem("chat_Id"));
+    console.log(garageId);
   }, []);
   //!===============GET ALL DURING THE CHAT===============
-
-  useEffect(() => {
-    // getMessage();
-    // updateMessages();
-  }, []);
 
   useEffect(() => {
     socket.on(
@@ -53,35 +51,38 @@ const Chat = () => {
       (data) => {
         console.log(typeof messages);
         console.log("data", data);
-        // setMessages((prev) => [...prev, data]);
         setMessages([...messages, data]);
-        // setMessages((prev) => [...prev, data]);
         console.log(messages);
       },
       [socket]
     );
-    // return () => {
-    //   socket.emit("leave_room", {
-    //     room: localStorage.getItem("chat_Id"),
-    //   });
-    // };
   });
-
-  // useEffect(() => {
-  //   updateMessages();
-  //   getMessage();
-  // }, [arrivalMessage, currentChat]);
 
   return (
     <div className="chat">
-      <button
-        onClick={() => {
-          localStorage.removeItem("chat_Id");
-          navigate("/UserChatsList");
-        }}
-      >
-        חזור לשאר הצעות המוסכים
-      </button>
+      <div className="garageTopButton">
+        <button
+          onClick={() => {
+            localStorage.removeItem("chat_Id");
+            navigate("/UserChatsList");
+          }}
+        >
+          חזור לשאר הצעות המוסכים
+        </button>
+        {user ? (
+          <button
+            onClick={() => {
+              getGarageById(garageId);
+              // console.log(garageId);
+            }}
+            style={{ backgroundColor: "red" }}
+          >
+            ראה פרופיל מוסך
+          </button>
+        ) : (
+          ""
+        )}
+      </div>
       <div className="AllmessageWrap">
         {messages &&
           messages?.map((message, index) => {
@@ -107,19 +108,11 @@ const Chat = () => {
         <button
           onClick={async (e) => {
             await postNewMessage(e);
-            // getChatMessages(localStorage.getItem("chat_Id"));
+            getChatMessages(localStorage.getItem("chat_Id"));
           }}
         >
           &#9658;
         </button>
-        {/* <button
-          onClick={async (e) => {
-            await postNewMessage(e);
-            // getChatMessages(localStorage.getItem("chat_Id"));
-          }}
-        >
-          שלח הודעה
-        </button> */}
       </div>
     </div>
   );

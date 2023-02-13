@@ -29,6 +29,14 @@ const UserContextProvider = (props) => {
     id = _id;
   }
 
+  //! go to garage profile
+
+  const goToGarage = async () => {
+    try {
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //!get all comments of a specific posts
 
   const commentOfPost = async (postId) => {

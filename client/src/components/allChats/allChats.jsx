@@ -17,6 +17,8 @@ const AllChats = () => {
     getUsers,
     connectToSocketServer,
     setCurrentChat,
+    garageId,
+    setGarageId,
   } = useContext(SocketContext);
 
   //! get all user chat
@@ -33,25 +35,37 @@ const AllChats = () => {
   const user = localStorage.getItem("user");
   return (
     <div className="allChats">
-      הצאטים שלי
+      <div className="allChatsCotrert">הצאטים שלי</div>
+
       {allChats?.map((chat, index) => {
         return (
           <div className="allChatsWrapper" key={chat._id}>
-            {/* <img src={user
-                ? chat.garageChat_side.garage_name
-                : chat.userChat_side.full_name} alt="" /> */}
-            <p
+            <p>{index + 1}</p>
+            <article
+              className="chatName"
               onClick={() => {
                 getChatMessages(chat._id);
                 setCurrentChat(chat);
                 localStorage.setItem("chat_Id", chat._id);
+                setGarageId(chat.members[1]);
                 navigate("/chat");
               }}
             >
               {user
-                ? chat.garageChat_side.garage_name
-                : chat.userChat_side.full_name}
-            </p>
+                ? chat.garageChat_side?.garage_name
+                : chat.userChat_side?.full_name}
+            </article>
+            <div className="chatImgWraper">
+              <img
+                className="allChatImg"
+                src={
+                  user
+                    ? chat.garageChat_side.image.url
+                    : "https://img.myloview.com/stickers/default-avatar-profile-icon-vector-social-media-user-image-700-205124837.jpg"
+                }
+                alt=""
+              />
+            </div>
           </div>
         );
       })}

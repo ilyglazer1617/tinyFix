@@ -63,13 +63,22 @@ const GarageProvider = (props) => {
     );
   };
 
-  async function getGarageById() {
-    const token = localStorage.getItem("token");
-    const token_info = await jwtDecode(token);
-    const garage = await axios.get(
-      `https://tinyfix.onrender.com/api/garage/${token_info._id}`
-    );
-    setGarageInfo(garage.data);
+  async function getGarageById(garageId) {
+    if (garageId) {
+      const garage = await axios.get(
+        `https://tinyfix.onrender.com/api/garage/${garageId}`
+      );
+      setGarageInfo(garage.data);
+      console.log(garage.data);
+      Navigate("/GarageInfo");
+    } else {
+      const token = localStorage.getItem("token");
+      const token_info = await jwtDecode(token);
+      const garage = await axios.get(
+        `https://tinyfix.onrender.com/api/garage/${token_info._id}`
+      );
+      setGarageInfo(garage.data);
+    }
   }
 
   async function addReviewToGarage(ev) {

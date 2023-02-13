@@ -1,8 +1,8 @@
 import { useEffect, useState, useContext } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { GarageContext } from "./../../context/garageContext";
-import "./garageInfo.css";
-const GarageInfo = () => {
+import "../garageInfo/garageInfo.css";
+const GarageInfoUSER = () => {
   const { getGarageById, garageInfo, setNewReview, newReview } =
     useContext(GarageContext);
   const Navigate = useNavigate();
@@ -14,12 +14,9 @@ const GarageInfo = () => {
     }
     return Math.round(sum / array.length);
   }
-
-  useEffect(() => {
-    getGarageById();
-  }, []);
   return (
-    <>
+    <div>
+      {" "}
       <div className="garageInfoContainer">
         <h1>{garageInfo.garage_name}</h1>
         <h2>בעלים: {garageInfo.owner}</h2>
@@ -40,7 +37,6 @@ const GarageInfo = () => {
           <h3>אמינות: {avarage(garageInfo.reviews?.reliability)}</h3>
         </div>
         <div className="contactButtons">
-          <button>צור קשר</button>
           <button
             onClick={() => {
               Navigate("/AddReview");
@@ -49,11 +45,10 @@ const GarageInfo = () => {
           >
             הוסף ביקורת
           </button>
-          {/* <h1>{avarage(garageInfo.reviews?.reliability)}</h1> */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default GarageInfo;
+export default GarageInfoUSER;
