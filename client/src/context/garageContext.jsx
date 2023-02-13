@@ -71,6 +71,11 @@ const GarageProvider = (props) => {
         }
     }
 
+    function logout() {
+        localStorage.removeItem("token");
+        Navigate("/garageLogin");
+    }
+
     return (
         <GarageContext.Provider
             value={{
@@ -87,6 +92,7 @@ const GarageProvider = (props) => {
                 newReview,
                 setNewReview,
                 addReviewToGarage,
+                logout,
             }}
         >
             {children}

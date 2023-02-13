@@ -7,6 +7,8 @@ import jwtDecode from "jwt-decode";
 import GarageInfo from "./../garageInfo/garageInfo";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 const CommentsPreview = () => {
     const {
@@ -132,8 +134,9 @@ const CommentsPreview = () => {
                                                 </h4>
                                             </div>
                                             {comment.garage_id._id == _id || comment.garage_id == _id ? (
-                                                <div>
+                                                <div className="manageComment">
                                                     <button
+                                                        className="editComment"
                                                         onClick={() => {
                                                             setEditComment({
                                                                 ...editComment,
@@ -144,10 +147,15 @@ const CommentsPreview = () => {
                                                             navigate("/EditComment");
                                                         }}
                                                     >
-                                                        עריכת הצעה
+                                                        <EditIcon />
+                                                        <p>עריכת הצעה</p>
                                                     </button>
-                                                    <button onClick={() => deleteComment(comment._id)}>
-                                                        מחיקת הצעה
+                                                    <button
+                                                        className="deleteComment"
+                                                        onClick={() => deleteComment(comment._id)}
+                                                    >
+                                                        <DeleteIcon />
+                                                        <p>מחק הצעה</p>
                                                     </button>
                                                 </div>
                                             ) : null}
