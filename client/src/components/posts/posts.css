@@ -5,6 +5,7 @@
     align-items: center;
     width: 100%;
     gap: 10px;
+    margin-top: 10%;
 }
 
 .funny {
@@ -19,6 +20,12 @@
     justify-content: center;
 }
 
+.postBtn {
+    background-color: aquamarine;
+}
+
 .funnyContent {
     width: 80%;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: 800;
 }
