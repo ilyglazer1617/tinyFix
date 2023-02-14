@@ -10,14 +10,38 @@ const GarageReviews = () => {
     getGarageById();
   }, []);
 
+  const reviews = {
+    prfessionalism: [Number],
+    reliability: [Number],
+    text: [String],
+  };
+
   return (
-    <div>
-      <h1>{garageInfo.reviews?.text[0]}</h1>
-      <h1>
-        {garageInfo.reviews?.text.map((review) => {
-          return <h4>{review}</h4>;
-        })}
-      </h1>
+    <div className="allReviews">
+      <table>
+        <thead>
+          <th className="textReliability">אמינות</th>
+          <th className="prfessionalismReviews">מקצועיות</th>
+          <th className="textReviews"> ביקורות</th>
+        </thead>
+        <tbody>
+          <tr>
+            {garageInfo.reviews?.reliability.map((reliability) => {
+              return <td>{reliability}</td>;
+            })}
+          </tr>
+          <tr>
+            {garageInfo.reviews?.prfessionalism.map((prfessionalism) => {
+              return <td>{prfessionalism}</td>;
+            })}
+          </tr>
+          <tr>
+            {garageInfo.reviews?.text.map((text) => {
+              return <td>{text}</td>;
+            })}
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 };
