@@ -4,6 +4,7 @@ import { PostsContext } from "../../context/PostsContext";
 import jwtdecode from "jwt-decode";
 import "./posts.css";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import Bottom from "../bottom/bottom";
 function Posts() {
   const { newPost, setNewPost, uploudPost, generateIMGS } =
     useContext(PostsContext);
@@ -70,6 +71,7 @@ function Posts() {
           הספורט הזה שתמיד רצית
         </div>
       </div>
+      <Bottom />
     </div>
   );
 }
