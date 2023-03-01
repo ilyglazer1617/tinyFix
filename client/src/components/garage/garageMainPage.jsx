@@ -88,7 +88,7 @@ const GarageMainPage = () => {
                   </div>
                   <div className="problemInfo">
                     <h2 className="problemClasification">סיווג הבעיה: {post.problem_classification}</h2>
-                    {post.comments[0] ? post.comments[0].garage_id === _id ? <h3>כל הכבוד! ההצעה הנמוכה ביותר היא שלך: {post.comments[0].bid}</h3> : <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid} </h3> : <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>}
+                    {post.comments[0] ? post.comments[0].garage_id === _id ? <h3>כל הכבוד! ההצעה הנמוכה ביותר היא שלך: {post.comments[0].bid}₪</h3> : <h3>ההצעה הנמוכה ביותר: {post.comments[0].bid}₪ </h3> : <h3>לתקלה זו אין הצעות! תהיה הראשון להציע</h3>}
                     <h3>תיאור מפורט של הבעיה: {post.description}</h3>
                   </div>
                 </div>
@@ -278,6 +278,7 @@ const GarageMainPage = () => {
             >
               נקה בחירה
             </button>
+            <p>מספר תוצאות: { posts.length }</p>
           </nav>
         </div>
       </main>

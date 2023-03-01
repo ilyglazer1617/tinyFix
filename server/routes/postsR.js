@@ -228,6 +228,11 @@ router.post("/withFilters/:district", async (req, res) => {
                   },
                 },
               },
+               {
+                $sort: {
+                  bid: 1,
+                },
+              },
             ],
             as: "comments",
           },
