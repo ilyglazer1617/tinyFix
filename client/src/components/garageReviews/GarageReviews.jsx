@@ -19,29 +19,26 @@ const GarageReviews = () => {
   return (
     <div className="allReviews">
       <table>
-        <thead>
-          <th className="textReliability">אמינות</th>
-          <th className="prfessionalismReviews">מקצועיות</th>
-          <th className="textReviews"> ביקורות</th>
-        </thead>
-        <tbody>
-          <tr>
-            {garageInfo.reviews?.reliability.map((reliability) => {
-              return <td>{reliability}</td>;
-            })}
-          </tr>
-          <tr>
-            {garageInfo.reviews?.prfessionalism.map((prfessionalism) => {
-              return <td>{prfessionalism}</td>;
-            })}
-          </tr>
-          <tr>
-            {garageInfo.reviews?.text.map((text) => {
-              return <td>{text}</td>;
-            })}
-          </tr>
-        </tbody>
-      </table>
+  <thead>
+    <tr>
+      <th className="textReliability">אמינות</th>
+      <th className="professionalismReviews">מקצועיות</th>
+      <th className="textReviews">ביקורות</th>
+    </tr>
+  </thead>
+  <tbody>
+    {garageInfo.reviews?.text.map((text, index) => {
+      return (
+        <tr key={index}>
+          <td>{garageInfo.reviews?.reliability[index]}</td>
+          <td>{garageInfo.reviews?.prfessionalism[index]}</td>
+          <td>{text}</td>
+        </tr>
+      );
+    })}
+  </tbody>
+</table>
+
     </div>
   );
 };
