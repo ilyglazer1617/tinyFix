@@ -12,6 +12,8 @@ import { useEffect } from "react";
 import { useContext } from "react";
 import Explanation from "../explanation/explanation";
 import MyPosts from "../myPosts/myPosts";
+import SuccessPrompt from "./../successPrompt/SuccessPrompt";
+import { CommentsContext } from "./../../context/CommentsContext";
 
 const StyledFab = styled(Fab)({
     position: "absolute",
@@ -24,6 +26,7 @@ const StyledFab = styled(Fab)({
 
 export default function Home() {
     const { getUserInfo, userPosts, getUserPosts } = useContext(UserContext);
+    const { showPromptMessage } = useContext(CommentsContext);
     useEffect(() => {
         getUserInfo();
     }, []);
@@ -43,12 +46,13 @@ export default function Home() {
                         sx={{ p: 2, pb: 0 }}
                     ></Typography>
                     {console.log(userPosts)} */}
-                    {userPosts.length ? <MyPosts /> : <Explanation />}
+                {userPosts.length ? <MyPosts /> : <Explanation />}
                 {/* </Paper> */}
                 <div className="buttomHome">
                     <Bottom className="bottomHomeC" />
                 </div>
             </React.Fragment>
+            {showPromptMessage === true && <SuccessPrompt />}
         </div>
     );
 }

@@ -24,11 +24,11 @@ import GarageReviews from "./components/garageReviews/GarageReviews";
 
 import GarageInfoUSER from "./components/garageInfoUSER/garageInfoUSER";
 function App() {
-  const user = localStorage.getItem("user");
-  return (
-    <div className="App">
-      <Routes>
-        {/* <Route path="/register" element={<Register />} />
+    const user = localStorage.getItem("user");
+    return (
+        <div className="App">
+            <Routes>
+                {/* <Route path="/register" element={<Register />} />
         <Route path="/" element={<Login />} />
         <Route path="/SetInfo" element={<SetInfo />} />
         <Route path="/Posts" element={<Posts />} />
@@ -39,8 +39,8 @@ function App() {
         <Route path="/GarageLogin" element={<GarageLogin />} />
         <Route path="/GarageMainPage" element={<GarageMainPage />} />
         <Route path="/allChats" element={<AllChats />} /> */}
-        {/* <Route path="/allChats" element={<ChatConteiner />} /> */}
-        {/* <Route path="/Chat" element={<Chat />} />
+                {/* <Route path="/allChats" element={<ChatConteiner />} /> */}
+                {/* <Route path="/Chat" element={<Chat />} />
 
         <Route
           path="/GarageMainPage/Comments"
@@ -56,40 +56,37 @@ function App() {
         <Route path="/LandingPage" element={<LandingPage />} />
         <Route path="/GarageInfo" element={<GarageInfo />} />
         <Route path="/AddReview" element={<AddReview />} /> */}
-        //? new routes=========================================
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/UserRegister" element={<Register />} />
-        <Route path="/UserLogin" element={<Login />} />
-        <Route path="/User/EditPersonalInformation" element={<SetInfo />} />
-        <Route path="/UploadPost" element={<Posts />} />
-        <Route path="/EditPost" element={<EditPost />} />
-        <Route path="/AddComment" element={<Comments />} />
-        <Route path="/EditComment" element={<EditComments />} />
-        <Route path="/GarageRegister" element={<GarageRegister />} />
-        <Route path="/GarageLogin" element={<GarageLogin />} />
-        <Route path="/GarageMainPage" element={<GarageMainPage />} />
-        <Route path="/UserChatsList" element={<AllChats />} />
-        <Route path="/Chat" element={<Chat />} />
-        <Route path="/GarageReviews" element={<GarageReviews />} />
-        <Route
-          path="/GarageMainPage/PostComments"
-          element={
-            <>
-              <GarageMainPage />
-              <CommentsPreview />
-            </>
-          }
-        />
-        <Route path="/UserMainPage" element={<Home />} />
-        <Route path="/UserPersonalInfo" element={<PrsonalInfo />} />
-        <Route
-          path="/GarageInfo"
-          element={!user ? <GarageInfo /> : <GarageInfoUSER />}
-        />
-        <Route path="/AddReview" element={<AddReview />} />
-      </Routes>
-    </div>
-  );
+                //? new routes=========================================
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/UserRegister" element={<Register />} />
+                <Route path="/UserLogin" element={<Login />} />
+                <Route path="/User/EditPersonalInformation" element={<SetInfo />} />
+                <Route path="/UploadPost" element={<Posts />} />
+                <Route path="/EditPost" element={<EditPost />} />
+                <Route path="/AddComment" element={<Comments />} />
+                <Route path="/EditComment" element={<EditComments />} />
+                <Route path="/GarageRegister" element={<GarageRegister />} />
+                <Route path="/GarageLogin" element={<GarageLogin />} />
+                <Route path="/GarageMainPage" element={<GarageMainPage />} />
+                <Route path="/UserChatsList" element={<AllChats />} />
+                <Route path="/Chat" element={<Chat />} />
+                <Route path="/GarageReviews" element={<GarageReviews />} />
+                <Route
+                    path="/GarageMainPage/PostComments"
+                    element={
+                        <>
+                            <GarageMainPage />
+                            <CommentsPreview />
+                        </>
+                    }
+                />
+                <Route path="/UserMainPage" element={<Home />} />
+                <Route path="/UserPersonalInfo" element={<PrsonalInfo />} />
+                <Route path="/GarageInfo" element={!user ? <GarageInfo /> : <GarageInfoUSER />} />
+                <Route path="/AddReview" element={<AddReview />} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

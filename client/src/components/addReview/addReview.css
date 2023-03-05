@@ -1,3 +1,14 @@
+.addReviewForm {
+    position: fixed;
+    top: 30vh;
+    left: 40%;
+    width: max-content;
+    padding-inline: 5%;
+    z-index: 1;
+    background-color: #e8f1f1;
+    box-shadow: 5px 5px 50px 20px black;
+}
+
 .professionailtyRating {
     display: flex;
     flex-direction: row-reverse;
@@ -11,7 +22,7 @@
 .professionailtyRating > label {
     position: relative;
     width: 1.1em;
-    font-size: 10vw;
+    font-size: 40px;
     color: #ffd700;
     cursor: pointer;
 }
@@ -35,7 +46,6 @@
     opacity: 0.4;
 }
 
-
 .reliabilityRating {
     display: flex;
     flex-direction: row-reverse;
@@ -49,7 +59,7 @@
 .reliabilityRating > label {
     position: relative;
     width: 1.1em;
-    font-size: 10vw;
+    font-size: 40px;
     color: #ffd700;
     cursor: pointer;
 }

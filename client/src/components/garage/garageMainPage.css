@@ -21,7 +21,7 @@
 
 nav {
     position: sticky;
-    top: 7rem;
+    top: 6rem;
     display: flex;
     flex-direction: column;
     background-color: white;
@@ -50,7 +50,7 @@ nav {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1.5fr 1fr;
+    grid-template-columns: 2.5fr 1fr;
     grid-template-rows: 1fr;
     column-gap: 2rem;
     padding: 1rem;
@@ -87,6 +87,10 @@ main {
 
 .carInfo {
     text-align: left;
+}
+
+.carInfo h2 {
+    text-align: right;
 }
 
 .comments p {
@@ -149,7 +153,7 @@ main {
 
 .carousel-root {
     display: flex;
-    flex-direction: row-reverse;
+    /* flex-direction: row-reverse; */
     align-items: center;
     padding: 1rem;
 }

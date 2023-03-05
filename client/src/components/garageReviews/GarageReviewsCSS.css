@@ -2,33 +2,32 @@
     margin: auto;
     max-width: 600px;
     width: 100%;
-  }
-  
-  .table {
+}
+
+.table {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  .table th,
-  .table td {
-    border: 1px solid #ddd;
+}
+
+.table th,
+.table td {
+    border: 1px solid #3c3b3b;
     padding: 8px;
     text-align: center;
-  }
-  
-  .table th {
+}
+
+.table th {
     background-color: #f2f2f2;
-  }
-  
-  .textReliability {
+}
+
+.textReliability {
     width: 25%;
-  }
-  
-  .professionalismReviews {
+}
+
+.professionalismReviews {
     width: 25%;
-  }
-  
-  .textReviews {
+}
+
+.textReviews {
     width: 50%;
-  }
-  
+}

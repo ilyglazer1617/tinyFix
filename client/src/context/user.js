@@ -1,8 +1,9 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import jwtdecode from "jwt-decode";
 import axios from "axios";
 import App from "./../App";
+import { CommentsContext } from "./CommentsContext";
 
 export const UserContext = createContext();
 
@@ -21,6 +22,8 @@ const UserContextProvider = (props) => {
     const [setInfo, setSetInfo] = useState({});
     const [userPosts, setUserPosts] = useState([]);
     const [postComment, setPostComment] = useState([]);
+
+    const { setPromptMessage, setShowPromptMessage, removePrompt } = useContext(CommentsContext);
 
     let token = localStorage.getItem("token");
     let id;
@@ -67,7 +70,9 @@ const UserContextProvider = (props) => {
         try {
             const res = await axios.put("https://tinyfix.onrender.com/user/updateUser/" + id, data);
             setUserInfo(res.data);
-            alert("המידע עודכן בהצלחה");
+            setPromptMessage(() => "המידע עודכן בהצלחה");
+            setShowPromptMessage(true);
+            removePrompt();
             navigate("/UserPersonalInfo");
         } catch (error) {
             console.log(error.message);

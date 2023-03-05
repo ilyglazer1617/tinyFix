@@ -3,10 +3,10 @@ import { useContext, useState } from "react";
 import { GarageContext } from "./../../context/garageContext";
 
 const AddReview = () => {
-    const { newReview, setNewReview, addReviewToGarage } = useContext(GarageContext);
+    const { newReview, setNewReview, addReviewToGarage, setAddReviewOpen } = useContext(GarageContext);
     console.log(newReview);
     return (
-        <>
+        <div className="addReviewForm">
             <form onSubmit={(ev) => addReviewToGarage(ev)}>
                 <h2>:אמינות</h2>
                 <div className="reliabilityRating">
@@ -67,6 +67,7 @@ const AddReview = () => {
                         name="rating"
                         value="1"
                         id="1"
+                        required
                         onChange={(ev) =>
                             setNewReview({
                                 ...newReview,
@@ -135,6 +136,7 @@ const AddReview = () => {
                         name="rating1"
                         value="1"
                         id="6"
+                        required
                         onChange={(ev) =>
                             setNewReview({
                                 ...newReview,
@@ -160,7 +162,7 @@ const AddReview = () => {
                 <br />
                 <button>שלח</button>
             </form>
-        </>
+        </div>
     );
 };
 

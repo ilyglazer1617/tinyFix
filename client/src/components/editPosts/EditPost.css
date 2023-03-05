@@ -1,0 +1,65 @@
+.fixPriceInput,
+.fixInfoInput {
+    text-align: right;
+    width: 300px;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 2px 2px 7px 0 rgb(0, 0, 0, 0.2);
+    outline: none;
+    color: green;
+    margin-right: 2rem;
+}
+
+.fixPriceInput {
+    width: 50px;
+}
+
+.fixPriceInput:invalid {
+    animation: justshake 0.3s forwards;
+    color: red;
+}
+
+@keyframes justshake {
+    25% {
+        transform: translateX(5px);
+    }
+
+    50% {
+        transform: translateX(-5px);
+    }
+
+    75% {
+        transform: translateX(5px);
+    }
+
+    100% {
+        transform: translateX(5px);
+    }
+}
+
+.editPostContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 1rem;
+    min-height: 100vh;
+}
+
+.editPostContainer input {
+    width: 75%;
+    text-align: right;
+    font-size: 16px;
+}
+
+.editPostSelect {
+    width: 75%;
+    padding: 8px;
+    font-size: 16px;
+    text-align: right;
+}
+
+.editPostSelect option {
+    direction: rtl;
+}

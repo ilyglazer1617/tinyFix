@@ -9,6 +9,7 @@ import ConstructionIcon from "@mui/icons-material/Construction";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+import EditComments from "../comments/EditComment";
 
 const CommentsPreview = () => {
     const {
@@ -21,6 +22,8 @@ const CommentsPreview = () => {
         newComment,
         deleteComment,
         setComments,
+        commentEditorOpen,
+        setCommentEditorOpen,
     } = useContext(CommentsContext);
 
     useEffect(() => {
@@ -134,30 +137,37 @@ const CommentsPreview = () => {
                                                 </h4>
                                             </div>
                                             {comment.garage_id._id == _id || comment.garage_id == _id ? (
-                                                <div className="manageComment">
-                                                    <button
-                                                        className="editComment"
-                                                        onClick={() => {
-                                                            setEditComment({
-                                                                ...editComment,
-                                                                comment_id: comment._id,
-                                                                text: comment.text,
-                                                                bid: comment.bid,
-                                                            });
-                                                            navigate("/EditComment");
-                                                        }}
-                                                    >
-                                                        <EditIcon />
-                                                        <p>עריכת הצעה</p>
-                                                    </button>
-                                                    <button
-                                                        className="deleteComment"
-                                                        onClick={() => deleteComment(comment._id)}
-                                                    >
-                                                        <DeleteIcon />
-                                                        <p>מחק הצעה</p>
-                                                    </button>
-                                                </div>
+                                                <>
+                                                    {commentEditorOpen === false ? (
+                                                        <div className="manageComment">
+                                                            <button
+                                                                className="editComment"
+                                                                onClick={() => {
+                                                                    setEditComment({
+                                                                        ...editComment,
+                                                                        comment_id: comment._id,
+                                                                        text: comment.text,
+                                                                        bid: comment.bid,
+                                                                    });
+                                                                    setCommentEditorOpen(true);
+                                                                    // navigate("/EditComment");
+                                                                }}
+                                                            >
+                                                                <EditIcon />
+                                                                <p>עריכת הצעה</p>
+                                                            </button>
+                                                            <button
+                                                                className="deleteComment"
+                                                                onClick={() => deleteComment(comment._id)}
+                                                            >
+                                                                <DeleteIcon />
+                                                                <p>מחק הצעה</p>
+                                                            </button>
+                                                        </div>
+                                                    ) : (
+                                                        <EditComments />
+                                                    )}
+                                                </>
                                             ) : null}
                                         </div>
                                     </>
